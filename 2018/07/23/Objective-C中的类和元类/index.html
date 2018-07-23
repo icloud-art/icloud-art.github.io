@@ -79,13 +79,23 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Charles&#39; Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="你真的知道OC的类（Class）是个什么玩意儿？ 众所周知，所有的对象都是由其对应的类实例化而来，但是类本身其实也是一种对象，surprise？下面我们就来拨开这层迷雾。 类在Objective-C中，我们用到的几乎所有类都是NSObject类的子类，查阅objc源码你会发现 NSObject类定义（如图1）我们这里只给出定义其他方法大家自行查阅。 图1 看完这个,那么问题来了：这个Class 类">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Objective-C中的类和元类">
+<meta property="og:url" content="http://yoursite.com/2018/07/23/Objective-C中的类和元类/index.html">
 <meta property="og:site_name" content="Charles&#39; Blog">
+<meta property="og:description" content="你真的知道OC的类（Class）是个什么玩意儿？ 众所周知，所有的对象都是由其对应的类实例化而来，但是类本身其实也是一种对象，surprise？下面我们就来拨开这层迷雾。 类在Objective-C中，我们用到的几乎所有类都是NSObject类的子类，查阅objc源码你会发现 NSObject类定义（如图1）我们这里只给出定义其他方法大家自行查阅。 图1 看完这个,那么问题来了：这个Class 类">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2651174-d367c4497f8230df.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/477">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2651174-74ff77e375043bf0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/460">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2651174-c040fea772b9fc66.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2651174-7c9e55edbbf35ffa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/529">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2651174-4d981dc5706f8167.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/508">
+<meta property="og:updated_time" content="2018-07-23T15:26:54.092Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Charles&#39; Blog">
+<meta name="twitter:title" content="Objective-C中的类和元类">
+<meta name="twitter:description" content="你真的知道OC的类（Class）是个什么玩意儿？ 众所周知，所有的对象都是由其对应的类实例化而来，但是类本身其实也是一种对象，surprise？下面我们就来拨开这层迷雾。 类在Objective-C中，我们用到的几乎所有类都是NSObject类的子类，查阅objc源码你会发现 NSObject类定义（如图1）我们这里只给出定义其他方法大家自行查阅。 图1 看完这个,那么问题来了：这个Class 类">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/2651174-d367c4497f8230df.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/477">
 
 
 
@@ -115,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/23/Objective-C中的类和元类/"/>
 
 
 
 
 
-  <title>Charles' Blog</title>
+  <title>Objective-C中的类和元类 | Charles' Blog</title>
   
 
 
@@ -140,8 +150,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -288,9 +297,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -320,9 +329,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/23/Objective-C中的类和元类/" itemprop="url">Objective-C中的类和元类</a></h1>
+          <h1 class="post-title" itemprop="name headline">Objective-C中的类和元类</h1>
         
 
         <div class="post-meta">
@@ -382,20 +389,26 @@
       
 
       
-        
-          
-          你真的知道OC的类（Class）是个什么玩意儿？
-众所周知，所有的对象都是由其对应的类实例化而来，但是类本身其实也是一种对象，surprise？下面我们就来拨开这层迷雾。
-类在Objective-C中，我们用到的几乎所有类都是NSObject类的子类，查阅objc源码你会发现 NSObject类定义
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/23/Objective-C中的类和元类/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+        <p>你真的知道OC的类（Class）是个什么玩意儿？</p>
+<p>众所周知，所有的对象都是由其对应的类实例化而来，但是类本身其实也是一种对象，surprise？下面我们就来拨开这层迷雾。</p>
+<p>类<br>在Objective-C中，我们用到的几乎所有类都是NSObject类的子类，查阅objc源码你会发现 NSObject类定义（如图1）我们这里只给出定义其他方法大家自行查阅。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/2651174-d367c4497f8230df.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/477" alt="avata"><br>图1</p>
+<p>看完这个,那么问题来了：这个Class 类型的 isa 是个什么玩意儿？Class 又是个什么类型？带着这两个疑问我们查阅一下objc.h中Class 的定义（如图2）</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/2651174-74ff77e375043bf0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/460" alt="avata"><br>图2<br>看完这个是不是又一脸懵逼！Class 被定义为一个指向objc_class 的结构体指针。那么objc_class 又是个什么玩意儿？我们接着看源码runtime.h中定义（如图3）</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/2651174-c040fea772b9fc66.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="avata"><br>图3<br>你会发现，我艹，怎么又一个isa! 下面我们来解答这个疑惑。</p>
+<p>其实在Objective-C中任何的类定义都是对象。即在程序启动的时候任何类定义都对应于一块内存。在编译的时候，编译器会给每一个类生成一个且只生成一个”描述其定义的对象”,也就是苹果公司说的类对象(class object),他是一个单例(singleton), 而我们在其他面向对象语言中所谓的对象，叫做实例对象(instance object)。对于实例对象我们不难理解，但类对象(class object)是个什么鬼？我们知道Objective-C是门很动态的语言，因此程序里的所有实例对象(instace object)都是在运行时由Objective-C的运行时库生成的，而这个类对象(class object)就是运行时库用来创建实例对象(instance object)的依据。</p>
+<p>通过上面的讨论，可以得出结论，不管是实例对象，类对象，其结构中都有一个isa。实例对象中的isa 指针指向的是 该实例的类对象，那么同理，类对象的isa 指向的是谁呢？这就是 元类对象（meta class object）。他们之间的关系看起来是这样的（如图4）：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/2651174-7c9e55edbbf35ffa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/529" alt="avata"><br>图4<br>类对象<br>类对象的本质<br>通过前文我们了解到，类对象是编译器生成的“描述类定义的对象”，就是在编译时的类。任何直接或者间接继承NSObject的类，它的实例对象（instance object）中都有一个isa 指针，指向它的类对象(class object)。这个类对象(class object)中存储了关于这个实例对象(instace object)所属的类的定义的一切：包括变量，方法，遵守的协议等等，这个可以通过（图3）来佐证。因此，类对象能访问所有关于这个类的信息，利用这些信息可以产生一个新的实例，但是类对象不能访问任何实例对象的内容。当你调用一个 “类方法” 例如 [NSObject alloc],你事实上是发送了一个消息给他的类对象。所谓一切皆对象就是这个意思。</p>
+<p>那么类对象与实例对象有什么区别呢？<br>尽管类对象保留了一个类实例的原型，但它并不是实例本身。它没有自己的实例变量，也不能执行那些类的实例的方法（只有实例对象才可以执行实例方法）。然而，类的定义能包含那些特意为类对象准备的方法–类方法（ 而不是的实例方法）。类对象从父类那里继承类方法，就像实例从父类那里继承实例方法一样。</p>
+<p>类对象是不是就是类名？<br>只有在消息表达式中作为接收者，类名才代表类对象。我理解为调用静态方法的时候。</p>
+<p>元类对象<br>元类对象的实质<br>实际上，类对象是元类对象的一个实例。元类描述了 一个类对象，就像类对象描述了普通对象一样。不同的是元类的方法列表是类方法的集合，由类对象的选择器来响应。当向一个类发送消息时，objc_msgSend会通过类对象的isa指针定位到元类，并检查元类的方法列表（包括父类）来决定调用哪个方法。元类代替了类对象描述了类方法，就像类对象代替了实例对象描述了实例化方法一样。</p>
+<p>很显然，元类也是对象，也应该是其他类的实例，实际上元类是根元类(root class’s metaclass)的实例,而根元类是其自身的实例，即根元类的isa指针指向自身。</p>
+<p>类的super_class指向其父类，而元类的super_class则指向父类的元类。元类的super class链与类的super class链平行，所以类方法的继承与实例方法的继承也是并行的。而根元类(root class’s metaclass)的super_class指向根类(root class)，这样，整个isa指针链就是一个闭环。</p>
+<p>记住，当一个消息发送给任何一个对象， 方法的检查 从对象的 isa 指针开始，然后是父类。实例方法在类中定义， 类方法 在元类和根类中定义。（根类的元类就是根类自己）。在一些计算机语言的原理中，一个类和元类层次结构可以更自由的组成，更深元类链和从单一的元类继承的更多的实例化的类。Objective-C 的类方法 是使用元类的根本原因，在其他方面试图在隐藏元类。例如 [NSObject class] 完全相等于 [NSObject self]，所以，在形式上他还是返回的 NSObject-&gt;isa 指向的元类。 Objective-C语言是一组实用的折中方案。下图表示了对象间的isa的关系，以及类的继承关系：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/2651174-4d981dc5706f8167.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/508" alt="avata"><br>图片来自网络（图5）</p>
+<p>综上所述，类对象(class object)中包含了类的实例变量，实例方法的定义，而元类对象(metaclass object)中包括了类的类方法(也就是C++中的静态方法)的定义。类对象和元类对象中当然还会包含一些其它的东西，苹果以后也可能添加其它的内容，但对于我们只需要记住：类对象存的是关于实例对象的信息(变量，实例方法等)，而元类对象(metaclass object)中存储的是关于类的信息(类的版本，名字，类方法等)。要注意的是，类对象(class object)和元类对象(metaclass object)的定义都是objc_class结构，其不同仅仅是在用途上，比如其中的方法列表在类对象(instance object)中保存的是实例方法(instance method)，而在元类对象(metaclass object)中则保存的是类方法(class method)。</p>
+<p>写了这么多不知道能够拨开您心中的迷雾呢？欢迎大家勘误，互相学习！</p>
+
       
     </div>
     
@@ -405,6 +418,40 @@
     
 
     
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Charles 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Charles 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+      <div id="bitcoin" style="display: inline-block">
+        <img id="bitcoin_qr" src="/images/bitcoin.png" alt="Charles 比特币"/>
+        <p>比特币</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
 
     
 
@@ -412,154 +459,28 @@
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/23/手把手教你用-Intellij-IDEA-创建一个简单的SpringBoot项目/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Charles">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Charles' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/23/手把手教你用-Intellij-IDEA-创建一个简单的SpringBoot项目/" itemprop="url">手把手教你用 Intellij IDEA 创建一个简单的SpringBoot项目</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-23T23:11:33+08:00">
-                2018-07-23
-              </time>
+              <a href="/2018/07/23/手把手教你用-Intellij-IDEA-创建一个简单的SpringBoot项目/" rel="next" title="手把手教你用 Intellij IDEA 创建一个简单的SpringBoot项目">
+                <i class="fa fa-chevron-left"></i> 手把手教你用 Intellij IDEA 创建一个简单的SpringBoot项目
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/07/23/手把手教你用-Intellij-IDEA-创建一个简单的SpringBoot项目/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/2018/07/23/手把手教你用-Intellij-IDEA-创建一个简单的SpringBoot项目/" itemprop="commentCount">0</span> comments
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-          新建Project 默认选中 Default
-点击下图的Next 按钮
-
-填写Group、Artifact
-Package 那一栏和Group 保持一致就好，如果是com.jack.springtest的话会导致 WhiteLabel Error Page 异常
-
-选中Web 选项 然后点击Next
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/23/手把手教你用-Intellij-IDEA-创建一个简单的SpringBoot项目/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -569,428 +490,32 @@ Package 那一栏和Group 保持一致就好，如果是com.jack.springtest的�
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/21/Block底层实现之逆向思维/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Charles">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Charles' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/21/Block底层实现之逆向思维/" itemprop="url">Block底层实现之逆向思维</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-21T21:39:13+08:00">
-                2018-07-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/07/21/Block底层实现之逆向思维/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/2018/07/21/Block底层实现之逆向思维/" itemprop="commentCount">0</span> comments
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          前段时间心血来潮，研究了一下block底层实现，在网上看了好多文章，基本都是通过clang 将代码转换为C++代码去分析Blcok的实现。今天我们反过来思考，用C去实现一个OC Block的效果。
-Block的实现本质上是一些结构体，函数指针，函数，的综合运用。
-话不多说，直奔主题：
-Block的实
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/21/Block底层实现之逆向思维/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+    <div class="post-spread">
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
 
 
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/21/Mac OS X - 重置 MySQL Root 密码/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Charles">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Charles' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/21/Mac OS X - 重置 MySQL Root 密码/" itemprop="url">Mac OS X - 重置 MySQL Root 密码</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-21T14:13:36+08:00">
-                2018-07-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/07/21/Mac OS X - 重置 MySQL Root 密码/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/2018/07/21/Mac OS X - 重置 MySQL Root 密码/" itemprop="commentCount">0</span> comments
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          一：您是否忘记了Mac OS 的MySQL的root密码? 通过以下4步就可重新设置新密码：1.  停止 mysql server.  通常是在 ‘系统偏好设置’ &gt; MySQL &gt; ‘Stop MySQL Server’2.  打开终端，输入：1$ sudo /usr/local/my
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/21/Mac OS X - 重置 MySQL Root 密码/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
           </div>
-          <!--/noindex-->
-        
-      
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/21/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Charles">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Charles' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/21/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-21T11:38:16+08:00">
-                2018-07-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/07/21/hello-world/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/2018/07/21/hello-world/" itemprop="commentCount">0</span> comments
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in 
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/21/hello-world/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
 
   
 
 
-          </div>
-          
-
-
-          
 
         </div>
         
@@ -1215,6 +740,10 @@ Block的实
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -1232,6 +761,18 @@ Block的实
       <script id="dsq-count-scr" src="https://Charles.disqus.com/count.js" async></script>
     
 
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/07/23/Objective-C中的类和元类/';
+          this.page.identifier = '2018/07/23/Objective-C中的类和元类/';
+          this.page.title = 'Objective-C中的类和元类';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Charles.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
     
 
   
