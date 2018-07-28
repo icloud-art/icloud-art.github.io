@@ -79,13 +79,20 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Charles&#39; Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="我在使用mac终端执行各种命令的时候，始终感觉不是很方便，比如在开发过程中执行git 命令的时候不清楚当前是是什么分支，得反复的git branch 查看；输入文件夹名称时候还要区分大小写，tab 键才能联想。。。为了解决这个问题，我一番google,原来有这么好用的工具 — zsh 下面我们来介绍一下zsh是如何在mac终端上面装逼的。其实zsh 也是一种sheel,但是并不是我们系统默认的 s">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mac终端装逼利器 zsh">
+<meta property="og:url" content="http://yoursite.com/2018/07/28/Mac终端装逼利器-zsh/index.html">
 <meta property="og:site_name" content="Charles&#39; Blog">
+<meta property="og:description" content="我在使用mac终端执行各种命令的时候，始终感觉不是很方便，比如在开发过程中执行git 命令的时候不清楚当前是是什么分支，得反复的git branch 查看；输入文件夹名称时候还要区分大小写，tab 键才能联想。。。为了解决这个问题，我一番google,原来有这么好用的工具 — zsh 下面我们来介绍一下zsh是如何在mac终端上面装逼的。其实zsh 也是一种sheel,但是并不是我们系统默认的 s">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/change.png">
+<meta property="og:image" content="http://yoursite.com/images/git.png">
+<meta property="og:updated_time" content="2018-07-28T08:01:59.306Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Charles&#39; Blog">
+<meta name="twitter:title" content="Mac终端装逼利器 zsh">
+<meta name="twitter:description" content="我在使用mac终端执行各种命令的时候，始终感觉不是很方便，比如在开发过程中执行git 命令的时候不清楚当前是是什么分支，得反复的git branch 查看；输入文件夹名称时候还要区分大小写，tab 键才能联想。。。为了解决这个问题，我一番google,原来有这么好用的工具 — zsh 下面我们来介绍一下zsh是如何在mac终端上面装逼的。其实zsh 也是一种sheel,但是并不是我们系统默认的 s">
+<meta name="twitter:image" content="http://yoursite.com/images/change.png">
 
 
 
@@ -115,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/28/Mac终端装逼利器-zsh/"/>
 
 
 
 
 
-  <title>Charles' Blog</title>
+  <title>Mac终端装逼利器 zsh | Charles' Blog</title>
   
 
 
@@ -140,8 +147,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -288,9 +294,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -320,9 +326,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/28/Mac终端装逼利器-zsh/" itemprop="url">Mac终端装逼利器 zsh</a></h1>
+          <h1 class="post-title" itemprop="name headline">Mac终端装逼利器 zsh</h1>
         
 
         <div class="post-meta">
@@ -382,19 +386,20 @@
       
 
       
-        
-          
-          我在使用mac终端执行各种命令的时候，始终感觉不是很方便，比如在开发过程中执行git 命令的时候不清楚当前是是什么分支，得反复的git branch 查看；输入文件夹名称时候还要区分大小写，tab 键才能联想。。。为了解决这个问题，我一番google,原来有这么好用的工具 — zsh
-下面我们来介绍
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/28/Mac终端装逼利器-zsh/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+        <p>我在使用mac终端执行各种命令的时候，始终感觉不是很方便，比如在开发过程中执行git 命令的时候不清楚当前是是什么分支，得反复的git branch 查看；输入文件夹名称时候还要区分大小写，tab 键才能联想。。。<br>为了解决这个问题，我一番google,原来有这么好用的工具 — zsh</p>
+<p>下面我们来介绍一下zsh是如何在mac终端上面装逼的。<br>其实zsh 也是一种sheel,但是并不是我们系统默认的 shell ,unix 衍生系统的默认shell 都是 bash.</p>
+<h3 id="查看已安装的shell"><a href="#查看已安装的shell" class="headerlink" title="查看已安装的shell"></a>查看已安装的shell</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/shells</span><br></pre></td></tr></table></figure>
+<p>可以看到总共六种<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/bin/bash</span><br><span class="line">/bin/csh</span><br><span class="line">/bin/ksh</span><br><span class="line">/bin/sh</span><br><span class="line">/bin/tcsh</span><br><span class="line">/bin/zsh</span><br></pre></td></tr></table></figure></p>
+<h3 id="将默认shell改成zsh"><a href="#将默认shell改成zsh" class="headerlink" title="将默认shell改成zsh"></a>将默认shell改成zsh</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chsh -s /bin/zsh</span><br></pre></td></tr></table></figure>
+<h3 id="安装-oh-my-zsh"><a href="#安装-oh-my-zsh" class="headerlink" title="安装 oh my zsh"></a>安装 oh my zsh</h3><p>手动安装：依次执行如下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh</span><br><span class="line">cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc</span><br></pre></td></tr></table></figure></p>
+<h3 id="配置zsh"><a href="#配置zsh" class="headerlink" title="配置zsh"></a>配置zsh</h3><p>打开配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.zshrc</span><br></pre></td></tr></table></figure></p>
+<h4 id="设置一些常用命令的别名"><a href="#设置一些常用命令的别名" class="headerlink" title="设置一些常用命令的别名"></a>设置一些常用命令的别名</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">alias zshconfig=&apos;vi ~/.zshrc&apos;</span><br><span class="line">alias vimconfig=&apos;vi ~/.vimrc&apos;</span><br><span class="line">alias ll=&apos;ls -l&apos;</span><br><span class="line">alias vi=&apos;vim&apos;</span><br><span class="line">alias xcode=&apos;open -a &quot;Xcode&quot;&apos;</span><br></pre></td></tr></table></figure>
+<h4 id="启用命令纠错功能"><a href="#启用命令纠错功能" class="headerlink" title="启用命令纠错功能"></a>启用命令纠错功能</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ENABLE_CORRECTION=&quot;true&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git </span><br><span class="line">osx</span><br><span class="line">autojump</span><br></pre></td></tr></table></figure>
+<p>只需要在.zshvr中启用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plugins=(git osx autojump)</span><br></pre></td></tr></table></figure></p>
+<p>到这里你可以重启一下你的终端看一下效果<br><img src="/images/change.png" alt="avatar"></p>
+<p>再看一下git效果<br><img src="/images/git.png" alt="avatar"></p>
+
       
     </div>
     
@@ -404,6 +409,40 @@
     
 
     
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Charles 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Charles 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+      <div id="bitcoin" style="display: inline-block">
+        <img id="bitcoin_qr" src="/images/bitcoin.png" alt="Charles 比特币"/>
+        <p>比特币</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
 
     
 
@@ -411,152 +450,28 @@
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/23/你真的明白isKindOfClass-和-isMemberOfClass-的区别么？/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Charles">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Charles' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/23/你真的明白isKindOfClass-和-isMemberOfClass-的区别么？/" itemprop="url">你真的明白isKindOfClass 和 isMemberOfClass 的区别么？</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-23T23:29:17+08:00">
-                2018-07-23
-              </time>
+              <a href="/2018/07/23/你真的明白isKindOfClass-和-isMemberOfClass-的区别么？/" rel="next" title="你真的明白isKindOfClass 和 isMemberOfClass 的区别么？">
+                <i class="fa fa-chevron-left"></i> 你真的明白isKindOfClass 和 isMemberOfClass 的区别么？
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/07/23/你真的明白isKindOfClass-和-isMemberOfClass-的区别么？/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/2018/07/23/你真的明白isKindOfClass-和-isMemberOfClass-的区别么？/" itemprop="commentCount">0</span> comments
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-          前几天看博客发现了一个关于 isKindOfClass  和 isMemberOfClass 的问题，但是感觉分析的不够透彻，所以我在这里试着分析一下，欢迎大家一起讨论。
-内容是这样的 （如图1）。
-
-图1上图中的四个Bool 分别是什么？
-我在这里先爆出答案：上面是个Bool 分别是：1 ，0，0
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/23/你真的明白isKindOfClass-和-isMemberOfClass-的区别么？/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -566,708 +481,32 @@
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/23/Objective-C中的类和元类/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Charles">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Charles' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/23/Objective-C中的类和元类/" itemprop="url">Objective-C中的类和元类</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-23T23:23:41+08:00">
-                2018-07-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/07/23/Objective-C中的类和元类/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/2018/07/23/Objective-C中的类和元类/" itemprop="commentCount">0</span> comments
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          你真的知道OC的类（Class）是个什么玩意儿？
-众所周知，所有的对象都是由其对应的类实例化而来，但是类本身其实也是一种对象，surprise？下面我们就来拨开这层迷雾。
-类在Objective-C中，我们用到的几乎所有类都是NSObject类的子类，查阅objc源码你会发现 NSObject类定义
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/23/Objective-C中的类和元类/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+    <div class="post-spread">
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
 
 
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/23/手把手教你用-Intellij-IDEA-创建一个简单的SpringBoot项目/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Charles">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Charles' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/23/手把手教你用-Intellij-IDEA-创建一个简单的SpringBoot项目/" itemprop="url">手把手教你用 Intellij IDEA 创建一个简单的SpringBoot项目</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-23T23:11:33+08:00">
-                2018-07-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/07/23/手把手教你用-Intellij-IDEA-创建一个简单的SpringBoot项目/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/2018/07/23/手把手教你用-Intellij-IDEA-创建一个简单的SpringBoot项目/" itemprop="commentCount">0</span> comments
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          新建Project 默认选中 Default
-点击下图的Next 按钮
-
-填写Group、Artifact
-Package 那一栏和Group 保持一致就好，如果是com.jack.springtest的话会导致 WhiteLabel Error Page 异常
-
-选中Web 选项 然后点击Next
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/23/手把手教你用-Intellij-IDEA-创建一个简单的SpringBoot项目/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
           </div>
-          <!--/noindex-->
-        
-      
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
 
   
 
-  
-  
-  
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/21/Block底层实现之逆向思维/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Charles">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Charles' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/21/Block底层实现之逆向思维/" itemprop="url">Block底层实现之逆向思维</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-21T21:39:13+08:00">
-                2018-07-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/07/21/Block底层实现之逆向思维/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/2018/07/21/Block底层实现之逆向思维/" itemprop="commentCount">0</span> comments
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          前段时间心血来潮，研究了一下block底层实现，在网上看了好多文章，基本都是通过clang 将代码转换为C++代码去分析Blcok的实现。今天我们反过来思考，用C去实现一个OC Block的效果。
-Block的实现本质上是一些结构体，函数指针，函数，的综合运用。
-话不多说，直奔主题：
-Block的实
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/21/Block底层实现之逆向思维/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/21/Mac OS X - 重置 MySQL Root 密码/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Charles">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Charles' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/21/Mac OS X - 重置 MySQL Root 密码/" itemprop="url">Mac OS X - 重置 MySQL Root 密码</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-21T14:13:36+08:00">
-                2018-07-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/07/21/Mac OS X - 重置 MySQL Root 密码/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/2018/07/21/Mac OS X - 重置 MySQL Root 密码/" itemprop="commentCount">0</span> comments
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          一：您是否忘记了Mac OS 的MySQL的root密码? 通过以下4步就可重新设置新密码：1.  停止 mysql server.  通常是在 ‘系统偏好设置’ &gt; MySQL &gt; ‘Stop MySQL Server’2.  打开终端，输入：1$ sudo /usr/local/my
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/21/Mac OS X - 重置 MySQL Root 密码/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/21/hexo快速搭建个人博客/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Charles">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Charles' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/21/hexo快速搭建个人博客/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-21T11:38:16+08:00">
-                2018-07-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/07/21/hexo快速搭建个人博客/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/2018/07/21/hexo快速搭建个人博客/" itemprop="commentCount">0</span> comments
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in 
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/21/hexo快速搭建个人博客/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
-
-
-          </div>
-          
-
-
-          
 
         </div>
         
@@ -1288,8 +527,17 @@ Block的实
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -1345,6 +593,22 @@ Block的实
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看已安装的shell"><span class="nav-number">1.</span> <span class="nav-text">查看已安装的shell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将默认shell改成zsh"><span class="nav-number">2.</span> <span class="nav-text">将默认shell改成zsh</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-oh-my-zsh"><span class="nav-number">3.</span> <span class="nav-text">安装 oh my zsh</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置zsh"><span class="nav-number">4.</span> <span class="nav-text">配置zsh</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#设置一些常用命令的别名"><span class="nav-number">4.1.</span> <span class="nav-text">设置一些常用命令的别名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启用命令纠错功能"><span class="nav-number">4.2.</span> <span class="nav-text">启用命令纠错功能</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插件"><span class="nav-number">5.</span> <span class="nav-text">插件</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1492,6 +756,10 @@ Block的实
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -1509,6 +777,18 @@ Block的实
       <script id="dsq-count-scr" src="https://Charles.disqus.com/count.js" async></script>
     
 
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/07/28/Mac终端装逼利器-zsh/';
+          this.page.identifier = '2018/07/28/Mac终端装逼利器-zsh/';
+          this.page.title = 'Mac终端装逼利器 zsh';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Charles.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
     
 
   
