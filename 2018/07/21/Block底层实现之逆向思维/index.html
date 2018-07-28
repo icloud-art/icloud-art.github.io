@@ -90,7 +90,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="iOS," />
 
 
 
@@ -102,13 +102,14 @@
 
 
 <meta name="description" content="前段时间心血来潮，研究了一下block底层实现，在网上看了好多文章，基本都是通过clang 将代码转换为C++代码去分析Blcok的实现。今天我们反过来思考，用C去实现一个OC Block的效果。 Block的实现本质上是一些结构体，函数指针，函数，的综合运用。 话不多说，直奔主题： Block的实现，首先需要声明一个结构，这个结构是我们实现Block的基础，也是关键1234567891011st">
+<meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Block底层实现之逆向思维">
 <meta property="og:url" content="http://yoursite.com/2018/07/21/Block底层实现之逆向思维/index.html">
 <meta property="og:site_name" content="Charles&#39; Blog">
 <meta property="og:description" content="前段时间心血来潮，研究了一下block底层实现，在网上看了好多文章，基本都是通过clang 将代码转换为C++代码去分析Blcok的实现。今天我们反过来思考，用C去实现一个OC Block的效果。 Block的实现本质上是一些结构体，函数指针，函数，的综合运用。 话不多说，直奔主题： Block的实现，首先需要声明一个结构，这个结构是我们实现Block的基础，也是关键1234567891011st">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-21T14:48:53.080Z">
+<meta property="og:updated_time" content="2018-07-28T10:15:34.267Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Block底层实现之逆向思维">
 <meta name="twitter:description" content="前段时间心血来潮，研究了一下block底层实现，在网上看了好多文章，基本都是通过clang 将代码转换为C++代码去分析Blcok的实现。今天我们反过来思考，用C去实现一个OC Block的效果。 Block的实现本质上是一些结构体，函数指针，函数，的综合运用。 话不多说，直奔主题： Block的实现，首先需要声明一个结构，这个结构是我们实现Block的基础，也是关键1234567891011st">
@@ -358,6 +359,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术人生/" itemprop="url" rel="index">
+                    <span itemprop="name">技术人生</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -461,6 +484,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
 
       
       
@@ -561,7 +590,25 @@
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
             
 
           </nav>
