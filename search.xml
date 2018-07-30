@@ -69,8 +69,8 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Hello World]]></title>
+    <title><![CDATA[hexo快速搭建个人博客]]></title>
     <url>%2F2018%2F07%2F21%2Fhexo%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%2F</url>
-    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+    <content type="text"><![CDATA[Hexo 是高效的静态网站生成框架，它基于Node.js,通过编辑markdown文件来生成对应的html页面。 准备工作首先安装node.js、安装Git、注册一个github账号。 开始搭建博客开启github pages服务在GitHub上面新建一个仓库如：username.github.io 这个过程和建立普通的仓库没什么区别，关键在于新仓库的名字，一定要是username+“github.io”的形式。这也是之前强调的要起一个好的用户名的原因。这样之后我们最后的博客网站的链接就会是：https://username.github.io的形式。 安装hexo:以上所有都安装完成之后再安装hexo.1sudo npm install hexo-cli -g 所有必须工具已经安装完成,接下来我们就可以生成博客，上传至我们的github 仓库了。 创建本地博客找一个合适的目录执行如下命令：1hexo init CharlesBlog 安装主题这里我选择的是一个比较流行的主题:next执行如下命令安装：12cd CharlesBloggit clone https://github.com/iissnan/hexo-theme-next themes/next 基础配置：打开文件位置CharlesBlog/_config.yml修改几个键值对，下面把几个必须设置的列出来按需求修改，记得保存， 还有注意配置的键值之间一定要有空格。title: CharlesBlog //你博客的名字author: Charles //你的名字language: zh-Hans //语言 中文theme: next //刚刚安装的主题名称deploy:type: gitrepository: git@github.com:icloud-art/icloud-art.github.io.gitbranch: master主题配置：主题配置文件在username.github.io/themes/next/_config.yml中修改，此处不做详细说明。 新建一片博客进入CharlesBlog目录执行如下命令：1hexo new testblog 之后会在_post目录下面生成一个testblog.md文件，这个文件就是用来生成对应的html页面。 测试testblog执行如下命令：123hexo cleanhexo ghexo s 然后再浏览器中输入https://localhost:4000 就可以看到刚才创建的博文了（没错，就是testblog）。 安装hexo-deployer-git自动部署发布工具执行如下命令：1npm install hexo-deployer-git --save 发布工具安装好之后就可以使用1hexo d 命令来发布你的博文到GitHub.io当然完成的发布流程是这样的：1hexo clean 1hexo g 1hexo d 好，到这里你可以通过github的域名来访问你的博文了。 时间有限，本文只是简单的介绍了的博客创建流程，还有很多很好玩的配置与插件。比如说评论、标签、统计等等。各位看官慢慢的玩起来吧！]]></content>
   </entry>
 </search>
