@@ -90,7 +90,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="iOS,Objective-C," />
 
 
 
@@ -101,14 +101,20 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="标签">
-<meta property="og:url" content="http://yoursite.com/tags/index.html">
+<meta name="description" content="这篇文章我们主要来探讨一下，如何让一个静态framework 依赖其他的静态framework，本文以活体检测的framework为例来一步步说明是如何实现的。 至于如何打包一个静态库的问题，请查看本人上一篇文章： 这篇文章我们基于上一篇文章中的例子继续讲解。 第一步，我们将需要的三方framework 以及 bundle 导入到CLNetStaticFramework里面的Libs文件夹下，注意">
+<meta name="keywords" content="iOS,Objective-C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何打包一个依赖第三方framework（如支付宝的framework）的静态framework">
+<meta property="og:url" content="http://yoursite.com/2018/12/01/如何打包一个依赖第三方framework（如支付宝的framework）的静态framework/index.html">
 <meta property="og:site_name" content="Charles&#39; Blog">
+<meta property="og:description" content="这篇文章我们主要来探讨一下，如何让一个静态framework 依赖其他的静态framework，本文以活体检测的framework为例来一步步说明是如何实现的。 至于如何打包一个静态库的问题，请查看本人上一篇文章： 这篇文章我们基于上一篇文章中的例子继续讲解。 第一步，我们将需要的三方framework 以及 bundle 导入到CLNetStaticFramework里面的Libs文件夹下，注意">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-28T10:13:30.919Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2651174-7de4cae0c0e0a0d8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/730/format/webp">
+<meta property="og:updated_time" content="2018-12-01T14:48:38.178Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="标签">
+<meta name="twitter:title" content="如何打包一个依赖第三方framework（如支付宝的framework）的静态framework">
+<meta name="twitter:description" content="这篇文章我们主要来探讨一下，如何让一个静态framework 依赖其他的静态framework，本文以活体检测的framework为例来一步步说明是如何实现的。 至于如何打包一个静态库的问题，请查看本人上一篇文章： 这篇文章我们基于上一篇文章中的例子继续讲解。 第一步，我们将需要的三方framework 以及 bundle 导入到CLNetStaticFramework里面的Libs文件夹下，注意">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/2651174-7de4cae0c0e0a0d8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/730/format/webp">
 
 
 
@@ -138,13 +144,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/12/01/如何打包一个依赖第三方framework（如支付宝的framework）的静态framework/"/>
 
 
 
 
 
-  <title>标签 | Charles' Blog</title>
+  <title>如何打包一个依赖第三方framework（如支付宝的framework）的静态framework | Charles' Blog</title>
   
 
 
@@ -313,40 +319,286 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/01/如何打包一个依赖第三方framework（如支付宝的framework）的静态framework/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Charles">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Charles' Blog">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">标签</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-                目前共计 5 个标签
+          <h1 class="post-title" itemprop="name headline">如何打包一个依赖第三方framework（如支付宝的framework）的静态framework</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-01T22:45:37+08:00">
+                2018-12-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术人生/" itemprop="url" rel="index">
+                    <span itemprop="name">技术人生</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术人生/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 本文阅读数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  202
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
             </div>
-            <div class="tag-cloud-tags">
-              <a href="/tags/Objective-C/" style="font-size: 21px; color: #6f6f6f">Objective-C</a> <a href="/tags/iOS/" style="font-size: 30px; color: #111">iOS</a> <a href="/tags/java/" style="font-size: 12px; color: #ccc">java</a> <a href="/tags/mysql/" style="font-size: 12px; color: #ccc">mysql</a> <a href="/tags/tools/" style="font-size: 12px; color: #ccc">tools</a>
-            </div>
-          </div>
-        
-      </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <p>这篇文章我们主要来探讨一下，如何让一个静态framework 依赖其他的静态framework，本文以活体检测的framework为例来一步步说明是如何实现的。</p>
+<p>至于如何打包一个静态库的问题，请查看本人上一篇文章：</p>
+<p>这篇文章我们基于上一篇文章中的例子继续讲解。</p>
+<p>第一步，我们将需要的三方framework 以及 bundle 导入到CLNetStaticFramework里面的Libs文件夹下，注意！导入的时候Add to targets 这一项一定不要勾选，只需要导入即可如图(1)。之所以这样是因为，静态库是相对独立的，不能一个静态库包含另外一个静态库，只能是依赖，这样不会造成重复引用。<br><img src="https://upload-images.jianshu.io/upload_images/2651174-7de4cae0c0e0a0d8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/730/format/webp" alt="avata"></p>
+<center>图1</center>
+
       
     </div>
     
     
     
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>谢谢您的支持！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Charles 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="Charles 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/Objective-C/" rel="tag"># Objective-C</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/28/Mac终端装逼利器-zsh/" rel="next" title="Mac终端装逼利器 zsh">
+                <i class="fa fa-chevron-left"></i> Mac终端装逼利器 zsh
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
   </div>
 
 
