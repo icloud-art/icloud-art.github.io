@@ -101,18 +101,18 @@
 
 
 
-<meta name="description" content="加载图片流程当我们使用SDWebImage 加载图片时需要调用如下方法：123- (void)sd_setImageWithURL:(nullable NSURL *)url &amp;#123;    [self sd_setImageWithURL:url placeholderImage:nil options:0 progress:nil completed:nil];&amp;#125; 之后进行一系列">
+<meta name="description" content="最近在研究图片缓存框架，所以SDWebImage一定是我研究的不二选择，下面就简单讲述一下SDWebImage是如何加载图片的，以及加载过程中涉及到的一些骚操作。 这里先强调一点SDWebImage加载图片过程中的两个骚操作：a. 如何避免同一时间多个请求，请求同一张图片下载多次问题。b. 如何解决TableViewCell 复用时导致的图片展示错乱问题。下文中会对这两个问题给出答案，好了不扯淡了">
 <meta name="keywords" content="图片缓存">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SDWebImage (5.0.6) 图片加载奇淫巧技">
 <meta property="og:url" content="http://yoursite.com/2019/07/29/SDWebImage (5.0.6) 图片加载奇淫巧技/index.html">
 <meta property="og:site_name" content="Charles&#39; Blog">
-<meta property="og:description" content="加载图片流程当我们使用SDWebImage 加载图片时需要调用如下方法：123- (void)sd_setImageWithURL:(nullable NSURL *)url &amp;#123;    [self sd_setImageWithURL:url placeholderImage:nil options:0 progress:nil completed:nil];&amp;#125; 之后进行一系列">
+<meta property="og:description" content="最近在研究图片缓存框架，所以SDWebImage一定是我研究的不二选择，下面就简单讲述一下SDWebImage是如何加载图片的，以及加载过程中涉及到的一些骚操作。 这里先强调一点SDWebImage加载图片过程中的两个骚操作：a. 如何避免同一时间多个请求，请求同一张图片下载多次问题。b. 如何解决TableViewCell 复用时导致的图片展示错乱问题。下文中会对这两个问题给出答案，好了不扯淡了">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-29T14:49:41.567Z">
+<meta property="og:updated_time" content="2019-07-29T14:58:19.011Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SDWebImage (5.0.6) 图片加载奇淫巧技">
-<meta name="twitter:description" content="加载图片流程当我们使用SDWebImage 加载图片时需要调用如下方法：123- (void)sd_setImageWithURL:(nullable NSURL *)url &amp;#123;    [self sd_setImageWithURL:url placeholderImage:nil options:0 progress:nil completed:nil];&amp;#125; 之后进行一系列">
+<meta name="twitter:description" content="最近在研究图片缓存框架，所以SDWebImage一定是我研究的不二选择，下面就简单讲述一下SDWebImage是如何加载图片的，以及加载过程中涉及到的一些骚操作。 这里先强调一点SDWebImage加载图片过程中的两个骚操作：a. 如何避免同一时间多个请求，请求同一张图片下载多次问题。b. 如何解决TableViewCell 复用时导致的图片展示错乱问题。下文中会对这两个问题给出答案，好了不扯淡了">
 
 
 
@@ -417,7 +417,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,692
+                  2,836
                 </span>
               
 
@@ -433,7 +433,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  12
+                  13
                 </span>
               
             </div>
@@ -454,7 +454,9 @@
       
 
       
-        <p>加载图片流程<br>当我们使用SDWebImage 加载图片时需要调用如下方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (void)sd_setImageWithURL:(nullable NSURL *)url &#123;</span><br><span class="line">    [self sd_setImageWithURL:url placeholderImage:nil options:0 progress:nil completed:nil];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <p>最近在研究图片缓存框架，所以SDWebImage一定是我研究的不二选择，下面就简单讲述一下SDWebImage是如何加载图片的，以及加载过程中涉及到的一些骚操作。</p>
+<p>这里先强调一点SDWebImage加载图片过程中的两个骚操作：<br>a. 如何避免同一时间多个请求，请求同一张图片下载多次问题。<br>b. 如何解决TableViewCell 复用时导致的图片展示错乱问题。<br>下文中会对这两个问题给出答案，好了不扯淡了，进入正题。</p>
+<p>当我们使用SDWebImage加载图片时需要调用如下方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (void)sd_setImageWithURL:(nullable NSURL *)url &#123;</span><br><span class="line">    [self sd_setImageWithURL:url placeholderImage:nil options:0 progress:nil completed:nil];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>之后进行一系列的传递会传递到最深层的方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">- (void)sd_setImageWithURL:(nullable NSURL *)url placeholderImage:(nullable UIImage *)placeholder</span><br><span class="line">                                                options:(SDWebImageOptions)options</span><br><span class="line">                                                context:(nullable SDWebImageContext *)context</span><br><span class="line">                                                progress:(nullable SDImageLoaderProgressBlock)progressBlock</span><br><span class="line">                                                completed:(nullable SDExternalCompletionBlock)completedBlock &#123;</span><br><span class="line">    [self sd_internalSetImageWithURL:url placeholderImage:placeholder options:options context:context setImageBlock:nil </span><br><span class="line">                                progress:progressBlock </span><br><span class="line">                                completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, </span><br><span class="line">                                SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) &#123;</span><br><span class="line">                    if (completedBlock) &#123;</span><br><span class="line">                        completedBlock(image, error, cacheType, imageURL);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>可以看到，这个方法里面调用了UIView+Webcache分类里面的一个方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- (void)sd_internalSetImageWithURL:(nullable NSURL *)url placeholderImage:(nullable UIImage *)placeholder</span><br><span class="line">                                                        options:(SDWebImageOptions)options</span><br><span class="line">                                                        context:(nullable SDWebImageContext *)context</span><br><span class="line">                                                        setImageBlock:(nullable SDSetImageBlock)setImageBlock</span><br><span class="line">                                                        progress:(nullable SDImageLoaderProgressBlock)progressBlock</span><br><span class="line">                                                        completed:(nullable SDInternalCompletionBlock)completedBlock &#123;</span><br><span class="line">                                                        ......</span><br><span class="line">                                                        &#125;</span><br></pre></td></tr></table></figure></p>
 <p>这个方法就是我们加载图片的正式入口方法。下面我们看一下这个方法里面都主要做了什么。<br>第一步，根据validOperationKey 取消掉正在执行的操作operation如下调用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">NSString *validOperationKey = context[SDWebImageContextSetImageOperationKey];</span><br><span class="line">if (!validOperationKey) &#123;</span><br><span class="line">    validOperationKey = NSStringFromClass([self class]);</span><br><span class="line">&#125;</span><br><span class="line">self.sd_latestOperationKey = validOperationKey;</span><br><span class="line">[self sd_cancelImageLoadOperationWithKey:validOperationKey];</span><br></pre></td></tr></table></figure></p>
@@ -752,7 +754,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共8.2k字</span>
+  <span class="post-count">博客全站共8.3k字</span>
 </div>
 
 <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
