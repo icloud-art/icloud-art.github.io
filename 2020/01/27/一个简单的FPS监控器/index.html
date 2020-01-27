@@ -101,18 +101,18 @@
 
 
 
-<meta name="description" content="前段时间心血来潮，研究了一下block底层实现，在网上看了好多文章，基本都是通过clang 将代码转换为C++代码去分析Blcok的实现。今天我们反过来思考，用C去实现一个OC Block的效果。 Block的实现本质上是一些结构体，函数指针，函数，的综合运用。 话不多说，直奔主题： Block的实现，首先需要声明一个结构，这个结构是我们实现Block的基础，也是关键1234567891011st">
+<meta name="description" content="最近在看有关iOS性能监控方面的知识，了解到如何通过12首先我们要了解一下```CADisplayLink```是个什么玩意儿，官方给出的解释是这样的： A timer object that allows your application to synchronize its drawing to the refresh rate of the display.123说白了，就是以屏幕刷新频率将">
 <meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Block底层实现之逆向思维">
-<meta property="og:url" content="http://yoursite.com/2018/07/21/Block底层实现之逆向思维/index.html">
+<meta property="og:title" content="一个简单的FPS监控器">
+<meta property="og:url" content="http://yoursite.com/2020/01/27/一个简单的FPS监控器/index.html">
 <meta property="og:site_name" content="Charles&#39; Blog">
-<meta property="og:description" content="前段时间心血来潮，研究了一下block底层实现，在网上看了好多文章，基本都是通过clang 将代码转换为C++代码去分析Blcok的实现。今天我们反过来思考，用C去实现一个OC Block的效果。 Block的实现本质上是一些结构体，函数指针，函数，的综合运用。 话不多说，直奔主题： Block的实现，首先需要声明一个结构，这个结构是我们实现Block的基础，也是关键1234567891011st">
+<meta property="og:description" content="最近在看有关iOS性能监控方面的知识，了解到如何通过12首先我们要了解一下```CADisplayLink```是个什么玩意儿，官方给出的解释是这样的： A timer object that allows your application to synchronize its drawing to the refresh rate of the display.123说白了，就是以屏幕刷新频率将">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-28T10:15:34.000Z">
+<meta property="og:updated_time" content="2020-01-27T08:06:15.783Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Block底层实现之逆向思维">
-<meta name="twitter:description" content="前段时间心血来潮，研究了一下block底层实现，在网上看了好多文章，基本都是通过clang 将代码转换为C++代码去分析Blcok的实现。今天我们反过来思考，用C去实现一个OC Block的效果。 Block的实现本质上是一些结构体，函数指针，函数，的综合运用。 话不多说，直奔主题： Block的实现，首先需要声明一个结构，这个结构是我们实现Block的基础，也是关键1234567891011st">
+<meta name="twitter:title" content="一个简单的FPS监控器">
+<meta name="twitter:description" content="最近在看有关iOS性能监控方面的知识，了解到如何通过12首先我们要了解一下```CADisplayLink```是个什么玩意儿，官方给出的解释是这样的： A timer object that allows your application to synchronize its drawing to the refresh rate of the display.123说白了，就是以屏幕刷新频率将">
 
 
 
@@ -142,13 +142,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/07/21/Block底层实现之逆向思维/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/01/27/一个简单的FPS监控器/"/>
 
 
 
 
 
-  <title>Block底层实现之逆向思维 | Charles' Blog</title>
+  <title>一个简单的FPS监控器 | Charles' Blog</title>
   
 
 
@@ -329,7 +329,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/21/Block底层实现之逆向思维/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/27/一个简单的FPS监控器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charles">
@@ -346,7 +346,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Block底层实现之逆向思维</h1>
+          <h1 class="post-title" itemprop="name headline">一个简单的FPS监控器</h1>
         
 
         <div class="post-meta">
@@ -358,8 +358,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-21T21:39:13+08:00">
-                2018-07-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-27T16:04:23+08:00">
+                2020-01-27
               </time>
             
 
@@ -412,7 +412,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  790
+                  395
                 </span>
               
 
@@ -428,7 +428,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  2
                 </span>
               
             </div>
@@ -449,33 +449,31 @@
       
 
       
-        <p>前段时间心血来潮，研究了一下block底层实现，在网上看了好多文章，基本都是通过clang 将代码转换为C++代码去分析Blcok的实现。今天我们反过来思考，用C去实现一个OC Block的效果。</p>
-<p>Block的实现本质上是一些结构体，函数指针，函数，的综合运用。</p>
-<p>话不多说，直奔主题：</p>
-<p>Block的实现，首先需要声明一个结构，这个结构是我们实现Block的基础，也是关键<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">struct __block_impl &#123;</span><br><span class="line"></span><br><span class="line">void *isa; </span><br><span class="line"></span><br><span class="line">int Flags;</span><br><span class="line"></span><br><span class="line">int Reserved;</span><br><span class="line"></span><br><span class="line">void *FuncPtr;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>说明一下：</p>
-<p>1.isa 保存的是Block的类型</p>
-<p>2.Flags 当block发生copy时，会用到</p>
-<p>3.FuncPtr 指针，指向block内的函数实现（后面函数指针调用的函数）</p>
-<p>这个结构体，是所有类型的Block都会有的一部分。</p>
-<p>然后我们看第二个结构体<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">static struct __simpleblk_block_desc_0 &#123;</span><br><span class="line"></span><br><span class="line">size_t reserved;</span><br><span class="line"></span><br><span class="line">size_t Block_size;</span><br><span class="line"></span><br><span class="line">&#125; __simpleblk_block_desc_0_DATA = &#123;0,sizeof(struct __simpleblk_block_impl_0)&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>说明一下：</p>
-<p>1.reserved 保留字段默认是0</p>
-<p>2.Block_size  用来保存block所占内存大小。</p>
-<p>这个结构体用来描述block的大小等信息，<strong>simpleblk_block_desc_0_DATA是</strong>simpleblk_block_desc_0的一个结构体实例。</p>
-<p>我们再看第三个结构体，也是Block实现最重要的结构，声明如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">struct __simpleblk_block_impl_0 &#123;</span><br><span class="line"></span><br><span class="line">struct __block_impl impl;</span><br><span class="line"></span><br><span class="line">struct __simpleblk_block_desc_0 *Desc;</span><br><span class="line"></span><br><span class="line">__simpleblk_block_impl_0(void *fp,struct __simpleblk_block_desc_0 *desc,int flags = 0)&#123;</span><br><span class="line"></span><br><span class="line">impl.isa = &amp;_NSConcreteStackBlock;</span><br><span class="line"></span><br><span class="line">impl.Flags = flags;</span><br><span class="line"></span><br><span class="line">impl.FuncPtr = fp;</span><br><span class="line"></span><br><span class="line">Desc = desc;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>说明一下：</p>
-<p>从这个结构中可以看到，该结构体含有 <strong>block_impl 结构的变量 和 </strong>simpleblk_block_desc_0 结构的变量，以及结构体构造函数<strong>simpleblk_block_impl_0，结构体构造函数用来初始化变量</strong>block_impl和__simpleblk_block_desc_0。</p>
-<p>到这里，我们实现最简单的Block所需要的结构就声明完了，但是要达到OC Block 那种效果，仅有结构体 肯定是不够的。截下来我们来看一个关键的函数，你没猜错就是一个很简单的C函数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">static void __simpleblk_block_func_0(struct __simpleblk_block_impl_0 *__cself) &#123;</span><br><span class="line"></span><br><span class="line">printf(&quot;this is charles&apos;s simple block!!&quot;);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>这个函数其实就是我们的Block块里面的操作。后面调用之后就会很清楚。</p>
-<p>到这里我们就可以写一个C函数来达到一个Block的效果：</p>
-<p>int simpleblk(){</p>
-<p>//声明一个结构体变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__simpleblk_block_impl_0 __simpleblk_impl0 = __simpleblk_block_impl_0((void *)__simpleblk_block_func_0,&amp;__simpleblk_block_desc_0_DATA);</span><br></pre></td></tr></table></figure></p>
-<p>//声明一个函数指针变量block，并且将上面的结构体变量的地址付给block指针<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void(*block)(void) = (void(*)())&amp;__simpleblk_impl0;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">下面这句代码 实际上调用的是 __simpleblk_block_func_0（）函数</span><br><span class="line">就是函数指针调用函数。</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">((void (*)(struct __block_impl *))((struct __block_impl *)block)-&gt;FuncPtr)((struct __block_impl *)block);</span><br><span class="line"></span><br><span class="line">return 1;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>其实，上面写了这么多，换成OC代码其实就是在一个函数里面，声明了一个Block变量并且调用它。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">int simpleblk() &#123;</span><br><span class="line"></span><br><span class="line">void (^block)(void) = ^()&#123;</span><br><span class="line"></span><br><span class="line">printf(&quot;this is charles&apos;s block!!&quot;);</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">block();</span><br><span class="line"></span><br><span class="line">return 1;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>到这里我们用C语言实现OC的 Block效果基本就写完了，不知道各位看官是否看明白了呢。。（PS:欢迎大家勘误，共同学习！）</p>
+        <p>最近在看有关iOS性能监控方面的知识，了解到如何通过<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">首先我们要了解一下```CADisplayLink```是个什么玩意儿，官方给出的解释是这样的：</span><br></pre></td></tr></table></figure></p>
+<p>A timer object that allows your application to synchronize its drawing to the refresh rate of the display.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">说白了，就是以屏幕刷新频率将内容绘制到屏幕上的定时器。它可以以屏幕的刷新频率调用指定的selector,而iOS系统中正常的屏幕刷新频率为60Hz(每秒60次)，那我们只要在这个方法里面统计每秒这个方法执行的次数，通过调用次数除以时间间隔(_count/interval)就可以得出当前屏幕的刷新频率了。</span><br><span class="line"></span><br><span class="line">接下来贴出核心代码：</span><br></pre></td></tr></table></figure></p>
+<p>// 开始监控FPS的方法</p>
+<ul>
+<li>(void)start {<br>  if (_displayLink) {<pre><code>_displayLink.paused = NO;
+</code></pre>  }else {<pre><code>_displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(triggerFps:)];
+// 让当前runloop在 UITrackingRunloopMode 下可以接收到回调
+[_displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+</code></pre>  }<br>}</li>
+</ul>
+<p>// 刷新频率回调方法</p>
+<ul>
+<li><p>(void)triggerFps:(CADisplayLink *)displayLink {<br>  // 大约每1/60秒调用一次 就是说每16.7ms 要产生一帧画面。<br>  // 记录第一次调用时的时间戳<br>  if (_lastTimestamp == 0) {</p>
+<pre><code>_lastTimestamp = displayLink.timestamp;
+return;
+</code></pre><p>  }<br>  _count++;<br>  // 当count=60 时  interval &gt;= 1 才会执行后面的fps值计算<br>  NSTimeInterval interval = displayLink.timestamp - _lastTimestamp;<br>  if (interval &lt; 1) {</p>
+<pre><code>return;
+</code></pre><p>  }<br>  // 计算出fps<br>  CGFloat fps = _count / interval;</p>
+<p>  // 记录上一次的时间戳<br>  _lastTimestamp = displayLink.timestamp;<br>  // reset _count<br>  _count = 0;</p>
+<p>  // 调整fps值<br>  NSInteger intFps = (NSInteger)(fps + 0.5);<br>  self.currentFps = intFps;<br>  if (self.FPSBlock) {</p>
+<pre><code>self.FPSBlock(self.currentFps);
+</code></pre><p>  }<br>}</p>
+</li>
+</ul>
+<p><code>`</code><br>通过上面的代码就能统计到帧数的变化了，这个FPS指示器也就完成了。</p>
 
       
     </div>
@@ -535,8 +533,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/21/Mac OS X - 重置 MySQL Root 密码/" rel="next" title="Mac OS X - 重置 MySQL Root 密码">
-                <i class="fa fa-chevron-left"></i> Mac OS X - 重置 MySQL Root 密码
+              <a href="/2019/08/04/SDWebImage (5.0.6) 图片缓存读写原理/" rel="next" title="SDWebImage (5.0.6) 图片缓存读写原理">
+                <i class="fa fa-chevron-left"></i> SDWebImage (5.0.6) 图片缓存读写原理
               </a>
             
           </div>
@@ -544,10 +542,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/23/手把手教你用-Intellij-IDEA-创建一个简单的SpringBoot项目/" rel="prev" title="手把手教你用 Intellij IDEA 创建一个简单的SpringBoot项目">
-                手把手教你用 Intellij IDEA 创建一个简单的SpringBoot项目 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
