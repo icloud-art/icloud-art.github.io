@@ -101,18 +101,18 @@
 
 
 
-<meta name="description" content="最近在看有关iOS性能监控方面的知识，了解到如何通过12首先我们要了解一下```CADisplayLink```是个什么玩意儿，官方给出的解释是这样的： A timer object that allows your application to synchronize its drawing to the refresh rate of the display.123说白了，就是以屏幕刷新频率将">
+<meta name="description" content="最近在看有关iOS性能监控方面的知识，了解到如何通过CADisplayLink来实现一个简单的屏幕刷新帧率监控的方法，在Blog里面做一个Mark。 首先我们要了解一下CADisplayLink是个什么玩意儿，官方给出的解释是这样的： 1A timer object that allows your application to synchronize its drawing to the ref">
 <meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一个简单的FPS监控器">
 <meta property="og:url" content="http://yoursite.com/2020/01/27/一个简单的FPS监控器/index.html">
 <meta property="og:site_name" content="Charles&#39; Blog">
-<meta property="og:description" content="最近在看有关iOS性能监控方面的知识，了解到如何通过12首先我们要了解一下```CADisplayLink```是个什么玩意儿，官方给出的解释是这样的： A timer object that allows your application to synchronize its drawing to the refresh rate of the display.123说白了，就是以屏幕刷新频率将">
+<meta property="og:description" content="最近在看有关iOS性能监控方面的知识，了解到如何通过CADisplayLink来实现一个简单的屏幕刷新帧率监控的方法，在Blog里面做一个Mark。 首先我们要了解一下CADisplayLink是个什么玩意儿，官方给出的解释是这样的： 1A timer object that allows your application to synchronize its drawing to the ref">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-01-27T08:06:15.783Z">
+<meta property="og:updated_time" content="2020-01-27T08:10:24.877Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一个简单的FPS监控器">
-<meta name="twitter:description" content="最近在看有关iOS性能监控方面的知识，了解到如何通过12首先我们要了解一下```CADisplayLink```是个什么玩意儿，官方给出的解释是这样的： A timer object that allows your application to synchronize its drawing to the refresh rate of the display.123说白了，就是以屏幕刷新频率将">
+<meta name="twitter:description" content="最近在看有关iOS性能监控方面的知识，了解到如何通过CADisplayLink来实现一个简单的屏幕刷新帧率监控的方法，在Blog里面做一个Mark。 首先我们要了解一下CADisplayLink是个什么玩意儿，官方给出的解释是这样的： 1A timer object that allows your application to synchronize its drawing to the ref">
 
 
 
@@ -412,7 +412,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  395
+                  458
                 </span>
               
 
@@ -449,31 +449,13 @@
       
 
       
-        <p>最近在看有关iOS性能监控方面的知识，了解到如何通过<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">首先我们要了解一下```CADisplayLink```是个什么玩意儿，官方给出的解释是这样的：</span><br></pre></td></tr></table></figure></p>
-<p>A timer object that allows your application to synchronize its drawing to the refresh rate of the display.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">说白了，就是以屏幕刷新频率将内容绘制到屏幕上的定时器。它可以以屏幕的刷新频率调用指定的selector,而iOS系统中正常的屏幕刷新频率为60Hz(每秒60次)，那我们只要在这个方法里面统计每秒这个方法执行的次数，通过调用次数除以时间间隔(_count/interval)就可以得出当前屏幕的刷新频率了。</span><br><span class="line"></span><br><span class="line">接下来贴出核心代码：</span><br></pre></td></tr></table></figure></p>
-<p>// 开始监控FPS的方法</p>
-<ul>
-<li>(void)start {<br>  if (_displayLink) {<pre><code>_displayLink.paused = NO;
-</code></pre>  }else {<pre><code>_displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(triggerFps:)];
-// 让当前runloop在 UITrackingRunloopMode 下可以接收到回调
-[_displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
-</code></pre>  }<br>}</li>
-</ul>
-<p>// 刷新频率回调方法</p>
-<ul>
-<li><p>(void)triggerFps:(CADisplayLink *)displayLink {<br>  // 大约每1/60秒调用一次 就是说每16.7ms 要产生一帧画面。<br>  // 记录第一次调用时的时间戳<br>  if (_lastTimestamp == 0) {</p>
-<pre><code>_lastTimestamp = displayLink.timestamp;
-return;
-</code></pre><p>  }<br>  _count++;<br>  // 当count=60 时  interval &gt;= 1 才会执行后面的fps值计算<br>  NSTimeInterval interval = displayLink.timestamp - _lastTimestamp;<br>  if (interval &lt; 1) {</p>
-<pre><code>return;
-</code></pre><p>  }<br>  // 计算出fps<br>  CGFloat fps = _count / interval;</p>
-<p>  // 记录上一次的时间戳<br>  _lastTimestamp = displayLink.timestamp;<br>  // reset _count<br>  _count = 0;</p>
-<p>  // 调整fps值<br>  NSInteger intFps = (NSInteger)(fps + 0.5);<br>  self.currentFps = intFps;<br>  if (self.FPSBlock) {</p>
-<pre><code>self.FPSBlock(self.currentFps);
-</code></pre><p>  }<br>}</p>
-</li>
-</ul>
-<p><code>`</code><br>通过上面的代码就能统计到帧数的变化了，这个FPS指示器也就完成了。</p>
+        <p>最近在看有关iOS性能监控方面的知识，了解到如何通过CADisplayLink来实现一个简单的屏幕刷新帧率监控的方法，在Blog里面做一个Mark。</p>
+<p>首先我们要了解一下CADisplayLink是个什么玩意儿，官方给出的解释是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A timer object that allows your application to synchronize its drawing to the refresh rate of the display.</span><br></pre></td></tr></table></figure>
+<p>说白了，就是以屏幕刷新频率将内容绘制到屏幕上的定时器。它可以以屏幕的刷新频率调用指定的selector,而iOS系统中正常的屏幕刷新频率为60Hz(每秒60次)，那我们只要在这个方法里面统计每秒这个方法执行的次数，通过调用次数除以时间间隔(_count/interval)就可以得出当前屏幕的刷新频率了。</p>
+<p>接下来贴出核心代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">// 开始监控FPS的方法</span><br><span class="line">- (void)start &#123;</span><br><span class="line">    if (_displayLink) &#123;</span><br><span class="line">        _displayLink.paused = NO;</span><br><span class="line">    &#125;else &#123;</span><br><span class="line">        _displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(triggerFps:)];</span><br><span class="line">        // 让当前runloop在 UITrackingRunloopMode 下可以接收到回调</span><br><span class="line">        [_displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 刷新频率回调方法</span><br><span class="line">- (void)triggerFps:(CADisplayLink *)displayLink &#123;</span><br><span class="line">    // 大约每1/60秒调用一次 就是说每16.7ms 要产生一帧画面。</span><br><span class="line">    // 记录第一次调用时的时间戳</span><br><span class="line">    if (_lastTimestamp == 0) &#123;</span><br><span class="line">        _lastTimestamp = displayLink.timestamp;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    _count++;</span><br><span class="line">    // 当count=60 时  interval &gt;= 1 才会执行后面的fps值计算</span><br><span class="line">    NSTimeInterval interval = displayLink.timestamp - _lastTimestamp;</span><br><span class="line">    if (interval &lt; 1) &#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    // 计算出fps</span><br><span class="line">    CGFloat fps = _count / interval;</span><br><span class="line"></span><br><span class="line">    // 记录上一次的时间戳</span><br><span class="line">    _lastTimestamp = displayLink.timestamp;</span><br><span class="line">    // reset _count</span><br><span class="line">    _count = 0;</span><br><span class="line">    </span><br><span class="line">    // 调整fps值</span><br><span class="line">    NSInteger intFps = (NSInteger)(fps + 0.5);</span><br><span class="line">    self.currentFps = intFps;</span><br><span class="line">    if (self.FPSBlock) &#123;</span><br><span class="line">        self.FPSBlock(self.currentFps);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过上面的代码就能统计到帧数的变化了，这个FPS指示器也就完成了。</p>
 
       
     </div>
@@ -742,7 +724,7 @@ return;
 
 <div class="powered-by">
   <i class="fa fa-pencil-square"></i>
-  <span class="post-count">全站共11.4k字</span>
+  <span class="post-count">全站共11.5k字</span>
   <i class="fa fa-clock-o"></i>
 </div>
 
