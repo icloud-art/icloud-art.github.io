@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[多版本Cocoapods切换]]></title>
+    <url>%2F2020%2F01%2F31%2F%E5%A4%9A%E7%89%88%E6%9C%ACCocoapods%E5%88%87%E6%8D%A2%2F</url>
+    <content type="text"><![CDATA[背景很多 iOS 项目都是基于特定版本的 CocoaPods，使用其他版本的 CocoaPods 执行 pod install 或 pod update可能出现项目无法编译的问题。由于我们的电脑上很有可能使用了其他的版本，本文主要介绍如何解决这种多版本 CocoaPods 切换的问题。 查看本地装的pod可以通过1gem list --local | grep cocoapods 命令来查看我们电脑上安装了哪些版本的pod,并可以通过1pod --version 来查看当前默认版本。 使用BundlerBundler 是一个 Ruby 项目的管理工具，可以理解成为 Ruby 界的 “CocoaPods”。准确来说，CocoaPods 是借鉴了 Bundler 的思想和模式。由于 CocoaPods 本身也是一个 Ruby 项目，因此我们可以通过 Bundler 来管理我们要使用的 CocoaPods 版本，完整的步骤如下所示: 安装Bundler,打开终端输入以下命令： 1gem install bundler 在终端中进入到项目所在的根目录就是podfile所在的目录。 创建Bundler的配置文件Gemfile,在终端中输入下面的命令即可。 1bundle init 在Gemfile中设置cocoapods的版本。例如： 12source &quot;https://rubygems.org&quot;gem &quot;cocoapods&quot;, &quot;1.5.3&quot; 安装特定版本的pod,如果已经安装则可忽略这一步。执行如下命令： 1bundle install 此时，Gemfile中配置的pod版本就安装到本地了。 使用Bundler控制上一步安装的pod来安装我们所需的pods。除了有bundle exec 这个前缀，其他和我们平时用pod命令一样。若去掉bundle exec 这个前缀，运行的就是默认版本的cocoapods了。1bundle exec pod install 另外，还可以通过其他方式运行指定版本的pod，如：1pod _1.5.3_ install 亲测有效。]]></content>
+      <categories>
+        <category>技术人生</category>
+      </categories>
+      <tags>
+        <tag>iOS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[一个简单的FPS监控器]]></title>
     <url>%2F2020%2F01%2F27%2F%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84FPS%E7%9B%91%E6%8E%A7%E5%99%A8%2F</url>
     <content type="text"><![CDATA[最近在看有关iOS性能监控方面的知识，了解到如何通过CADisplayLink来实现一个简单的屏幕刷新帧率监控的方法，在Blog里面做一个Mark。 首先我们要了解一下CADisplayLink是个什么玩意儿，官方给出的解释是这样的： 1A timer object that allows your application to synchronize its drawing to the refresh rate of the display. 说白了，就是以屏幕刷新频率将内容绘制到屏幕上的定时器。它可以以屏幕的刷新频率调用指定的selector,而iOS系统中正常的屏幕刷新频率为60Hz(每秒60次)，那我们只要在这个方法里面统计每秒这个方法执行的次数，通过调用次数除以时间间隔(_count/interval)就可以得出当前屏幕的刷新频率了。 接下来贴出核心代码： 12345678910111213141516171819202122232425262728293031323334353637383940// 开始监控FPS的方法- (void)start &#123; if (_displayLink) &#123; _displayLink.paused = NO; &#125;else &#123; _displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(triggerFps:)]; // 让当前runloop在 UITrackingRunloopMode 下可以接收到回调 [_displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes]; &#125;&#125;// 刷新频率回调方法- (void)triggerFps:(CADisplayLink *)displayLink &#123; // 大约每1/60秒调用一次 就是说每16.7ms 要产生一帧画面。 // 记录第一次调用时的时间戳 if (_lastTimestamp == 0) &#123; _lastTimestamp = displayLink.timestamp; return; &#125; _count++; // 当count=60 时 interval &gt;= 1 才会执行后面的fps值计算 NSTimeInterval interval = displayLink.timestamp - _lastTimestamp; if (interval &lt; 1) &#123; return; &#125; // 计算出fps CGFloat fps = _count / interval; // 记录上一次的时间戳 _lastTimestamp = displayLink.timestamp; // reset _count _count = 0; // 调整fps值 NSInteger intFps = (NSInteger)(fps + 0.5); self.currentFps = intFps; if (self.FPSBlock) &#123; self.FPSBlock(self.currentFps); &#125;&#125; 通过上面的代码就能统计到帧数的变化了，这个FPS指示器也就完成了。]]></content>
