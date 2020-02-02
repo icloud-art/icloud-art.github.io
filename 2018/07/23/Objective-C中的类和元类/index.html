@@ -109,16 +109,16 @@
 <meta property="og:site_name" content="Charles&#39; Blog">
 <meta property="og:description" content="你真的知道OC的类（Class）是个什么玩意儿？ 众所周知，所有的对象都是由其对应的类实例化而来，但是类本身其实也是一种对象，surprise？下面我们就来拨开这层迷雾。 类在Objective-C中，我们用到的几乎所有类都是NSObject类的子类，查阅objc源码你会发现 NSObject类定义（如图1）我们这里只给出定义其他方法大家自行查阅。  图1看完这个,那么问题来了：这个Class 类">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2651174-d367c4497f8230df.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/477">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2651174-74ff77e375043bf0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/460">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2651174-c040fea772b9fc66.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2651174-7c9e55edbbf35ffa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/529">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2651174-4d981dc5706f8167.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/508">
-<meta property="og:updated_time" content="2018-07-29T14:31:14.000Z">
+<meta property="og:image" content="https://github.com/icloud-art/charlesblogimages/raw/master/class/class-1.png">
+<meta property="og:image" content="https://github.com/icloud-art/charlesblogimages/raw/master/class/class-2.png">
+<meta property="og:image" content="https://github.com/icloud-art/charlesblogimages/raw/master/class/class-3.png">
+<meta property="og:image" content="https://github.com/icloud-art/charlesblogimages/raw/master/class/class-4.png">
+<meta property="og:image" content="https://github.com/icloud-art/charlesblogimages/raw/master/class/class-5.png">
+<meta property="og:updated_time" content="2020-02-02T04:22:43.350Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Objective-C中的类和元类">
 <meta name="twitter:description" content="你真的知道OC的类（Class）是个什么玩意儿？ 众所周知，所有的对象都是由其对应的类实例化而来，但是类本身其实也是一种对象，surprise？下面我们就来拨开这层迷雾。 类在Objective-C中，我们用到的几乎所有类都是NSObject类的子类，查阅objc源码你会发现 NSObject类定义（如图1）我们这里只给出定义其他方法大家自行查阅。  图1看完这个,那么问题来了：这个Class 类">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/2651174-d367c4497f8230df.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/477">
+<meta name="twitter:image" content="https://github.com/icloud-art/charlesblogimages/raw/master/class/class-1.png">
 
 
 
@@ -469,14 +469,14 @@
         <p>你真的知道OC的类（Class）是个什么玩意儿？</p>
 <p>众所周知，所有的对象都是由其对应的类实例化而来，但是类本身其实也是一种对象，surprise？下面我们就来拨开这层迷雾。</p>
 <p>类<br>在Objective-C中，我们用到的几乎所有类都是NSObject类的子类，查阅objc源码你会发现 NSObject类定义（如图1）我们这里只给出定义其他方法大家自行查阅。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/2651174-d367c4497f8230df.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/477" alt="avata"></p>
+<p><img src="https://github.com/icloud-art/charlesblogimages/raw/master/class/class-1.png" alt="avata"></p>
 <p><center>图1</center><br>看完这个,那么问题来了：这个Class 类型的 isa 是个什么玩意儿？Class 又是个什么类型？带着这两个疑问我们查阅一下objc.h中Class 的定义（如图2）</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/2651174-74ff77e375043bf0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/460" alt="avata"><br>图2<br>看完这个是不是又一脸懵逼！Class 被定义为一个指向objc_class 的结构体指针。那么objc_class 又是个什么玩意儿？我们接着看源码runtime.h中定义（如图3）</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/2651174-c040fea772b9fc66.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="avata"></p>
+<p><img src="https://github.com/icloud-art/charlesblogimages/raw/master/class/class-2.png" alt="avata"><br>图2<br>看完这个是不是又一脸懵逼！Class 被定义为一个指向objc_class 的结构体指针。那么objc_class 又是个什么玩意儿？我们接着看源码runtime.h中定义（如图3）</p>
+<p><img src="https://github.com/icloud-art/charlesblogimages/raw/master/class/class-3.png" alt="avata"></p>
 <p><center>图3</center><br>你会发现，我艹，怎么又一个isa! 下面我们来解答这个疑惑。</p>
 <p>其实在Objective-C中任何的类定义都是对象。即在程序启动的时候任何类定义都对应于一块内存。在编译的时候，编译器会给每一个类生成一个且只生成一个”描述其定义的对象”,也就是苹果公司说的类对象(class object),他是一个单例(singleton), 而我们在其他面向对象语言中所谓的对象，叫做实例对象(instance object)。对于实例对象我们不难理解，但类对象(class object)是个什么鬼？我们知道Objective-C是门很动态的语言，因此程序里的所有实例对象(instace object)都是在运行时由Objective-C的运行时库生成的，而这个类对象(class object)就是运行时库用来创建实例对象(instance object)的依据。</p>
 <p>通过上面的讨论，可以得出结论，不管是实例对象，类对象，其结构中都有一个isa。实例对象中的isa 指针指向的是 该实例的类对象，那么同理，类对象的isa 指向的是谁呢？这就是 元类对象（meta class object）。他们之间的关系看起来是这样的（如图4）：</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/2651174-7c9e55edbbf35ffa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/529" alt="avata"></p>
+<p><img src="https://github.com/icloud-art/charlesblogimages/raw/master/class/class-4.png" alt="avata"></p>
 <p><center>图4</center>&gt;<br>类对象<br>类对象的本质<br>通过前文我们了解到，类对象是编译器生成的“描述类定义的对象”，就是在编译时的类。任何直接或者间接继承NSObject的类，它的实例对象（instance object）中都有一个isa 指针，指向它的类对象(class object)。这个类对象(class object)中存储了关于这个实例对象(instace object)所属的类的定义的一切：包括变量，方法，遵守的协议等等，这个可以通过（图3）来佐证。因此，类对象能访问所有关于这个类的信息，利用这些信息可以产生一个新的实例，但是类对象不能访问任何实例对象的内容。当你调用一个 “类方法” 例如 [NSObject alloc],你事实上是发送了一个消息给他的类对象。所谓一切皆对象就是这个意思。</p>
 <p>那么类对象与实例对象有什么区别呢？<br>尽管类对象保留了一个类实例的原型，但它并不是实例本身。它没有自己的实例变量，也不能执行那些类的实例的方法（只有实例对象才可以执行实例方法）。然而，类的定义能包含那些特意为类对象准备的方法–类方法（ 而不是的实例方法）。类对象从父类那里继承类方法，就像实例从父类那里继承实例方法一样。</p>
 <p>类对象是不是就是类名？<br>只有在消息表达式中作为接收者，类名才代表类对象。我理解为调用静态方法的时候。</p>
@@ -484,7 +484,7 @@
 <p>很显然，元类也是对象，也应该是其他类的实例，实际上元类是根元类(root class’s metaclass)的实例,而根元类是其自身的实例，即根元类的isa指针指向自身。</p>
 <p>类的super_class指向其父类，而元类的super_class则指向父类的元类。元类的super class链与类的super class链平行，所以类方法的继承与实例方法的继承也是并行的。而根元类(root class’s metaclass)的super_class指向根类(root class)，这样，整个isa指针链就是一个闭环。</p>
 <p>记住，当一个消息发送给任何一个对象， 方法的检查 从对象的 isa 指针开始，然后是父类。实例方法在类中定义， 类方法 在元类和根类中定义。（根类的元类就是根类自己）。在一些计算机语言的原理中，一个类和元类层次结构可以更自由的组成，更深元类链和从单一的元类继承的更多的实例化的类。Objective-C 的类方法 是使用元类的根本原因，在其他方面试图在隐藏元类。例如 [NSObject class] 完全相等于 [NSObject self]，所以，在形式上他还是返回的 NSObject-&gt;isa 指向的元类。 Objective-C语言是一组实用的折中方案。下图表示了对象间的isa的关系，以及类的继承关系：</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/2651174-4d981dc5706f8167.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/508" alt="avata"></p>
+<p><img src="https://github.com/icloud-art/charlesblogimages/raw/master/class/class-5.png" alt="avata"></p>
 <p><center>图片来自网络（图5）</center><br>综上所述，类对象(class object)中包含了类的实例变量，实例方法的定义，而元类对象(metaclass object)中包括了类的类方法(也就是C++中的静态方法)的定义。类对象和元类对象中当然还会包含一些其它的东西，苹果以后也可能添加其它的内容，但对于我们只需要记住：类对象存的是关于实例对象的信息(变量，实例方法等)，而元类对象(metaclass object)中存储的是关于类的信息(类的版本，名字，类方法等)。要注意的是，类对象(class object)和元类对象(metaclass object)的定义都是objc_class结构，其不同仅仅是在用途上，比如其中的方法列表在类对象(instance object)中保存的是实例方法(instance method)，而在元类对象(metaclass object)中则保存的是类方法(class method)。</p>
 <p>写了这么多不知道能够拨开您心中的迷雾呢？欢迎大家勘误，互相学习！</p>
 
