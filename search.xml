@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[彻底解决pod install龟速问题]]></title>
+    <url>%2F2020%2F02%2F08%2F%E5%BD%BB%E5%BA%95%E8%A7%A3%E5%86%B3pod-install%E9%BE%9F%E9%80%9F%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[最近由于疫情严重，我司果断安排在家办公，在配置开发环境的时候我遇到了让我非常头疼的问题，那就是 pod install 执行时慢的要死。忍不了啊，搜索了一番之后找到了有效的方法，在此做一个Mark。下面我们就来看看是如何提高pod install 的安装速度的。 其实，pod 真正慢的原因不在于你执行的pod 命令而是github上面的代码库访问速度真的慢，翻墙也不行啊。那么真正的t解决办法是提高git 命令的速速。 我们开发者一般都会用代理工具，这里我用的是Shadowsocks代理，我的默认端口号是1086，如下图： 拿到上图中的端口号之后，我们执行一个命令：1git config --global http.https://github.com.proxy socks5://127.0.0.1:1086 这个命令中我设置了只是github上的代码库才走代理。当然我们也可以给git 设置全局代理：1git config --global http.proxy socks5://127.0.0.1:1086 但是第一个命令才是我们需要的。 执行完之后可以对比一下安装的速度：配置命令之前的速度： 配置命令之后的速速： 从图中可以看到，速度提高了许多倍啊！！ 最后提示一下，如果想去掉上面我们配置命令可以采用如下方法： 12去掉全局git代理git config --global --unset http.proxy 12去掉github代理git config --global --unset http.https://github.com.proxy]]></content>
+      <categories>
+        <category>技术人生</category>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>工具</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Charles工具进阶篇]]></title>
     <url>%2F2020%2F01%2F31%2FCharles%E5%B7%A5%E5%85%B7%E8%BF%9B%E9%98%B6%E7%AF%87%2F</url>
     <content type="text"><![CDATA[我们都知道Charles是一款好用的抓包工具，其实它的功能是非常强大的，下面我们就一起看一下Charles这个工具的一些其他常用功能。 使用Charles进行网络环境模拟在开发中，我们要经常考虑各种边界问题，对于网络开发，告诉网络、弱网络、上行和下行带宽差异等都是我们要进行适配的场景，Charles就可以很好的模拟这些环境。接下来我们就一下看一下如何模拟： 在Charles菜单栏的Proxy菜单中选择 Throttle(节流阀) Settings 菜单项，这个可以用来进行网络字节流的设置，就是我们说的网络环境模拟，如图(1): 图(1) 在弹出的新窗口中，我们就可以进行网络设置了，如图(2)： 图(2) 勾选Enable Throttling选项则表示开启网络节流功能，可以看到，在图(2)的窗口中还有一个Only for selected hosts 选项，开启这个选项后，我们可以配置一些主机地址，从而只会针对这些主机地址的请求进行节流控制。 在Throttle preset 中预设了多种网络环境，对每一种预设都配置了一套网络环境参数，我们也可以自定义。 下面来解释一下窗口中的各个参数：Bandwidth 用来配置上行和下行网络的带宽 Utilisation 用来设置上行和下行网络的利用率。 Round-trip latency 用来设置往返的延迟时间。 MTU设置网络最大传输单元 Reliablity 设置网络可靠率。 Stability 设置网络稳定性。 Unstable quality range 设置不稳定范围。 当我们根据自己的需求自定义了一套网络环境参数后，也可以进行保存，填写完成后点击Add Preset按钮即可新增一种自定义预设，Remove Preset用来删除预设。实际上这个预设是一个XML文件，我们可以将其导出给其他人使用。Charles提供了非常人性化的导入/导出功能。 使用Charles添加请求断点]]></content>
