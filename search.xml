@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Flutter使用Packages]]></title>
+    <url>%2F2020%2F02%2F16%2FFlutter%E4%BD%BF%E7%94%A8Packages%2F</url>
+    <content type="text"><![CDATA[使用 Flutter PackagesFlutter 支持使用其他开发者在Flutter和Dart生态系统中共享的包。这可以使你快速的构建一个应用而不必从头开发一切。这篇文章我来介绍一下如何使用已经发布的packages。 查找包使用一个包之前，首先得找到这个包，我们可以访问pub.dev来查找你需要的包。 添加一个包到项目中添加 css_colors 包到一个项目中有如下步骤: 添加依赖: 打开pubspec.yaml文件，在dependencies下面添加css_colors。 安装依赖：使用终端 cd 到你的项目目录下执行flutter pub get命令,或者在pubspec.yaml顶部点击Packegets get。 导入你添加的包：在你的Dart代码中添加一个正确的 import 语句。 如果需要的话，重启或者停止你的应用：因为热重载和热重启只作用于Dart代码，不会作用于平台特定代码。在使用包的时候做一个重启应用可以有效的避免以下错误。 冲突解决试想一下，如果你在一个应用中想使用 some_package 和 another_package两个包，而这两个包都依赖于url_launcher的不同版本。这就会造成包的版本依赖冲突。那么这种情况我们该如何解决呢？最好的方法来避免这个问题就是在指定依赖的时候使用版本范围而不是一个指定的版本。 123dependencies: url_launcher：^0.4.2 # 任意的0.4.x版本，当x&gt;=2时都生效。 image_picker：‘0.1.1’ # 只有0.1.1版本生效。 如果some_package声明了上面的依赖项，而另一个_package声明了一个兼容的url_launcher依赖项，比如’0.4.5’或^0.4.0，那么Pub会自动解决这个问题。平台对Gradle模块和/或CocoaPods的特定依赖也以类似的方式解决。 即使some_package和another_package声明url_launcher的版本不兼容，它们实际上可能以兼容的方式使用url_launcher。在这种情况下，可以通过在应用程序的pubspec.yaml文件中添加依赖项覆盖声明来解决冲突，强制使用特定的版本。 强制使用url_launcher 0.4.3 版本修改如下代码： 12345dependencies: some_package: another_package:dependency_overrides: url_launcher: &apos;0.4.3&apos; 开发新包如果现有的包满足不了你的特定需求，你可以开发一个自定义的包。下篇文章我们会讲述如何开发一个新包和插件。 管理包依赖和版本为了是冲突的风险最低，我们可以在pubspec.yaml中指定一个版本范围。为了确保应用在包更新时不会中断，我们可以使用以下方式来指定包版本范围： 指定最小和最大的版本的范围约束： 12dependencies: url_launcher: &apos;&gt;=0.1.2 &lt;0.2.0&apos; 使用插入符号语法的范围约束： 12dependencies: collection: &apos;^0.1.2&apos; 更新包依赖当你添加完包以后，第一次使用flutter pub get的时候，Flutter 保存了具体的包版本号在pubspec.lock 文件中。这个确保你和你的团队成员在执行flutter pub get 命令时可以得到同样版本的包。 升级一个包的新版本，例如要使用一个包的新特性，执行flutter pub upgrade来获取pubspec.yaml中版本约束中允许的最高可用版本的包。 依赖没有发布的包没有发布到pub.dev的包也可以用。对于私有的插件，或者没有准备好发布的包，可以使用附加的依赖项选项： Path dependency: 一个Flutter 应用可以通过一个文件系统路径依赖一个插件，路径可以是相对的或者绝对的。例如要依赖一个位于应用统计目录的插件plugin1,可以使用如下语法： 123dependencies: plugin1: path: ../plugin1/ Git dependency:你也可以使用一个存储在git版本库中的包，如果包位于repo的根目录，使用如下语法： 1234dependencies: plugin1: git: url: git://github.com/flutter/plugin1.git Git dependency on a package in a folder:Pub假定包在Git存储仓库的根目录中，如果不是的话，使用path参数来指定路径，例如： 12345dependencies: package1: git: url: git://github.com/flutter/packages.git path: packages/package1 最后，可以使用ref 参数将依赖项固定到特定的git提交，分支或者tag。 到这里，关于Flutter包的使用已经介绍完了，为了方便理解呢，我还是附上一个例子：Flutter包的使用。]]></content>
+      <categories>
+        <category>Flutter</category>
+      </categories>
+      <tags>
+        <tag>Flutter</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[iOS和Flutter通信初探]]></title>
     <url>%2F2020%2F02%2F15%2FiOS%E5%92%8CFlutter%E9%80%9A%E4%BF%A1%E5%88%9D%E6%8E%A2%2F</url>
     <content type="text"><![CDATA[Flutter 使用了一套灵活的系统来调用平台特定的APIs,无论是iOS还是安卓。Flutter支持平台特定API不是依赖于生成代码的方式，而是通过灵活的消息传递。 应用的Flutter部分发送消息到它的宿主（应用的iOS或者Android部分）通过，platform channel. 应用宿主在platform channel上面监听并且接受消息。然后调用任意数量的特定平台的API（通过原生语言），然后发送一个回调给到Flutter 部分。注意 如果您需要使用Java/Kotlin/Objective-C或Swift中的平台api或库，本文将介绍如何使用平台通道机制。但是，通过检查defaultTargetPlatform属性，您还可以在Flutter应用程序中编写特定于平台的Dart代码。平台适配列出了一些特定于平台的适配，这些适配会在框架中自动执行Flutter。平台渠道的架构概述使用平台通道在客户端(UI)和主机(平台)之间传递消息，如下图所示: 消息和响应是异步传递的，以确保用户界面保持响应性。 尽管Flutter是异步地向Dart发送消息，但无论何时调用channel方法，都必须在平台的主线程上调用该方法。 在客户端，MethodChannel (API)允许发送与方法调用对应的消息。在平台端，Android上的MethodChannel (API)和iOS上的FlutterMethodChannel (API)支持接收方法调用和发送结果。这些类允许您用很少的“样板”代码开发平台插件。 平台通道数据类型支持和编解码器 标准平台通道使用标准消息编解码器，该编解码器支持对简单的json类值(如布尔值、数字、字符串、字节缓冲区以及这些值的列表和映射)的高效二进制序列化(有关详细信息，请参阅StandardMessageCodec)。当您发送和接收值时，这些值与消息之间的序列化和反序列化将自动发生。 下表显示了在平台端接收Dart值的方式，反之亦然。 好了，原理介绍完了，下面一起来看一下具体是如何跑起来的。参照官方文档做了一个在iOS平台获取手机电量的例子。这个例子会示范如何调用平台特定的API来检索以及展示当前设备的电量。它将会使用Android BatteryManager API,和iOS device.batteryLevel API,通过一个单独的平台方法，getBatteryLevel()。 创建一个flutter工程使用如下命令创建：1flutter create platform_channel 或者你可以通过设置特定的语言来指定默认的模板：1flutter create -i objc -a java platform_channel 使用你安装的编译器来打开创建好的工程，我使用的是idea,然后在你工程中的main.dart里面添加如下代码： 123456789101112131415161718class _MyHomePageState extends State&lt;MyHomePage&gt; &#123; // 创建client和host通信的通道 static const platform = const MethodChannel(&apos;charles.flutter.dev/battery&apos;); String _batteryLevel = &apos;Unknown battery level.&apos;; // 获取电量方法 Future&lt;void&gt; _getBatteryLevel()async&#123; String batteryLevel; try&#123; final int result = await platform.invokeMethod(&apos;getBatteryLevel&apos;); batteryLevel = &apos;Battery level at $result % .&apos;; &#125;on PlatformException catch(e)&#123; batteryLevel = &quot;Failed to get battery level: &apos;$&#123;e.message&#125;&apos;.&quot;; &#125; setState(() &#123; _batteryLevel = batteryLevel; &#125;); &#125;&#125; 简单解释一下：首先创建了platform 实例，这个就是通信的通道。client 和 host之间通过通道名称进行连接。单个应用中使用的所有通道名称必须是唯一的，给通道名字添加域前缀，例如：charles.flutter.dev/battery。_getBatteryLevel()方法就是异步的获取当前设备电量的方法。这个方法中最核心的一句： 1final int result = await platform.invokeMethod(&apos;getBatteryLevel&apos;); 就是通过通道，去调用host端的getBatteryLevel方法，并且把获取到的值但会到client端。 展示电量的部分就不介绍了。大家可以看下文附的Demo. host端的话，只介绍iOS端了，安卓类似。有兴趣的朋友可以自己看看。从flutter 项目目录下找到 ios/Runner.xcworkspace 双击打开。在Appdelegate 里面添加如下代码： 123456789101112131415161718192021222324252627282930313233343536373839404142#import &lt;Flutter/Flutter.h&gt;#import &quot;GeneratedPluginRegistrant.h&quot;@implementation AppDelegate- (BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions &#123; FlutterViewController* controller = (FlutterViewController*)self.window.rootViewController; FlutterMethodChannel* batteryChannel = [FlutterMethodChannel methodChannelWithName:@&quot;samples.flutter.dev/battery&quot; binaryMessenger:controller]; __weak typeof(self) weakSelf = self; [batteryChannel setMethodCallHandler:^(FlutterMethodCall* call, FlutterResult result) &#123; // Note: this method is invoked on the UI thread. if ([@&quot;getBatteryLevel&quot; isEqualToString:call.method]) &#123; int batteryLevel = [weakSelf getBatteryLevel]; if (batteryLevel == -1) &#123; result([FlutterError errorWithCode:@&quot;UNAVAILABLE&quot; message:@&quot;Battery info unavailable&quot; details:nil]); &#125; else &#123; result(@(batteryLevel)); &#125; &#125; else &#123; result(FlutterMethodNotImplemented); &#125; &#125;]; [GeneratedPluginRegistrant registerWithRegistry:self]; return [super application:application didFinishLaunchingWithOptions:launchOptions];&#125;- (int)getBatteryLevel &#123; UIDevice* device = UIDevice.currentDevice; device.batteryMonitoringEnabled = YES; if (device.batteryState == UIDeviceBatteryStateUnknown) &#123; return -1; &#125; else &#123; return (int)(device.batteryLevel * 100); &#125;&#125;@end 解释一下：这段代码也是先创建一个通道 batteryChannel，可以看到这里使用的channel name 和上文中提到的 client 端里面的完全一致。同时设置了消息的发送者。 getBatteryLevel 就是iOS获取电量的方法，不做过多解释，到此为止，你可以运行platform_channel flutter项目来看一下是否可以获取到当前手机的电量。 效果如下： 附：本文的Demo]]></content>
@@ -9,8 +20,8 @@
       </categories>
       <tags>
         <tag>iOS</tag>
-        <tag>Objective-C</tag>
         <tag>Flutter</tag>
+        <tag>Objective-C</tag>
         <tag>Dart</tag>
       </tags>
   </entry>
@@ -23,8 +34,8 @@
       </categories>
       <tags>
         <tag>iOS</tag>
-        <tag>Objective-C</tag>
         <tag>Flutter</tag>
+        <tag>Objective-C</tag>
         <tag>Dart</tag>
       </tags>
   </entry>
