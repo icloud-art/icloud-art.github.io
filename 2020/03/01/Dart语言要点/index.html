@@ -110,7 +110,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://github.com/icloud-art/charlesblogimages/raw/master/dart/class/dart-class-1.png">
 <meta property="og:image" content="https://github.com/icloud-art/charlesblogimages/raw/master/dart/class/dart-class-2.png">
-<meta property="og:updated_time" content="2020-03-01T10:51:57.650Z">
+<meta property="og:updated_time" content="2020-03-01T12:39:30.317Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dart语言要点">
 <meta name="twitter:description" content="对象、接口、类与mixin对象的创建每个类至少有一个构造函数，构造函数可以由开发者明确的声明，或者也可以隐式的产生。在没有明确的构造函数被声明时，隐式构造函数讲被创建，它们没有参数和函数体。 Dart实例变量初始化的几种方式： 123class  Point &amp;#123;	var x = 0, y = 0;&amp;#125; 或者使用构造函数初始化方式： 1234class Point &amp;#123;	v">
@@ -390,7 +390,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3,238
+                  3,593
                 </span>
               
 
@@ -406,7 +406,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  12
+                  13
                 </span>
               
             </div>
@@ -499,16 +499,23 @@
 <p>如果你真的想让自己的库健壮，那么你应该组合使用前缀和show,只导入你实际使用的元素：</p>
 <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span> lib1;</span><br><span class="line"><span class="keyword">import</span> <span class="string">'stack1.dart'</span> <span class="keyword">as</span> stack1 show pop,push;</span><br></pre></td></tr></table></figure>
 <p>使用show将防止导入的新成员有意外冲突。而采用上面的方式，可以解决不同倒入成员之间的冲突，并提防倒入成员和继承成员之间的冲突。</p>
-<h3 id="将库拆分成part"><a href="#将库拆分成part" class="headerlink" title="将库拆分成part"></a>将库拆分成part</h3><p>有时，一个库可能太大，不能方便的保存在一个文件中。Dart允许把库拆分成较小的part组件。每个子功能或者子系统都放在各自的文件中，而库通过使用<code>part</code>指令来引用他们。</p>
+<h4 id="将库拆分成part"><a href="#将库拆分成part" class="headerlink" title="将库拆分成part"></a>将库拆分成part</h4><p>有时，一个库可能太大，不能方便的保存在一个文件中。Dart允许把库拆分成较小的part组件。每个子功能或者子系统都放在各自的文件中，而库通过使用<code>part</code>指令来引用他们。</p>
 <p><code>part</code>指令看起来跟C语言的<code>#include</code>类似。但事实并非如此，每一个<code>part</code>都必须以一个<code>part</code>头来指定它属于哪一个库。例如：</p>
 <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">part</span> of ide;</span><br><span class="line"><span class="comment">// 顶层声明 </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClassBrowser</span>...</span></span><br><span class="line"><span class="class">...</span></span><br></pre></td></tr></table></figure>
 <p><code>part</code>的头部使用库名称来指明它所在的库。不是所有的库都有名称，但是如果使用<code>part</code>来构建库，那么库本身必须要命名。各个<code>part</code>应该有很好的结构，并且按照逻辑分组，而不是纯粹的堆积代码。</p>
 <p>一般的规则是，如果库通过URI引用某个part,而URI的内容并不是一个part,那么这就是一个编译错误，而如果part本身不指向同一个库，那么会产生一个警告。</p>
-<h3 id="导出"><a href="#导出" class="headerlink" title="导出"></a>导出</h3><p>导出指令允许一个库使用来自其他命名空间的对象来扩充自己的导出命名空间。</p>
+<h4 id="导出"><a href="#导出" class="headerlink" title="导出"></a>导出</h4><p>导出指令允许一个库使用来自其他命名空间的对象来扩充自己的导出命名空间。</p>
 <p><code>export &#39;browsing.dart&#39;</code></p>
 <p>还可以使用<code>show</code>和<code>hide</code>对库的命名空间进行合理的过滤。</p>
 <p><code>export &#39;vcs.dart show RepositoryBrowser&#39;;</code></p>
-
+<p>导出的规则与导入、part的规则相同。</p>
+<h4 id="钻石导入"><a href="#钻石导入" class="headerlink" title="钻石导入"></a>钻石导入</h4><p>从多个聚合性API导入时，可能会从不同的路径导入相同的对象，这种情况被称为钻石导入。Dart会对钻石导入发出警告。</p>
+<h4 id="延迟加载"><a href="#延迟加载" class="headerlink" title="延迟加载"></a>延迟加载</h4><p>延迟加载的作用：一是应用快速启动且保持下载量尽可能的小。另外，在拥有诸多功能的大型应用中，延迟加载可以减少内存的使用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import &apos;rarelyUsed.dart&apos; deferred as rarelyUsed;</span><br></pre></td></tr></table></figure>
+<p>延迟加载的导入必须提供前缀，且前缀不能被库中的其他导入使用。违反这些规则将会导致编译错误。</p>
+<h4 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h4><p>Dart程序由库组成。库聚合类、函数和变量。Dart的库是针对隐私而不是安全性封装单元。</p>
+<p>Dart程序的执行总是从脚本的main()函数开始的。一个库可以被拆分成多个part。Dart库通过导入来接入他们自身的依赖，并能通过执行命名空间组合器来选择性地导入其他库的对象，也能够通过添加前缀来区分各个导入。库通过命名空间组合器也能将其他库或自己的部分内容重新导入。库可以延迟到运行时加载，以改善启动时间及减少不必要的内存开销。</p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2>
       
     </div>
     
@@ -759,7 +766,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#对象、接口、类与mixin"><span class="nav-number">1.</span> <span class="nav-text">对象、接口、类与mixin</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对象的创建"><span class="nav-number">1.0.1.</span> <span class="nav-text">对象的创建</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#重定向构造函数"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">重定向构造函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#工厂构造函数"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">工厂构造函数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#noSuchMethod"><span class="nav-number">1.0.2.</span> <span class="nav-text">noSuchMethod()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常量对象与字段"><span class="nav-number">1.0.3.</span> <span class="nav-text">常量对象与字段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类方法"><span class="nav-number">1.0.4.</span> <span class="nav-text">类方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实例及实例的类与元类"><span class="nav-number">1.0.5.</span> <span class="nav-text">实例及实例的类与元类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Object-与其方法"><span class="nav-number">1.0.6.</span> <span class="nav-text">Object 与其方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mixin"><span class="nav-number">1.0.7.</span> <span class="nav-text">mixin</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">1.0.8.</span> <span class="nav-text">总结</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#库"><span class="nav-number">2.</span> <span class="nav-text">库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#顶层"><span class="nav-number">2.0.1.</span> <span class="nav-text">顶层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#隐私"><span class="nav-number">2.0.2.</span> <span class="nav-text">隐私</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#导入"><span class="nav-number">2.0.3.</span> <span class="nav-text">导入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将库拆分成part"><span class="nav-number">2.1.</span> <span class="nav-text">将库拆分成part</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导出"><span class="nav-number">2.2.</span> <span class="nav-text">导出</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#对象、接口、类与mixin"><span class="nav-number">1.</span> <span class="nav-text">对象、接口、类与mixin</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对象的创建"><span class="nav-number">1.0.1.</span> <span class="nav-text">对象的创建</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#重定向构造函数"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">重定向构造函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#工厂构造函数"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">工厂构造函数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#noSuchMethod"><span class="nav-number">1.0.2.</span> <span class="nav-text">noSuchMethod()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常量对象与字段"><span class="nav-number">1.0.3.</span> <span class="nav-text">常量对象与字段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类方法"><span class="nav-number">1.0.4.</span> <span class="nav-text">类方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实例及实例的类与元类"><span class="nav-number">1.0.5.</span> <span class="nav-text">实例及实例的类与元类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Object-与其方法"><span class="nav-number">1.0.6.</span> <span class="nav-text">Object 与其方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mixin"><span class="nav-number">1.0.7.</span> <span class="nav-text">mixin</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">1.0.8.</span> <span class="nav-text">总结</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#库"><span class="nav-number">2.</span> <span class="nav-text">库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#顶层"><span class="nav-number">2.0.1.</span> <span class="nav-text">顶层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#隐私"><span class="nav-number">2.0.2.</span> <span class="nav-text">隐私</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#导入"><span class="nav-number">2.0.3.</span> <span class="nav-text">导入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#将库拆分成part"><span class="nav-number">2.0.4.</span> <span class="nav-text">将库拆分成part</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#导出"><span class="nav-number">2.0.5.</span> <span class="nav-text">导出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#钻石导入"><span class="nav-number">2.0.6.</span> <span class="nav-text">钻石导入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#延迟加载"><span class="nav-number">2.0.7.</span> <span class="nav-text">延迟加载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结-1"><span class="nav-number">2.0.8.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-number">3.</span> <span class="nav-text">函数</span></a></li></div>
             
 
           </div>
@@ -793,7 +800,7 @@
 
 <div class="powered-by">
   <i class="fa fa-pencil-square"></i>
-  <span class="post-count">全站共21.2k字</span>
+  <span class="post-count">全站共21.5k字</span>
   <i class="fa fa-clock-o"></i>
 </div>
 
