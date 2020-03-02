@@ -110,7 +110,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://github.com/icloud-art/charlesblogimages/raw/master/dart/class/dart-class-1.png">
 <meta property="og:image" content="https://github.com/icloud-art/charlesblogimages/raw/master/dart/class/dart-class-2.png">
-<meta property="og:updated_time" content="2020-03-01T12:39:30.317Z">
+<meta property="og:updated_time" content="2020-03-02T10:38:02.736Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dart语言要点">
 <meta name="twitter:description" content="对象、接口、类与mixin对象的创建每个类至少有一个构造函数，构造函数可以由开发者明确的声明，或者也可以隐式的产生。在没有明确的构造函数被声明时，隐式构造函数讲被创建，它们没有参数和函数体。 Dart实例变量初始化的几种方式： 123class  Point &amp;#123;	var x = 0, y = 0;&amp;#125; 或者使用构造函数初始化方式： 1234class Point &amp;#123;	v">
@@ -390,7 +390,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3,593
+                  4,008
                 </span>
               
 
@@ -406,7 +406,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  13
+                  15
                 </span>
               
             </div>
@@ -515,7 +515,19 @@
 <p>延迟加载的导入必须提供前缀，且前缀不能被库中的其他导入使用。违反这些规则将会导致编译错误。</p>
 <h4 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h4><p>Dart程序由库组成。库聚合类、函数和变量。Dart的库是针对隐私而不是安全性封装单元。</p>
 <p>Dart程序的执行总是从脚本的main()函数开始的。一个库可以被拆分成多个part。Dart库通过导入来接入他们自身的依赖，并能通过执行命名空间组合器来选择性地导入其他库的对象，也能够通过添加前缀来区分各个导入。库通过命名空间组合器也能将其他库或自己的部分内容重新导入。库可以延迟到运行时加载，以改善启动时间及减少不必要的内存开销。</p>
-<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>函数是Dart的主力，所有计算都是由函数来执行。我们将所有语法形式的函数与方法统称为函数。</p>
+<p>函数是Dart存储在变量中的一等值，它能作为参数传递，作为函数的返回值。函数同样是对象。</p>
+<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><p>函数总是有一个形式参数列表，这个列表页可以为空。参数要么是位置型的，要么是命名型的。</p>
+<h4 id="位置参数"><a href="#位置参数" class="headerlink" title="位置参数"></a>位置参数</h4><p>位置参数可以是必填的或可选的。可选参数必须排列在一起放置在参数列表尾部，并用方括号<code>[]</code>包裹。任意必填参数都必须出现在可选参数前面。可选参数可以指定默认值但必须是编译时常量。<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">increment(x,[step = <span class="number">1</span>]) =&gt; x + step;  <span class="comment">// step 是可选的，默认值是1</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="命令参数"><a href="#命令参数" class="headerlink" title="命令参数"></a>命令参数</h4><p>命名参数要在位置参数之后声明，并用大括号<code>{}</code>包裹。</p>
+<p>示例<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">addressLetter(&#123;name:<span class="string">''</span>, street:<span class="string">''</span>, number,city,zip,country&#125;)&#123;...&#125;</span><br></pre></td></tr></table></figure></p>
+<p>下面是一个必填参数与命名参数混合的例子：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">fail() =&gt; <span class="keyword">throw</span>(<span class="string">'Key not found'</span>);</span><br><span class="line">lookup(key,&#123;ifMissing: fail&#125;)&#123;</span><br><span class="line"> 	<span class="keyword">var</span> result = map[key];</span><br><span class="line"> 	<span class="keyword">if</span>(result == <span class="keyword">null</span>)&#123;</span><br><span class="line">	 	<span class="keyword">return</span> ifMissing();</span><br><span class="line"> 	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通常，作为错误处理程序的回调函数会通过命名参数来指定。</p>
+<p>如果可选参数没有指定默认值，则它的值默认是null。</p>
+<p>命名参数始终是可选的，不可以混合使用可选位置参数和命名参数。</p>
+<p>形式参数不是fianl变量，他们可以被修改，但这不是一个好的风格，我们应该尽量减少使用可变的变量。</p>
+
       
     </div>
     
@@ -766,7 +778,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#对象、接口、类与mixin"><span class="nav-number">1.</span> <span class="nav-text">对象、接口、类与mixin</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对象的创建"><span class="nav-number">1.0.1.</span> <span class="nav-text">对象的创建</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#重定向构造函数"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">重定向构造函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#工厂构造函数"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">工厂构造函数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#noSuchMethod"><span class="nav-number">1.0.2.</span> <span class="nav-text">noSuchMethod()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常量对象与字段"><span class="nav-number">1.0.3.</span> <span class="nav-text">常量对象与字段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类方法"><span class="nav-number">1.0.4.</span> <span class="nav-text">类方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实例及实例的类与元类"><span class="nav-number">1.0.5.</span> <span class="nav-text">实例及实例的类与元类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Object-与其方法"><span class="nav-number">1.0.6.</span> <span class="nav-text">Object 与其方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mixin"><span class="nav-number">1.0.7.</span> <span class="nav-text">mixin</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">1.0.8.</span> <span class="nav-text">总结</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#库"><span class="nav-number">2.</span> <span class="nav-text">库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#顶层"><span class="nav-number">2.0.1.</span> <span class="nav-text">顶层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#隐私"><span class="nav-number">2.0.2.</span> <span class="nav-text">隐私</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#导入"><span class="nav-number">2.0.3.</span> <span class="nav-text">导入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#将库拆分成part"><span class="nav-number">2.0.4.</span> <span class="nav-text">将库拆分成part</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#导出"><span class="nav-number">2.0.5.</span> <span class="nav-text">导出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#钻石导入"><span class="nav-number">2.0.6.</span> <span class="nav-text">钻石导入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#延迟加载"><span class="nav-number">2.0.7.</span> <span class="nav-text">延迟加载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结-1"><span class="nav-number">2.0.8.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-number">3.</span> <span class="nav-text">函数</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#对象、接口、类与mixin"><span class="nav-number">1.</span> <span class="nav-text">对象、接口、类与mixin</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对象的创建"><span class="nav-number">1.0.1.</span> <span class="nav-text">对象的创建</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#重定向构造函数"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">重定向构造函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#工厂构造函数"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">工厂构造函数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#noSuchMethod"><span class="nav-number">1.0.2.</span> <span class="nav-text">noSuchMethod()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常量对象与字段"><span class="nav-number">1.0.3.</span> <span class="nav-text">常量对象与字段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类方法"><span class="nav-number">1.0.4.</span> <span class="nav-text">类方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实例及实例的类与元类"><span class="nav-number">1.0.5.</span> <span class="nav-text">实例及实例的类与元类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Object-与其方法"><span class="nav-number">1.0.6.</span> <span class="nav-text">Object 与其方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mixin"><span class="nav-number">1.0.7.</span> <span class="nav-text">mixin</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">1.0.8.</span> <span class="nav-text">总结</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#库"><span class="nav-number">2.</span> <span class="nav-text">库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#顶层"><span class="nav-number">2.0.1.</span> <span class="nav-text">顶层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#隐私"><span class="nav-number">2.0.2.</span> <span class="nav-text">隐私</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#导入"><span class="nav-number">2.0.3.</span> <span class="nav-text">导入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#将库拆分成part"><span class="nav-number">2.0.4.</span> <span class="nav-text">将库拆分成part</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#导出"><span class="nav-number">2.0.5.</span> <span class="nav-text">导出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#钻石导入"><span class="nav-number">2.0.6.</span> <span class="nav-text">钻石导入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#延迟加载"><span class="nav-number">2.0.7.</span> <span class="nav-text">延迟加载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结-1"><span class="nav-number">2.0.8.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-number">3.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#参数"><span class="nav-number">3.0.1.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#位置参数"><span class="nav-number">3.0.2.</span> <span class="nav-text">位置参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#命令参数"><span class="nav-number">3.0.3.</span> <span class="nav-text">命令参数</span></a></li></ol></li></div>
             
 
           </div>
@@ -800,7 +812,7 @@
 
 <div class="powered-by">
   <i class="fa fa-pencil-square"></i>
-  <span class="post-count">全站共21.5k字</span>
+  <span class="post-count">全站共22.0k字</span>
   <i class="fa fa-clock-o"></i>
 </div>
 
