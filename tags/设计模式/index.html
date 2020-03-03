@@ -90,7 +90,7 @@
 
 
 
-  <meta name="keywords" content="iOS,Objective-C,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -101,24 +101,13 @@
 
 
 
-<meta name="description" content="前几天看博客发现了一个关于 isKindOfClass  和 isMemberOfClass 的问题，但是感觉分析的不够透彻，所以我在这里试着分析一下，欢迎大家一起讨论。 内容是这样的 （如图1）。  图1上图中的四个Bool 分别是什么？我在这里先爆出答案：上面是个Bool 分别是：1 ，0，0，0；那么问题来了，为毛会是这个结果？要弄明白这个就要搞清楚isKindOfClass 和 isMem">
-<meta name="keywords" content="iOS,Objective-C">
-<meta property="og:type" content="article">
-<meta property="og:title" content="你真的明白isKindOfClass 和 isMemberOfClass 的区别么？">
-<meta property="og:url" content="http://yoursite.com/2018/07/23/你真的明白isKindOfClass-和-isMemberOfClass-的区别么？/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Charles&#39; Blog">
+<meta property="og:url" content="http://yoursite.com/tags/设计模式/index.html">
 <meta property="og:site_name" content="Charles&#39; Blog">
-<meta property="og:description" content="前几天看博客发现了一个关于 isKindOfClass  和 isMemberOfClass 的问题，但是感觉分析的不够透彻，所以我在这里试着分析一下，欢迎大家一起讨论。 内容是这样的 （如图1）。  图1上图中的四个Bool 分别是什么？我在这里先爆出答案：上面是个Bool 分别是：1 ，0，0，0；那么问题来了，为毛会是这个结果？要弄明白这个就要搞清楚isKindOfClass 和 isMem">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://github.com/icloud-art/charlesblogimages/raw/master/iskind/iskind-1.png">
-<meta property="og:image" content="https://github.com/icloud-art/charlesblogimages/raw/master/iskind/iskind-2.png">
-<meta property="og:image" content="https://github.com/icloud-art/charlesblogimages/raw/master/iskind/iskind-3.png">
-<meta property="og:image" content="https://github.com/icloud-art/charlesblogimages/raw/master/iskind/iskind-4.png">
-<meta property="og:image" content="https://github.com/icloud-art/charlesblogimages/raw/master/iskind/iskind-5.png">
-<meta property="og:updated_time" content="2020-02-14T09:47:04.484Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="你真的明白isKindOfClass 和 isMemberOfClass 的区别么？">
-<meta name="twitter:description" content="前几天看博客发现了一个关于 isKindOfClass  和 isMemberOfClass 的问题，但是感觉分析的不够透彻，所以我在这里试着分析一下，欢迎大家一起讨论。 内容是这样的 （如图1）。  图1上图中的四个Bool 分别是什么？我在这里先爆出答案：上面是个Bool 分别是：1 ，0，0，0；那么问题来了，为毛会是这个结果？要弄明白这个就要搞清楚isKindOfClass 和 isMem">
-<meta name="twitter:image" content="https://github.com/icloud-art/charlesblogimages/raw/master/iskind/iskind-1.png">
+<meta name="twitter:title" content="Charles&#39; Blog">
 
 
 
@@ -148,13 +137,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/07/23/你真的明白isKindOfClass-和-isMemberOfClass-的区别么？/">
+  <link rel="canonical" href="http://yoursite.com/tags/设计模式/">
 
 
 
 
 
-  <title>你真的明白isKindOfClass 和 isMemberOfClass 的区别么？ | Charles' Blog</title>
+  <title>标签: 设计模式 | Charles' Blog</title>
   
 
 
@@ -183,7 +172,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -319,284 +308,52 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  
+  
+  
+  <div class="post-block tag">
 
-  
+    <div id="posts" class="posts-collapse">
+      <div class="collection-title">
+        <h1>设计模式<small>标签</small>
+        </h1>
+      </div>
 
-  
-  
-  
+      
+        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/23/你真的明白isKindOfClass-和-isMemberOfClass-的区别么？/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Charles">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Charles' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h2 class="post-title">
         
+            <a class="post-title-link" href="/2020/03/03/小试工厂模式/" itemprop="url">
+              
+                <span itemprop="name">小试工厂模式</span>
+              
+            </a>
         
-          <h1 class="post-title" itemprop="name headline">你真的明白isKindOfClass 和 isMemberOfClass 的区别么？</h1>
-        
+      </h2>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-23T23:29:17+08:00">
-                2018-07-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  652
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  3
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>前几天看博客发现了一个关于 isKindOfClass  和 isMemberOfClass 的问题，但是感觉分析的不够透彻，所以我在这里试着分析一下，欢迎大家一起讨论。</p>
-<p>内容是这样的 （如图1）。</p>
-<p><img src="https://github.com/icloud-art/charlesblogimages/raw/master/iskind/iskind-1.png" alt="avata"></p>
-<center>图1</center><br>上图中的四个Bool 分别是什么？<br><br>我在这里先爆出答案：上面是个Bool 分别是：1 ，0，0，0；<br><br>那么问题来了，为毛会是这个结果？<br><br>要弄明白这个就要搞清楚isKindOfClass 和 isMemberOfClass 的区别，先来看看官方的说法：<br><br>isKindOfClass：Returns a Boolean value that indicates whether the receiver is an instance of given class or an instance of any class that inherits from that class.<br><br>isMemberOfClass：Returns a Boolean value that indicates whether the receiver is an instance of a given class.<br><br>其实就是这个意思：<br><br>isKindOfClass：判断对象是否为某类或其派生类的实例。<br><br>isMemberOfClass：判断对象是否为某个特定类的实例。<br><br>好，那么先来分析res1 为什么是Yes.<br><br>首先了解一下class 方法的实现 （图2）<br><img src="https://github.com/icloud-art/charlesblogimages/raw/master/iskind/iskind-2.png" alt="avata"><br><center>图2</center><br>从图2中可以看出[NSObject class]; 返回的其实还是NSObject,到这里你可能会想<br><br>NSObject  isKindOfClass  NSObject  所以 res1 = Yes。But,But,But,重要的事情说三遍，事实并非如此，接着我们来看一下isKindOfClass 方法的实现（图3）<br><br><img src="https://github.com/icloud-art/charlesblogimages/raw/master/iskind/iskind-3.png" alt="avata"><br><center>图3</center>
-
-<p>以及object_getClass 的实现 （图4）<br><img src="https://github.com/icloud-art/charlesblogimages/raw/master/iskind/iskind-4.png" alt="avata"></p>
-<p><center>图4</center><br>通过查阅objc4 源码 就是上面的图3和图4，会发现object_getClass 返回的是传入的对象的isa,由于我们传入的是类对象，所以isa 指向的是一个元类对象，那么object_getClass((id)self);返回的就是self 的元类对象，那么NSObject 类对象的元类对象是谁呢?如果你了解OC的对象模型的话会知道，NSObject的元类对象为 Meta NSObject Class Object（我们暂且这么叫） 。</p>
-<p>回到isKindOfClass 的实现代码里，循环会先获取到NSObject的元类对象即tcls，然后跟NSObject类对象(cls)作比较,此时元类对象不等于类对象，继续循环，找到tcls-&gt;superclass,还是得熟悉OC的对象模型，NSObject 元类对象的super 就是NSObject ，没错就是它，此时 tcls 就是 NSObject 类对象，cls 也是NSObject 类对象，所以tcls 等于cls ，此时循环结束，返回Yes。</p>
-<p>到这里不知道各位看官是否明白是怎么回事了呢？</p>
-<p>下面附上isMemberOfClass 的源码实现 图5<br><img src="https://github.com/icloud-art/charlesblogimages/raw/master/iskind/iskind-5.png" alt="avata"></p>
-<p><center>图5</center><br>大家可以通过上面isKindOfClass 的分析，以及我提供的源码截图，可以分析一下其他三种res2,res3，res4的结果为什么全是0。</p>
-<p>才疏学浅，欢迎大家勘误。多多交流，互相学习！</p>
-
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-      <div>
-        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-  <div>谢谢您的支持！</div>
-  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-    <span>打赏</span>
-  </button>
-  <div id="QR" style="display: none;">
-
-    
-      <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/images/wechatpay.png" alt="Charles 微信支付">
-        <p>微信支付</p>
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2020-03-03T21:10:50+08:00" content="2020-03-03">
+          03-03
+        </time>
       </div>
-    
 
-    
-      <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="/images/alipay.png" alt="Charles 支付宝">
-        <p>支付宝</p>
-      </div>
-    
-
-    
-
-  </div>
-</div>
-
-      </div>
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/iOS/" rel="tag"># iOS</a>
-          
-            <a href="/tags/Objective-C/" rel="tag"># Objective-C</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/07/23/Objective-C中的类和元类/" rel="next" title="Objective-C中的类和元类">
-                <i class="fa fa-chevron-left"></i> Objective-C中的类和元类
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/28/Mac终端装逼利器-zsh/" rel="prev" title="Mac终端装逼利器 zsh">
-                Mac终端装逼利器 zsh <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+    </header>
   </article>
 
 
-
-    <div class="post-spread">
-      
-        
-  <div class="bdsharebuttonbox">
-    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
-    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
-    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
-    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
-    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
-    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
-    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
-    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
-    <a href="#" class="bds_more" data-cmd="more"></a>
-    <a class="bds_count" data-cmd="count"></a>
-  </div>
-  <script>
-    window._bd_share_config = {
-      "common": {
-        "bdText": "",
-        "bdMini": "2",
-        "bdMiniList": false,
-        "bdPic": ""
-      },
-      "share": {
-        "bdSize": "16",
-        "bdStyle": "0"
-      },
-      "image": {
-        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
-        "viewText": "分享到：",
-        "viewSize": "16"
-      }
-    }
-  </script>
-
-<script>
-  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
-</script>
-
       
     </div>
+
   </div>
+  
+  
+  
+
+  
 
 
           </div>
@@ -604,14 +361,6 @@
 
 
           
-
-  
-    <div class="comments" id="comments">
-      <div id="lv-container" data-id="city" data-uid="MTAyMC8zODQ1Mi8xNDk4MA=="></div>
-    </div>
-
-  
-
         </div>
         
           
@@ -872,10 +621,6 @@
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 
@@ -904,17 +649,6 @@
 
 
 
-  
-    <script type="text/javascript">
-      (function(d, s) {
-        var j, e = d.getElementsByTagName(s)[0];
-        if (typeof LivereTower === 'function') { return; }
-        j = d.createElement(s);
-        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-        j.async = true;
-        e.parentNode.insertBefore(j, e);
-      })(document, 'script');
-    </script>
   
 
 

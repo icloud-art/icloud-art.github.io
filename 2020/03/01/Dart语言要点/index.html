@@ -110,7 +110,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://github.com/icloud-art/charlesblogimages/raw/master/dart/class/dart-class-1.png">
 <meta property="og:image" content="https://github.com/icloud-art/charlesblogimages/raw/master/dart/class/dart-class-2.png">
-<meta property="og:updated_time" content="2020-03-02T10:38:02.736Z">
+<meta property="og:updated_time" content="2020-03-03T10:05:34.763Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dart语言要点">
 <meta name="twitter:description" content="对象、接口、类与mixin对象的创建每个类至少有一个构造函数，构造函数可以由开发者明确的声明，或者也可以隐式的产生。在没有明确的构造函数被声明时，隐式构造函数讲被创建，它们没有参数和函数体。 Dart实例变量初始化的几种方式： 123class  Point &amp;#123;	var x = 0, y = 0;&amp;#125; 或者使用构造函数初始化方式： 1234class Point &amp;#123;	v">
@@ -390,7 +390,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  4,008
+                  5,154
                 </span>
               
 
@@ -406,7 +406,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  15
+                  19
                 </span>
               
             </div>
@@ -527,6 +527,42 @@
 <p>如果可选参数没有指定默认值，则它的值默认是null。</p>
 <p>命名参数始终是可选的，不可以混合使用可选位置参数和命名参数。</p>
 <p>形式参数不是fianl变量，他们可以被修改，但这不是一个好的风格，我们应该尽量减少使用可变的变量。</p>
+<h4 id="函数体"><a href="#函数体" class="headerlink" title="函数体"></a>函数体</h4><p>Dart的函数体有两种形式：</p>
+<ul>
+<li>大括号<code>{}</code>括起来的语句列表(可以为空)。</li>
+<li>=&gt; 符号后跟着一个表达式。</li>
+</ul>
+<p>构造函数包括了工厂构造函数与生产构造函数，其中工厂构造函数是具备特殊功能的普通函数。生产构造函数与工厂构造函数的区别在于，它始终返回一个新的实例或者抛出一个异常。所以就算是没有显式的使用return语句，生产构造函数也不会返回null。</p>
+<h4 id="函数声明"><a href="#函数声明" class="headerlink" title="函数声明"></a>函数声明</h4><p>函数声明有一个函数名称，后面跟着参数列表和函数体。</p>
+<p>抽象方法有函数签名但是没有函数体。</p>
+<p>函数声明可以出现在顶层(如，main()),或者作为方法存在，而且，函数可以是局部函数。局部函数就是定义在其他函数内部的函数。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fib(n)&#123;</span><br><span class="line">	lastTwo(n)&#123;</span><br><span class="line">		<span class="keyword">if</span>(n &lt; <span class="number">1</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> [<span class="number">0</span>,<span class="number">1</span>]; </span><br><span class="line">		&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">var</span> p = lastTwo(n - <span class="number">1</span>);</span><br><span class="line">			<span class="keyword">return</span> [p[<span class="number">1</span>], p[<span class="number">0</span>] + p[<span class="number">1</span>]];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> lastTwo(n)[<span class="number">1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h4><p>函数可以定义在表达式内部，他们被称为函数字面量，或者被称为闭包。与函数生命不同，闭包没有名称。但是他们也有参数列表和函数体。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(x) =&gt; x;</span><br><span class="line">(x) &#123;<span class="keyword">return</span> x;&#125;</span><br><span class="line">(x, [step = <span class="number">1</span>]) =&gt; x + step;	<span class="comment">// 有一个可选参数的闭包</span></span><br><span class="line">(a, b) =&gt; a + b; <span class="comment">// 有两个必填参数的闭包</span></span><br></pre></td></tr></table></figure>
+<h4 id="调用方法与函数"><a href="#调用方法与函数" class="headerlink" title="调用方法与函数"></a>调用方法与函数</h4><h5 id="级联"><a href="#级联" class="headerlink" title="级联"></a>级联</h5><p>除了使用点运算符来执行成员选择，Dart也支持使用双点运算符进行方法级联。例如:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"Hello"</span>.length.toString(); <span class="comment">// 值为'5'</span></span><br><span class="line"><span class="string">"Hello"</span>..length.toString();	<span class="comment">// 值为 'Hello'</span></span><br></pre></td></tr></table></figure>
+<p>所以下面的代码我们可以换一种写法：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> address = <span class="keyword">new</span> Address.of(<span class="string">"Charles"</span>);</span><br><span class="line">address.setStreet(<span class="string">"Elm"</span>, <span class="string">"13a"</span>);</span><br><span class="line">address.city = <span class="string">"Carthage"</span>;</span><br><span class="line">address.state = <span class="string">"Eurasia"</span>;</span><br></pre></td></tr></table></figure>
+<p>使用级联的写法：<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Address.of(<span class="string">"Charles"</span>);</span><br><span class="line">	..setStreet(<span class="string">"Elm"</span>, <span class="string">"13a"</span>)</span><br><span class="line">	..city = <span class="string">"Carthage"</span></span><br><span class="line">	..state = <span class="string">"Eurasia"</span>;</span><br></pre></td></tr></table></figure></p>
+<p>不应当滥用级联，比如，不应当把一系列级联放在同一行或是使用过多层次的级联。</p>
+<p>级联对构建建造者模式API非常有用，即 一个对象描述符被分步创建，在经历一系列级联后，对象在构建结束时才被创建。</p>
+<p>另一种能用到级联的情况是，当我们执行某个对象的方法时，我们需要的返回值是对象本身。</p>
+<h5 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h5><p>可能并不明显，但Dart中的赋值通常都是函数调用，因为对字段的赋值只是setter 方法的语法糖而已。</p>
+<h5 id="使用运算符"><a href="#使用运算符" class="headerlink" title="使用运算符"></a>使用运算符</h5><p>Dart支持用户自定义的运算符，用户自定义的运算符是加上是有着特殊语法的实例方法，这些方法必须使用内置标识符operator作为前缀。</p>
+<h4 id="Function-类"><a href="#Function-类" class="headerlink" title="Function 类"></a>Function 类</h4><p>Function是代表所有函数的公共顶层接口的抽象类。Function没有声明任何实例方法。然而他声明了类方法apply(),此方法接收一个函数和一个参数列表，并使用提供的参数列表去调用传入的函数。</p>
+<p>apply()的签名是：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> apply(<span class="built_in">Function</span> function, <span class="built_in">List</span> positionalArguments, [<span class="built_in">Map</span>&lt;<span class="built_in">Symbol</span>, <span class="keyword">dynamic</span>&gt; namedArguments]);</span><br></pre></td></tr></table></figure>
+<p>apply()方法提供了一种使用动态确定的参数列表来调用函数的机制。通过这我们可以处理在编译时参数列表数量不确定的情况。</p>
+<h4 id="函数作为对象"><a href="#函数作为对象" class="headerlink" title="函数作为对象"></a>函数作为对象</h4><p>在Dart中，函数当然也是对象。</p>
+<p>实际上，一个函数表达式每被计算一次，就可能分配一个新的函数对象。同样，局部函数的声明每次被新的动态作用域包含时，就会引入一个新的对象。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">makeCounter()&#123;</span><br><span class="line">	<span class="keyword">var</span> counter = <span class="number">0</span>;</span><br><span class="line">	increment()=&gt; ++counter;</span><br><span class="line">	<span class="keyword">return</span> increment;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>每次对increment的调用都返回一个不同的increment函数。</p>
+<h4 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h4><ul>
+<li>与其他运行时的值一样，函数也是对象。Dart中的函数可以接收位置或命名参数。位置参数可以是必填或可选的，命名参数始终是可选的。</li>
+<li>函数始终遵循词法作用域且对周边环境是封闭的。</li>
+<li>Dart函数既能作为类的方法也能作为独立的结构。独立的函数可以在库级别声明。</li>
+<li>所有内置的操作符也都是函数，且他们大部分都被定义为实例方法，可以被开发者重写。用户定义的类可以通过实现特殊的call方法来模拟内置函数类型。所有Dart函数都被认为是Function类型的成员。</li>
+</ul>
 
       
     </div>
@@ -589,6 +625,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/03/小试工厂模式/" rel="prev" title="小试工厂模式">
+                小试工厂模式 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -713,7 +753,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -724,7 +764,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -735,7 +775,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -778,7 +818,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#对象、接口、类与mixin"><span class="nav-number">1.</span> <span class="nav-text">对象、接口、类与mixin</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对象的创建"><span class="nav-number">1.0.1.</span> <span class="nav-text">对象的创建</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#重定向构造函数"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">重定向构造函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#工厂构造函数"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">工厂构造函数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#noSuchMethod"><span class="nav-number">1.0.2.</span> <span class="nav-text">noSuchMethod()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常量对象与字段"><span class="nav-number">1.0.3.</span> <span class="nav-text">常量对象与字段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类方法"><span class="nav-number">1.0.4.</span> <span class="nav-text">类方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实例及实例的类与元类"><span class="nav-number">1.0.5.</span> <span class="nav-text">实例及实例的类与元类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Object-与其方法"><span class="nav-number">1.0.6.</span> <span class="nav-text">Object 与其方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mixin"><span class="nav-number">1.0.7.</span> <span class="nav-text">mixin</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">1.0.8.</span> <span class="nav-text">总结</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#库"><span class="nav-number">2.</span> <span class="nav-text">库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#顶层"><span class="nav-number">2.0.1.</span> <span class="nav-text">顶层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#隐私"><span class="nav-number">2.0.2.</span> <span class="nav-text">隐私</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#导入"><span class="nav-number">2.0.3.</span> <span class="nav-text">导入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#将库拆分成part"><span class="nav-number">2.0.4.</span> <span class="nav-text">将库拆分成part</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#导出"><span class="nav-number">2.0.5.</span> <span class="nav-text">导出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#钻石导入"><span class="nav-number">2.0.6.</span> <span class="nav-text">钻石导入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#延迟加载"><span class="nav-number">2.0.7.</span> <span class="nav-text">延迟加载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结-1"><span class="nav-number">2.0.8.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-number">3.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#参数"><span class="nav-number">3.0.1.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#位置参数"><span class="nav-number">3.0.2.</span> <span class="nav-text">位置参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#命令参数"><span class="nav-number">3.0.3.</span> <span class="nav-text">命令参数</span></a></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#对象、接口、类与mixin"><span class="nav-number">1.</span> <span class="nav-text">对象、接口、类与mixin</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对象的创建"><span class="nav-number">1.0.1.</span> <span class="nav-text">对象的创建</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#重定向构造函数"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">重定向构造函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#工厂构造函数"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">工厂构造函数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#noSuchMethod"><span class="nav-number">1.0.2.</span> <span class="nav-text">noSuchMethod()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常量对象与字段"><span class="nav-number">1.0.3.</span> <span class="nav-text">常量对象与字段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类方法"><span class="nav-number">1.0.4.</span> <span class="nav-text">类方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实例及实例的类与元类"><span class="nav-number">1.0.5.</span> <span class="nav-text">实例及实例的类与元类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Object-与其方法"><span class="nav-number">1.0.6.</span> <span class="nav-text">Object 与其方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mixin"><span class="nav-number">1.0.7.</span> <span class="nav-text">mixin</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">1.0.8.</span> <span class="nav-text">总结</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#库"><span class="nav-number">2.</span> <span class="nav-text">库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#顶层"><span class="nav-number">2.0.1.</span> <span class="nav-text">顶层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#隐私"><span class="nav-number">2.0.2.</span> <span class="nav-text">隐私</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#导入"><span class="nav-number">2.0.3.</span> <span class="nav-text">导入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#将库拆分成part"><span class="nav-number">2.0.4.</span> <span class="nav-text">将库拆分成part</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#导出"><span class="nav-number">2.0.5.</span> <span class="nav-text">导出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#钻石导入"><span class="nav-number">2.0.6.</span> <span class="nav-text">钻石导入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#延迟加载"><span class="nav-number">2.0.7.</span> <span class="nav-text">延迟加载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结-1"><span class="nav-number">2.0.8.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-number">3.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#参数"><span class="nav-number">3.0.1.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#位置参数"><span class="nav-number">3.0.2.</span> <span class="nav-text">位置参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#命令参数"><span class="nav-number">3.0.3.</span> <span class="nav-text">命令参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数体"><span class="nav-number">3.0.4.</span> <span class="nav-text">函数体</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数声明"><span class="nav-number">3.0.5.</span> <span class="nav-text">函数声明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#闭包"><span class="nav-number">3.0.6.</span> <span class="nav-text">闭包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#调用方法与函数"><span class="nav-number">3.0.7.</span> <span class="nav-text">调用方法与函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#级联"><span class="nav-number">3.0.7.1.</span> <span class="nav-text">级联</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#赋值"><span class="nav-number">3.0.7.2.</span> <span class="nav-text">赋值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用运算符"><span class="nav-number">3.0.7.3.</span> <span class="nav-text">使用运算符</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Function-类"><span class="nav-number">3.0.8.</span> <span class="nav-text">Function 类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数作为对象"><span class="nav-number">3.0.9.</span> <span class="nav-text">函数作为对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结-2"><span class="nav-number">3.0.10.</span> <span class="nav-text">总结</span></a></li></ol></li></div>
             
 
           </div>
@@ -812,7 +852,7 @@
 
 <div class="powered-by">
   <i class="fa fa-pencil-square"></i>
-  <span class="post-count">全站共22.0k字</span>
+  <span class="post-count">全站共23.7k字</span>
   <i class="fa fa-clock-o"></i>
 </div>
 
