@@ -90,7 +90,7 @@
 
 
 
-  <meta name="keywords" content="工具,">
+  <meta name="keywords" content="Objective-C,设计模式,">
 
 
 
@@ -101,21 +101,18 @@
 
 
 
-<meta name="description" content="我们都知道Charles是一款好用的抓包工具，其实它的功能是非常强大的，下面我们就一起看一下Charles这个工具的一些其他常用功能。 使用Charles进行网络环境模拟在开发中，我们要经常考虑各种边界问题，对于网络开发，告诉网络、弱网络、上行和下行带宽差异等都是我们要进行适配的场景，Charles就可以很好的模拟这些环境。接下来我们就一下看一下如何模拟： 在Charles菜单栏的Proxy菜单中">
-<meta name="keywords" content="工具">
+<meta name="description" content="在开发过程中，很多人钟情于if/else连环写法，举个简单的例子，一个页面有N个菜单，点击的时候通过枚举类型来进行业务逻辑跳转。那么通常会这么写： 12345678- (void)handleJumpType:(ClJumpType)jumpType&amp;#123;    if(jumpType == CLJumpTypeAccount)&amp;#123;        [self gotoAccountP">
+<meta name="keywords" content="Objective-C,设计模式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Charles工具进阶篇">
-<meta property="og:url" content="http://yoursite.com/2020/01/31/Charles工具进阶篇/index.html">
+<meta property="og:title" content="小试工厂模式">
+<meta property="og:url" content="http://yoursite.com/2019/05/03/小试工厂模式/index.html">
 <meta property="og:site_name" content="Charles&#39; Blog">
-<meta property="og:description" content="我们都知道Charles是一款好用的抓包工具，其实它的功能是非常强大的，下面我们就一起看一下Charles这个工具的一些其他常用功能。 使用Charles进行网络环境模拟在开发中，我们要经常考虑各种边界问题，对于网络开发，告诉网络、弱网络、上行和下行带宽差异等都是我们要进行适配的场景，Charles就可以很好的模拟这些环境。接下来我们就一下看一下如何模拟： 在Charles菜单栏的Proxy菜单中">
+<meta property="og:description" content="在开发过程中，很多人钟情于if/else连环写法，举个简单的例子，一个页面有N个菜单，点击的时候通过枚举类型来进行业务逻辑跳转。那么通常会这么写： 12345678- (void)handleJumpType:(ClJumpType)jumpType&amp;#123;    if(jumpType == CLJumpTypeAccount)&amp;#123;        [self gotoAccountP">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://github.com/icloud-art/charlesblogimages/raw/master/charles/charles-1.png">
-<meta property="og:image" content="https://github.com/icloud-art/charlesblogimages/raw/master/charles/charles-2.png">
-<meta property="og:updated_time" content="2020-02-14T09:50:03.189Z">
+<meta property="og:updated_time" content="2020-03-09T13:23:26.643Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Charles工具进阶篇">
-<meta name="twitter:description" content="我们都知道Charles是一款好用的抓包工具，其实它的功能是非常强大的，下面我们就一起看一下Charles这个工具的一些其他常用功能。 使用Charles进行网络环境模拟在开发中，我们要经常考虑各种边界问题，对于网络开发，告诉网络、弱网络、上行和下行带宽差异等都是我们要进行适配的场景，Charles就可以很好的模拟这些环境。接下来我们就一下看一下如何模拟： 在Charles菜单栏的Proxy菜单中">
-<meta name="twitter:image" content="https://github.com/icloud-art/charlesblogimages/raw/master/charles/charles-1.png">
+<meta name="twitter:title" content="小试工厂模式">
+<meta name="twitter:description" content="在开发过程中，很多人钟情于if/else连环写法，举个简单的例子，一个页面有N个菜单，点击的时候通过枚举类型来进行业务逻辑跳转。那么通常会这么写： 12345678- (void)handleJumpType:(ClJumpType)jumpType&amp;#123;    if(jumpType == CLJumpTypeAccount)&amp;#123;        [self gotoAccountP">
 
 
 
@@ -145,13 +142,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/01/31/Charles工具进阶篇/">
+  <link rel="canonical" href="http://yoursite.com/2019/05/03/小试工厂模式/">
 
 
 
 
 
-  <title>Charles工具进阶篇 | Charles' Blog</title>
+  <title>小试工厂模式 | Charles' Blog</title>
   
 
 
@@ -330,7 +327,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/31/Charles工具进阶篇/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/03/小试工厂模式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charles">
@@ -347,7 +344,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Charles工具进阶篇</h1>
+          <h1 class="post-title" itemprop="name headline">小试工厂模式</h1>
         
 
         <div class="post-meta">
@@ -359,8 +356,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-31T11:48:25+08:00">
-                2020-01-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-03T21:10:50+08:00">
+                2019-05-03
               </time>
             
 
@@ -382,8 +379,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术人生/" itemprop="url" rel="index">
-                    <span itemprop="name">技术人生</span>
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
                   </a>
                 </span>
 
@@ -413,7 +410,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  546
+                  561
                 </span>
               
 
@@ -450,27 +447,18 @@
       
 
       
-        <p>我们都知道Charles是一款好用的抓包工具，其实它的功能是非常强大的，下面我们就一起看一下Charles这个工具的一些其他常用功能。</p>
-<h3 id="使用Charles进行网络环境模拟"><a href="#使用Charles进行网络环境模拟" class="headerlink" title="使用Charles进行网络环境模拟"></a>使用Charles进行网络环境模拟</h3><p>在开发中，我们要经常考虑各种边界问题，对于网络开发，告诉网络、弱网络、上行和下行带宽差异等都是我们要进行适配的场景，Charles就可以很好的模拟这些环境。接下来我们就一下看一下如何模拟：</p>
-<p>在Charles菜单栏的Proxy菜单中选择 <code>Throttle(节流阀) Settings</code> 菜单项，这个可以用来进行网络字节流的设置，就是我们说的网络环境模拟，如图(1):    </p>
-<p><img src="https://github.com/icloud-art/charlesblogimages/raw/master/charles/charles-1.png" alt="avatar"></p>
-<center>图(1)</center>
+        <p>在开发过程中，很多人钟情于<code>if/else</code>连环写法，举个简单的例子，一个页面有N个菜单，点击的时候通过枚举类型来进行业务逻辑跳转。那么通常会这么写：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)handleJumpType:(ClJumpType)jumpType&#123;</span><br><span class="line">    <span class="keyword">if</span>(jumpType == <span class="built_in">CLJumpTypeAccount</span>)&#123;</span><br><span class="line">        [<span class="keyword">self</span> gotoAccountPage];</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(jumpType == <span class="built_in">CLJumpTypeAbout</span>)&#123;</span><br><span class="line">        [<span class="keyword">self</span> gotoAboutPage];</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>假如说有十几个枚举，那<code>handleJumpType:</code>方法就会看起来不是很优雅，如果条件有变化的话，不好扩展，而且业务代码牵一发动全身……</p>
+<p>那么骚一点的程序员会怎么写呢？<code>switch/case</code>? 当然不是，我这里推荐使用工厂模式来优雅的处理类似的逻辑。</p>
+<p>接下来我们就通过一系列的代码来演示如何通过<strong>工厂模式</strong>来处理这个问题。</p>
+<p>废话不说了上代码：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 类型枚举</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="built_in">NS_ENUM</span>(<span class="built_in">NSUInteger</span>, <span class="built_in">CLJumpType</span>) &#123;</span><br><span class="line">    <span class="built_in">CLJumpTypeAccount</span> = <span class="number">1</span>,</span><br><span class="line">    <span class="built_in">CLJumpTypeAbout</span> = <span class="number">2</span>,</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 点击事件基类</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">CLJumpEvent</span> : <span class="title">NSObject</span></span></span><br><span class="line">- (<span class="keyword">instancetype</span>)initWithType:(<span class="built_in">CLJumpType</span>)jumpType;</span><br><span class="line">- (<span class="keyword">void</span>)jumpEvent;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">CLJumpTypeEvent</span>()</span></span><br><span class="line"><span class="keyword">@property</span> (nonatmoic, <span class="keyword">assign</span>) <span class="built_in">CLJumpType</span> jumpType;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">CLJumpTypeEvent</span></span></span><br><span class="line">- (<span class="keyword">instancetype</span>)initWithType:(<span class="built_in">CLJumpType</span>)jumpType &#123;</span><br><span class="line">    <span class="keyword">if</span> ([<span class="keyword">self</span> = <span class="keyword">super</span> init])&#123;   </span><br><span class="line">        <span class="keyword">self</span>.jumpType = jumpType;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)jumpEvent &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"点击事件处理"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 跳转到我的账户</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">CLJumpTypeAccount</span> : <span class="title">CLJumpTypeEvent</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">CLJumpTypeEvent</span></span></span><br><span class="line"><span class="comment">// 重写基类的jumpEvent方法</span></span><br><span class="line">- (<span class="keyword">void</span>)jumpEvent &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"跳转到我的账户页面..."</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 跳转工厂类</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">CLJumpFactory</span> : <span class="title">NSObject</span> </span></span><br><span class="line">+ (<span class="built_in">CLJumpEvent</span>)getJumpEvent:(<span class="built_in">CLJumpType</span>)jumpType;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">CLJumpFactory</span></span></span><br><span class="line"></span><br><span class="line">+ (<span class="built_in">NSDictionary</span>)jumpEvents &#123;</span><br><span class="line">    <span class="keyword">return</span> @&#123;</span><br><span class="line">        @(<span class="built_in">CLJumpTypeAccount</span>):[[<span class="built_in">CLJumpTypeEvent</span> alloc]initWithType:<span class="built_in">CLJumpTypeAccount</span>],</span><br><span class="line">        @(<span class="built_in">CLJumpTypeAbout</span>):[[<span class="built_in">CLJumpTypeEvent</span> alloc]initWithType:<span class="built_in">CLJumpTypeAbout</span>],</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">+ (<span class="built_in">CLJumpEvent</span>)getJumpEvent:(<span class="built_in">CLJumpType</span>)jumpType&#123;</span><br><span class="line">    <span class="keyword">return</span> [[<span class="keyword">self</span> jumpEvents] objectForKey:@(jumpType)];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<p>到这里，我们的工厂定义完了，那么接下来改造一下上面的<code>handleJumpType：</code>方法:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)handleJumpType:(ClJumpType)jumpType&#123;</span><br><span class="line">    <span class="built_in">CLJumpTypeEvent</span> *jumpEvent = [<span class="built_in">CLJumpFactory</span> getJumpEvent:jumpType];</span><br><span class="line">    [jumpEvent jumpEvent];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>OK，改造完的样子，是不是很优雅？而且如果需要扩展的话，<code>handleJumpType:</code>方法完全不用修改。</p>
+<p>通过这个例子是不是觉得利用工厂模式来处理类似的问题十分的合适呢，其实设计模式在实际的开发中还是很有用的，只要我们仔细的去揣摩代码，你会发现它总有一些模式在里面。</p>
 
-<p>在弹出的新窗口中，我们就可以进行网络设置了，如图(2)：</p>
-<p><img src="https://github.com/icloud-art/charlesblogimages/raw/master/charles/charles-2.png" alt="image"></p>
-<center>图(2)</center>
-
-<p>勾选<code>Enable Throttling</code>选项则表示开启网络节流功能，可以看到，在图(2)的窗口中还有一个<code>Only for selected hosts</code> 选项，开启这个选项后，我们可以配置一些主机地址，从而只会针对这些主机地址的请求进行节流控制。   </p>
-<p>在<code>Throttle preset</code> 中预设了多种网络环境，对每一种预设都配置了一套网络环境参数，我们也可以自定义。</p>
-<h5 id="下面来解释一下窗口中的各个参数："><a href="#下面来解释一下窗口中的各个参数：" class="headerlink" title="下面来解释一下窗口中的各个参数："></a>下面来解释一下窗口中的各个参数：</h5><p><code>Bandwidth</code> 用来配置上行和下行网络的带宽</p>
-<p><code>Utilisation</code> 用来设置上行和下行网络的利用率。</p>
-<p><code>Round-trip latency</code> 用来设置往返的延迟时间。   </p>
-<p><code>MTU</code>设置网络最大传输单元</p>
-<p><code>Reliablity</code> 设置网络可靠率。   </p>
-<p><code>Stability</code> 设置网络稳定性。</p>
-<p><code>Unstable quality range</code> 设置不稳定范围。</p>
-<p>当我们根据自己的需求自定义了一套网络环境参数后，也可以进行保存，填写完成后点击Add Preset按钮即可新增一种自定义预设，Remove Preset用来删除预设。实际上这个预设是一个XML文件，我们可以将其导出给其他人使用。Charles提供了非常人性化的导入/导出功能。</p>
-<h3 id="使用Charles添加请求断点"><a href="#使用Charles添加请求断点" class="headerlink" title="使用Charles添加请求断点"></a>使用Charles添加请求断点</h3>
       
     </div>
     
@@ -516,7 +504,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/工具/" rel="tag"># 工具</a>
+            <a href="/tags/Objective-C/" rel="tag"># Objective-C</a>
+          
+            <a href="/tags/设计模式/" rel="tag"># 设计模式</a>
           
         </div>
       
@@ -529,8 +519,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/01/31/多版本Cocoapods切换/" rel="next" title="多版本Cocoapods切换">
-                <i class="fa fa-chevron-left"></i> 多版本Cocoapods切换
+              <a href="/2019/04/25/Charles工具进阶篇/" rel="next" title="Charles工具进阶篇">
+                <i class="fa fa-chevron-left"></i> Charles工具进阶篇
               </a>
             
           </div>
@@ -539,8 +529,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/02/08/彻底解决pod-install龟速问题/" rel="prev" title="彻底解决pod install龟速问题">
-                彻底解决pod install龟速问题 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/07/29/SDWebImage (5.0.6) 图片加载奇淫巧技/" rel="prev" title="SDWebImage (5.0.6) 图片加载奇淫巧技">
+                SDWebImage (5.0.6) 图片加载奇淫巧技 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -634,19 +624,10 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
 
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -666,7 +647,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -688,7 +669,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -722,22 +703,6 @@
       </section>
 
       
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用Charles进行网络环境模拟"><span class="nav-number">1.</span> <span class="nav-text">使用Charles进行网络环境模拟</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#下面来解释一下窗口中的各个参数："><span class="nav-number">1.0.1.</span> <span class="nav-text">下面来解释一下窗口中的各个参数：</span></a></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#使用Charles添加请求断点"><span class="nav-number">2.</span> <span class="nav-text">使用Charles添加请求断点</span></a></li></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
 
       
 
@@ -765,7 +730,7 @@
 
 <div class="powered-by">
   <i class="fa fa-pencil-square"></i>
-  <span class="post-count">全站共23.7k字</span>
+  <span class="post-count">全站共25.4k字</span>
   <i class="fa fa-clock-o"></i>
 </div>
 
