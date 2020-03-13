@@ -35,8 +35,8 @@
         <category>Flutter</category>
       </categories>
       <tags>
-        <tag>Flutter</tag>
         <tag>iOS</tag>
+        <tag>Flutter</tag>
         <tag>Objective-C</tag>
         <tag>Dart</tag>
       </tags>
@@ -49,8 +49,8 @@
         <category>Flutter</category>
       </categories>
       <tags>
-        <tag>Flutter</tag>
         <tag>iOS</tag>
+        <tag>Flutter</tag>
         <tag>Objective-C</tag>
         <tag>Dart</tag>
       </tags>
@@ -147,6 +147,14 @@
         <tag>Objective-C</tag>
         <tag>静态库</tag>
         <tag>framework</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[iOS线程之多读单写和常驻线程]]></title>
+    <url>%2F2018%2F09%2F13%2FiOS%E7%BA%BF%E7%A8%8B%E4%B9%8B%E5%A4%9A%E8%AF%BB%E5%8D%95%E5%86%99%E5%92%8C%E5%B8%B8%E9%A9%BB%E7%BA%BF%E7%A8%8B%2F</url>
+    <content type="text"><![CDATA[熟悉多线程的朋友，应该都遇到过这样的应用场景： 多个线程去读写数据。那么试想一下如果一条线程正在读取数据的时候另外一条线程同时在写数据。这种场景是否会产生问题呢？ 我们期望这样一个线程，可以被我们反复利用，那么这又是如何实现的呢？ 接下来我们一一介绍 如何解决多个线程对同一块资源的读写问题呢？试想一下，当一个线程在读取资源的时候，正好有另外一个线程修改了这个资源，或者多个线程同时修改资源，这两种情况都会导致数据错乱。所以为了避免这种问题的产生我们应该怎么处理呢？ 我们在多线程读写的时候应该有以下原则： 读者、读者并发 读者、写者互斥 写者、写者互斥 满足以上原则，我们就可以很好的结局上述问题。满足以上原则的话，系统给我们提供了很好用的API:dispatch_barrier_async，它可以很好的将我们的读写操作分离，原则上我们允许多个读取线程同时读取数据，假如说有写线程的话，通过上述dispatch_barrier_async就可以将它之前的读操作隔离开来，同样的如果它后面还有读取线程的话也必须等到，写数据线程执行完之后才会执行。 具体的用法呢，就是通过调用dispatch_barrier_async将写任务提交到一个自定义的并发队列concurrent_queue中，而读取操作呢用过调用dispatch_sync将读取操作以同步的方式提交到自定义的并发队列concurrent_queue中。 接下来我们看具体的实现： 我们声明一个类MultiReadSingleWrite 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849// 接口部分@interface MultiReadSingleWrite : NSObject- (id)objectForKey:(NSString *)key;- (void)setObject:(id)object forKey:(NSString *)key;@end// 实现部分@interface MultiReadSingleWrite ()&#123; // 定义一个并发队列 dispatch_queue_t concurrent_queue; // 定义一个供线程读写的数据容器 NSMutableDictionary *containerDict;&#125;@end@implementation MultiReadSingleWrite- (instancetype)init &#123; if (self = [super init]) &#123; // 定义一个访问容器 containerDict = [[NSMutableDictionary alloc]initWithCapacity:0]; // 创件一个并发队列 concurrent_queue = dispatch_queue_create("read_write_queue", DISPATCH_QUEUE_CONCURRENT); &#125; return self;&#125;// 读取数据- (id)objectForKey:(NSString *)key &#123; __block id value = nil; // 同步读取数据 dispatch_sync(concurrent_queue, ^&#123; value = [containerDict objectForKey:key]; &#125;); return value;&#125;// 写数据- (void)setObject:(id)object forKey:(NSString *)key &#123; // 异步栅栏调用设置数据 dispatch_barrier_async(concurrent_queue, ^&#123; [containerDict setObject:object forKey:key]; &#125;);&#125;@end 没错，就是这么简单，相信你看了我的介绍，对多读单写应该很清楚了。接下来我们来介绍上述第二个问题。 如何创建一个可以反复使用的线程呢？反复使用的线程说白了就是我们通常所说的 常驻线程。那么改如何创建呢？需要满足一下三点： 为当前线程开启一个RunLoop 向该RunLoop中添加一个Port/Sources等维持RunLoop的事件循环 启动该RunLoop 我们看代码实现： 123456789101112131415161718192021222324252627282930313233343536373839404142// 接口部分@interface AliveForeverThread : NSObject+ (NSThread *)threadForDispatch;@end // 实现部分static NSThread *thred = nil;static BOOL runAlways = YES;@implementation AliveForeverThread+ (NSThread *)threadForDispatch &#123; static dispatch_once_t onceToken; dispatch_once(&amp;onceToken, ^&#123; thred = [[NSThread alloc]initWithTarget:self selector:@selector(runRequest) object:nil]; [thred setName:@"charles_alive_thread"]; [thred start]; &#125;); return thred;&#125;+ (void)runRequest &#123; // 创建一个Source CFRunLoopSourceContext context = &#123;&#125;; CFRunLoopSourceRef source = CFRunLoopSourceCreate(kCFAllocatorDefault, 0, &amp;context); // 创建RunLoop CFRunLoopAddSource(CFRunLoopGetCurrent(), source,kCFRunLoopDefaultMode); // 开始运行 while (runAlways) &#123; @autoreleasepool &#123; // 使当前RunLoop运行在DefaultMode下。 CFRunLoopRunInMode(kCFRunLoopDefaultMode, 1.0e10, true); &#125; &#125; // 某一时机，runAlways = NO 时，可以保证跳出RunLoop,线程退出。 CFRunLoopRemoveSource(CFRunLoopGetCurrent(), source, kCFRunLoopDefaultMode); CFRelease(source);&#125;@end 到这里，我们上述的两个问题就介绍完了，欢迎勘误！]]></content>
+      <tags>
+        <tag>iOS</tag>
       </tags>
   </entry>
   <entry>
