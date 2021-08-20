@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[iOS性能优化]]></title>
+    <url>%2F2021%2F08%2F18%2FiOS%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%2F</url>
+    <content type="text"><![CDATA[CPU &amp; GPU在屏幕成像的过程中CPU（Central Processing Unit，中央处理器）和GPU(Graphics Processing Unit，图形处理器)起到了至关重要的作用,简言之,CPU负责计算包括:对象的创建和销毁、对象属性的调整、布局计算、文本的计算和排版、图片格式的转换和解码、图像的绘制（Core Graphics）。而GPU的话主要负责绘制：纹理的渲染。 两者协作的原理是这样的： 卡顿优化耗电优化启动优化安装包瘦身]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[iOS获取设备CPU时钟频率]]></title>
     <url>%2F2021%2F08%2F04%2FiOS%E8%8E%B7%E5%8F%96%E8%AE%BE%E5%A4%87CPU%E6%97%B6%E9%92%9F%E9%A2%91%E7%8E%87%2F</url>
     <content type="text"><![CDATA[背景 用户反馈在使用APP过程中设备发烫变卡,我猜测是因为温度过高导致CPU降频了,但是iOS系统是没有提供获取其时钟频率的接口,所以我就查资料自己尝试了一下 通过汇编语言计算得出iOS设备CPU的实时频率 下面介绍如何获取在AppDelegate.m 里面加入如下内容:1.把汇编文件cpuFrequ.s导入到项目中,将freqTest函数声明到AppDelegate.m里面;2.计算500次,然后取其中时间最少的一次,从而排除系统干扰,得到最高的频率值;3.每一次调用都是传循环参数10000，也就是执行add指令130*10000次，因此最后算频率的时候是1300000/time，也就是单位时间（s）内执行cycles的数量！！！ 123456789101112131415161718192021extern int freqTest(int cycles); static double GetCPUFrequency(void) &#123; volatile NSTimeInterval times[500]; int sum = 0; for(int i = 0; i &lt; 500; i++) &#123; times[i] = [[NSProcessInfo processInfo] systemUptime]; sum += freqTest(10000); times[i] = [[NSProcessInfo processInfo] systemUptime] - times[i]; &#125; NSTimeInterval time = times[0]; for(int i = 1; i &lt; 500; I++) &#123; if(time &gt; times[i]) time = times[i]; &#125; double freq = 1300000.0 / time; return freq; &#125; 汇编部分的代码如下: 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156157158159160161162163.text.text.align 4.globl _freqTest_freqTest:freqTest_LOOP:// loop 1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1// loop 2add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1// loop 3add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1// loop 4add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1// loop 5add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1// loop 6add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1// loop 7add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1// loop 8add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1// loop 9add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1// loop 10add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1add x1, x1, x1subs x0, x0, #1bne freqTest_LOOPRET 到这就可以测试设备的实时CPU时钟频率了,我的测试方法是将App跑起来进入一个页面,获取一下此时的时钟频率,然后在该页面执行耗CPU的操作,观测CPU的占用率达到50%左右,此时设备会发烫,持续一段时间,然后销毁这个这页面(退出页面),之后定时获取CPU时钟频率,对比数据就可以判定是不是降频了.]]></content>
@@ -58,9 +63,9 @@
         <category>Flutter</category>
       </categories>
       <tags>
-        <tag>Dart</tag>
-        <tag>iOS</tag>
         <tag>Flutter</tag>
+        <tag>iOS</tag>
+        <tag>Dart</tag>
         <tag>Objective-C</tag>
       </tags>
   </entry>
@@ -72,9 +77,9 @@
         <category>Flutter</category>
       </categories>
       <tags>
-        <tag>Dart</tag>
-        <tag>iOS</tag>
         <tag>Flutter</tag>
+        <tag>iOS</tag>
+        <tag>Dart</tag>
         <tag>Objective-C</tag>
       </tags>
   </entry>

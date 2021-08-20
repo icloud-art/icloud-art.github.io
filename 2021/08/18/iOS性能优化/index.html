@@ -90,7 +90,7 @@
 
 
 
-  <meta name="keywords" content="Objective-C,设计模式," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -101,18 +101,17 @@
 
 
 
-<meta name="description" content="在开发过程中，很多人钟情于if/else连环写法，举个简单的例子，一个页面有N个菜单，点击的时候通过枚举类型来进行业务逻辑跳转。那么通常会这么写： 12345678- (void)handleJumpType:(ClJumpType)jumpType&amp;#123;    if(jumpType == CLJumpTypeAccount)&amp;#123;        [self gotoAccountP">
-<meta name="keywords" content="Objective-C,设计模式">
+<meta name="description" content="CPU &amp;amp; GPU在屏幕成像的过程中CPU（Central Processing Unit，中央处理器）和GPU(Graphics Processing Unit，图形处理器)起到了至关重要的作用,简言之,CPU负责计算包括:对象的创建和销毁、对象属性的调整、布局计算、文本的计算和排版、图片格式的转换和解码、图像的绘制（Core Graphics）。而GPU的话主要负责绘制：纹理的渲染。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="小试工厂模式">
-<meta property="og:url" content="http://yoursite.com/2019/05/03/小试工厂模式/index.html">
+<meta property="og:title" content="iOS性能优化">
+<meta property="og:url" content="http://yoursite.com/2021/08/18/iOS性能优化/index.html">
 <meta property="og:site_name" content="Charles&#39; Blog">
-<meta property="og:description" content="在开发过程中，很多人钟情于if/else连环写法，举个简单的例子，一个页面有N个菜单，点击的时候通过枚举类型来进行业务逻辑跳转。那么通常会这么写： 12345678- (void)handleJumpType:(ClJumpType)jumpType&amp;#123;    if(jumpType == CLJumpTypeAccount)&amp;#123;        [self gotoAccountP">
+<meta property="og:description" content="CPU &amp;amp; GPU在屏幕成像的过程中CPU（Central Processing Unit，中央处理器）和GPU(Graphics Processing Unit，图形处理器)起到了至关重要的作用,简言之,CPU负责计算包括:对象的创建和销毁、对象属性的调整、布局计算、文本的计算和排版、图片格式的转换和解码、图像的绘制（Core Graphics）。而GPU的话主要负责绘制：纹理的渲染。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-08-04T08:41:10.407Z">
+<meta property="og:updated_time" content="2021-08-20T02:55:33.150Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="小试工厂模式">
-<meta name="twitter:description" content="在开发过程中，很多人钟情于if/else连环写法，举个简单的例子，一个页面有N个菜单，点击的时候通过枚举类型来进行业务逻辑跳转。那么通常会这么写： 12345678- (void)handleJumpType:(ClJumpType)jumpType&amp;#123;    if(jumpType == CLJumpTypeAccount)&amp;#123;        [self gotoAccountP">
+<meta name="twitter:title" content="iOS性能优化">
+<meta name="twitter:description" content="CPU &amp;amp; GPU在屏幕成像的过程中CPU（Central Processing Unit，中央处理器）和GPU(Graphics Processing Unit，图形处理器)起到了至关重要的作用,简言之,CPU负责计算包括:对象的创建和销毁、对象属性的调整、布局计算、文本的计算和排版、图片格式的转换和解码、图像的绘制（Core Graphics）。而GPU的话主要负责绘制：纹理的渲染。">
 
 
 
@@ -142,13 +141,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/05/03/小试工厂模式/"/>
+  <link rel="canonical" href="http://yoursite.com/2021/08/18/iOS性能优化/"/>
 
 
 
 
 
-  <title>小试工厂模式 | Charles' Blog</title>
+  <title>iOS性能优化 | Charles' Blog</title>
   
 
 
@@ -329,7 +328,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/03/小试工厂模式/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/08/18/iOS性能优化/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charles">
@@ -346,7 +345,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">小试工厂模式</h1>
+          <h1 class="post-title" itemprop="name headline">iOS性能优化</h1>
         
 
         <div class="post-meta">
@@ -358,8 +357,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-03T21:10:50+08:00">
-                2019-05-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-18T14:21:42+08:00">
+                2021-08-18
               </time>
             
 
@@ -368,28 +367,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/设计模式/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -412,7 +389,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  561
+                  137
                 </span>
               
 
@@ -428,7 +405,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  1
                 </span>
               
             </div>
@@ -449,18 +426,9 @@
       
 
       
-        <p>在开发过程中，很多人钟情于<code>if/else</code>连环写法，举个简单的例子，一个页面有N个菜单，点击的时候通过枚举类型来进行业务逻辑跳转。那么通常会这么写：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)handleJumpType:(ClJumpType)jumpType&#123;</span><br><span class="line">    <span class="keyword">if</span>(jumpType == <span class="built_in">CLJumpTypeAccount</span>)&#123;</span><br><span class="line">        [<span class="keyword">self</span> gotoAccountPage];</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(jumpType == <span class="built_in">CLJumpTypeAbout</span>)&#123;</span><br><span class="line">        [<span class="keyword">self</span> gotoAboutPage];</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>假如说有十几个枚举，那<code>handleJumpType:</code>方法就会看起来不是很优雅，如果条件有变化的话，不好扩展，而且业务代码牵一发动全身……</p>
-<p>那么骚一点的程序员会怎么写呢？<code>switch/case</code>? 当然不是，我这里推荐使用工厂模式来优雅的处理类似的逻辑。</p>
-<p>接下来我们就通过一系列的代码来演示如何通过<strong>工厂模式</strong>来处理这个问题。</p>
-<p>废话不说了上代码：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 类型枚举</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="built_in">NS_ENUM</span>(<span class="built_in">NSUInteger</span>, <span class="built_in">CLJumpType</span>) &#123;</span><br><span class="line">    <span class="built_in">CLJumpTypeAccount</span> = <span class="number">1</span>,</span><br><span class="line">    <span class="built_in">CLJumpTypeAbout</span> = <span class="number">2</span>,</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 点击事件基类</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">CLJumpEvent</span> : <span class="title">NSObject</span></span></span><br><span class="line">- (<span class="keyword">instancetype</span>)initWithType:(<span class="built_in">CLJumpType</span>)jumpType;</span><br><span class="line">- (<span class="keyword">void</span>)jumpEvent;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">CLJumpTypeEvent</span>()</span></span><br><span class="line"><span class="keyword">@property</span> (nonatmoic, <span class="keyword">assign</span>) <span class="built_in">CLJumpType</span> jumpType;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">CLJumpTypeEvent</span></span></span><br><span class="line">- (<span class="keyword">instancetype</span>)initWithType:(<span class="built_in">CLJumpType</span>)jumpType &#123;</span><br><span class="line">    <span class="keyword">if</span> ([<span class="keyword">self</span> = <span class="keyword">super</span> init])&#123;   </span><br><span class="line">        <span class="keyword">self</span>.jumpType = jumpType;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)jumpEvent &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"点击事件处理"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 跳转到我的账户</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">CLJumpTypeAccount</span> : <span class="title">CLJumpTypeEvent</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">CLJumpTypeEvent</span></span></span><br><span class="line"><span class="comment">// 重写基类的jumpEvent方法</span></span><br><span class="line">- (<span class="keyword">void</span>)jumpEvent &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"跳转到我的账户页面..."</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 跳转工厂类</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">CLJumpFactory</span> : <span class="title">NSObject</span> </span></span><br><span class="line">+ (<span class="built_in">CLJumpEvent</span>)getJumpEvent:(<span class="built_in">CLJumpType</span>)jumpType;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">CLJumpFactory</span></span></span><br><span class="line"></span><br><span class="line">+ (<span class="built_in">NSDictionary</span>)jumpEvents &#123;</span><br><span class="line">    <span class="keyword">return</span> @&#123;</span><br><span class="line">        @(<span class="built_in">CLJumpTypeAccount</span>):[[<span class="built_in">CLJumpTypeEvent</span> alloc]initWithType:<span class="built_in">CLJumpTypeAccount</span>],</span><br><span class="line">        @(<span class="built_in">CLJumpTypeAbout</span>):[[<span class="built_in">CLJumpTypeEvent</span> alloc]initWithType:<span class="built_in">CLJumpTypeAbout</span>],</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">+ (<span class="built_in">CLJumpEvent</span>)getJumpEvent:(<span class="built_in">CLJumpType</span>)jumpType&#123;</span><br><span class="line">    <span class="keyword">return</span> [[<span class="keyword">self</span> jumpEvents] objectForKey:@(jumpType)];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
-<p>到这里，我们的工厂定义完了，那么接下来改造一下上面的<code>handleJumpType：</code>方法:</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)handleJumpType:(ClJumpType)jumpType&#123;</span><br><span class="line">    <span class="built_in">CLJumpTypeEvent</span> *jumpEvent = [<span class="built_in">CLJumpFactory</span> getJumpEvent:jumpType];</span><br><span class="line">    [jumpEvent jumpEvent];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>OK，改造完的样子，是不是很优雅？而且如果需要扩展的话，<code>handleJumpType:</code>方法完全不用修改。</p>
-<p>通过这个例子是不是觉得利用工厂模式来处理类似的问题十分的合适呢，其实设计模式在实际的开发中还是很有用的，只要我们仔细的去揣摩代码，你会发现它总有一些模式在里面。</p>
-
+        <h1 id="CPU-amp-GPU"><a href="#CPU-amp-GPU" class="headerlink" title="CPU &amp; GPU"></a>CPU &amp; GPU</h1><p>在屏幕成像的过程中CPU（Central Processing Unit，中央处理器）和GPU(Graphics Processing Unit，图形处理器)起到了至关重要的作用,简言之,CPU负责计算包括:对象的创建和销毁、对象属性的调整、布局计算、文本的计算和排版、图片格式的转换和解码、图像的绘制（Core Graphics）。而GPU的话主要负责绘制：纹理的渲染。</p>
+<p>两者协作的原理是这样的：</p>
+<h1 id="卡顿优化"><a href="#卡顿优化" class="headerlink" title="卡顿优化"></a>卡顿优化</h1><h1 id="耗电优化"><a href="#耗电优化" class="headerlink" title="耗电优化"></a>耗电优化</h1><h1 id="启动优化"><a href="#启动优化" class="headerlink" title="启动优化"></a>启动优化</h1><h1 id="安装包瘦身"><a href="#安装包瘦身" class="headerlink" title="安装包瘦身"></a>安装包瘦身</h1>
       
     </div>
     
@@ -504,14 +472,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Objective-C/" rel="tag"># Objective-C</a>
-          
-            <a href="/tags/设计模式/" rel="tag"># 设计模式</a>
-          
-        </div>
-      
 
       
       
@@ -521,8 +481,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/25/Charles工具进阶篇/" rel="next" title="Charles工具进阶篇">
-                <i class="fa fa-chevron-left"></i> Charles工具进阶篇
+              <a href="/2021/08/04/iOS获取设备CPU时钟频率/" rel="next" title="iOS获取设备CPU时钟频率">
+                <i class="fa fa-chevron-left"></i> iOS获取设备CPU时钟频率
               </a>
             
           </div>
@@ -530,10 +490,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/29/SDWebImage (5.0.6) 图片加载奇淫巧技/" rel="prev" title="SDWebImage (5.0.6) 图片加载奇淫巧技">
-                SDWebImage (5.0.6) 图片加载奇淫巧技 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -626,10 +582,19 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
 
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -706,6 +671,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CPU-amp-GPU"><span class="nav-number">1.</span> <span class="nav-text">CPU &amp; GPU</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#卡顿优化"><span class="nav-number">2.</span> <span class="nav-text">卡顿优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#耗电优化"><span class="nav-number">3.</span> <span class="nav-text">耗电优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#启动优化"><span class="nav-number">4.</span> <span class="nav-text">启动优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装包瘦身"><span class="nav-number">5.</span> <span class="nav-text">安装包瘦身</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
