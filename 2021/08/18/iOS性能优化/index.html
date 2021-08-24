@@ -111,7 +111,7 @@
 <meta property="og:image" content="https://i.loli.net/2021/08/20/ZVt8AgXCp4vUBf6.png">
 <meta property="og:image" content="https://i.loli.net/2021/08/24/gotUBLHfbPdWM9c.png">
 <meta property="og:image" content="https://i.loli.net/2021/08/24/K9JNzvfGd1aLoOw.png">
-<meta property="og:updated_time" content="2021-08-24T11:37:47.175Z">
+<meta property="og:updated_time" content="2021-08-24T11:42:06.818Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS性能优化">
 <meta name="twitter:description" content="CPU &amp;amp; GPU在屏幕成像的过程中CPU（Central Processing Unit，中央处理器）和GPU(Graphics Processing Unit，图形处理器)起到了至关重要的作用,简言之,CPU负责计算包括:对象的创建和销毁、对象属性的调整、布局计算、文本的计算和排版、图片格式的转换和解码、图像的绘制（Core Graphics）。而GPU的话主要负责绘制：纹理的渲染。">
@@ -433,14 +433,14 @@
         <h1 id="CPU-amp-GPU"><a href="#CPU-amp-GPU" class="headerlink" title="CPU &amp; GPU"></a>CPU &amp; GPU</h1><p>在屏幕成像的过程中CPU（Central Processing Unit，中央处理器）和GPU(Graphics Processing Unit，图形处理器)起到了至关重要的作用,简言之,CPU负责计算包括:对象的创建和销毁、对象属性的调整、布局计算、文本的计算和排版、图片格式的转换和解码、图像的绘制（Core Graphics）。而GPU的话主要负责绘制：纹理的渲染。</p>
 <p>两者协作的原理是这样的：</p>
 <p><img src="https://i.loli.net/2021/08/20/ZVt8AgXCp4vUBf6.png" alt="image-20210820110123949" style="zoom: 33%;"></p>
-<h1 id="卡顿优化"><a href="#卡顿优化" class="headerlink" title="卡顿优化"></a>卡顿优化</h1><h2 id="卡顿产生的原因"><a href="#卡顿产生的原因" class="headerlink" title="卡顿产生的原因"></a>卡顿产生的原因</h2><p>屏幕显示的原理是通过两个信号：水平同步信号和垂直同步信号，每当有垂直同步信号过来的时候就会显示一帧的数据；</p>
+<h1 id="卡顿优化"><a href="#卡顿优化" class="headerlink" title="卡顿优化"></a>卡顿优化</h1><h3 id="卡顿产生的原因"><a href="#卡顿产生的原因" class="headerlink" title="卡顿产生的原因"></a>卡顿产生的原因</h3><p>屏幕显示的原理是通过两个信号：水平同步信号和垂直同步信号，每当有垂直同步信号过来的时候就会显示一帧的数据；</p>
 <p><img src="https://i.loli.net/2021/08/24/gotUBLHfbPdWM9c.png" alt="image-20210824181803107"></p>
 <p>我们知道这每一帧的数据是通过CPU和GPU共同协作来完成的，也就是说需要在垂直同步信号到来之前CPU和GPU必须准备好要显示的这一帧的数据，那么如果没有准备完毕就会导致显示延迟也就是卡顿；<br>可以看下这个示意图：</p>
 <p><img src="https://i.loli.net/2021/08/24/K9JNzvfGd1aLoOw.png" alt="image-20210824181639771"></p>
 <p>红色的箭头表示CPU的工作时间，蓝色的箭头表示GPU的工作时间，如果两者的工作时间超过了垂直同步信号到来的时间，就不能正常显示这一帧的图像了。那么垂直同步信号多久来一次呢？按照60FPS的刷新频率，每隔16ms就会有一个垂直同步信号过来，也就是说每一帧图像的计算和绘制要小于等于16ms，这样才不会卡；</p>
-<h2 id="卡顿问题如何解决"><a href="#卡顿问题如何解决" class="headerlink" title="卡顿问题如何解决"></a>卡顿问题如何解决</h2><p>OK，既然我们知道了卡顿的原因，那么我们如何避免卡顿是不是就有方向了呢？</p>
+<h3 id="卡顿问题如何解决"><a href="#卡顿问题如何解决" class="headerlink" title="卡顿问题如何解决"></a>卡顿问题如何解决</h3><p>OK，既然我们知道了卡顿的原因，那么我们如何避免卡顿是不是就有方向了呢？</p>
 <p>很显然我们要从CPU和GPU这两个方向来处理，前面已经分别讲过了二者的工作内容，那么也就是想办法降低CPU的计算时间和GPU的绘制时间。下面分别就二者的特点来总结：</p>
-<h3 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h3><ul>
+<h4 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h4><ul>
 <li><p>尽量要用轻量级对象，比如用不到事件处理的地方，可以考虑用CALayer来代替UIView</p>
 </li>
 <li><p>尽量不要频繁的调用UIView的相关属性，比如frame、transform、bouds等属性，尽量减少不必要的修改，降低CPU对View大小重新计算的频率；</p>
@@ -456,7 +456,7 @@
 <li><p>尽量把耗时的操作放在子线程处理：文本处理（尺寸的计算以及绘制）、图片处理（编码和绘制）</p>
 </li>
 </ul>
-<h3 id="GPU"><a href="#GPU" class="headerlink" title="GPU"></a>GPU</h3><ul>
+<h4 id="GPU"><a href="#GPU" class="headerlink" title="GPU"></a>GPU</h4><ul>
 <li><p>尽量避免短时间内大量图片显示，尽可能的讲多张图片合并成一张来显示</p>
 </li>
 <li><p>GPU能处理的最大纹理尺寸是4096 * 4096,一旦超过这个尺寸就会占用CPU资源进行处理，所以纹理尽量不要超过这个尺寸</p>
@@ -725,7 +725,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CPU-amp-GPU"><span class="nav-number">1.</span> <span class="nav-text">CPU &amp; GPU</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#卡顿优化"><span class="nav-number">2.</span> <span class="nav-text">卡顿优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#卡顿产生的原因"><span class="nav-number">2.1.</span> <span class="nav-text">卡顿产生的原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#卡顿问题如何解决"><span class="nav-number">2.2.</span> <span class="nav-text">卡顿问题如何解决</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU"><span class="nav-number">2.2.1.</span> <span class="nav-text">CPU</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GPU"><span class="nav-number">2.2.2.</span> <span class="nav-text">GPU</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#离屏渲染"><span class="nav-number">2.2.3.</span> <span class="nav-text">离屏渲染</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#耗电优化"><span class="nav-number">3.</span> <span class="nav-text">耗电优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#启动优化"><span class="nav-number">4.</span> <span class="nav-text">启动优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装包瘦身"><span class="nav-number">5.</span> <span class="nav-text">安装包瘦身</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CPU-amp-GPU"><span class="nav-number">1.</span> <span class="nav-text">CPU &amp; GPU</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#卡顿优化"><span class="nav-number">2.</span> <span class="nav-text">卡顿优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#卡顿产生的原因"><span class="nav-number">2.0.1.</span> <span class="nav-text">卡顿产生的原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卡顿问题如何解决"><span class="nav-number">2.0.2.</span> <span class="nav-text">卡顿问题如何解决</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CPU"><span class="nav-number">2.0.2.1.</span> <span class="nav-text">CPU</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GPU"><span class="nav-number">2.0.2.2.</span> <span class="nav-text">GPU</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#离屏渲染"><span class="nav-number">2.0.3.</span> <span class="nav-text">离屏渲染</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#耗电优化"><span class="nav-number">3.</span> <span class="nav-text">耗电优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#启动优化"><span class="nav-number">4.</span> <span class="nav-text">启动优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装包瘦身"><span class="nav-number">5.</span> <span class="nav-text">安装包瘦身</span></a></li></ol></div>
             
 
           </div>
