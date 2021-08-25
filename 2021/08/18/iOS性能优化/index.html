@@ -111,7 +111,8 @@
 <meta property="og:image" content="https://i.loli.net/2021/08/20/ZVt8AgXCp4vUBf6.png">
 <meta property="og:image" content="https://i.loli.net/2021/08/24/gotUBLHfbPdWM9c.png">
 <meta property="og:image" content="https://i.loli.net/2021/08/24/K9JNzvfGd1aLoOw.png">
-<meta property="og:updated_time" content="2021-08-24T11:42:06.818Z">
+<meta property="og:image" content="https://i.loli.net/2021/08/25/Qkfe7bIxGRMZ4DK.png">
+<meta property="og:updated_time" content="2021-08-25T09:21:07.860Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS性能优化">
 <meta name="twitter:description" content="CPU &amp;amp; GPU在屏幕成像的过程中CPU（Central Processing Unit，中央处理器）和GPU(Graphics Processing Unit，图形处理器)起到了至关重要的作用,简言之,CPU负责计算包括:对象的创建和销毁、对象属性的调整、布局计算、文本的计算和排版、图片格式的转换和解码、图像的绘制（Core Graphics）。而GPU的话主要负责绘制：纹理的渲染。">
@@ -393,7 +394,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  836
+                  1,671
                 </span>
               
 
@@ -409,7 +410,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  6
                 </span>
               
             </div>
@@ -468,7 +469,61 @@
 <li><p>尽量避免离屏渲染</p>
 </li>
 </ul>
-<h3 id="离屏渲染"><a href="#离屏渲染" class="headerlink" title="离屏渲染"></a>离屏渲染</h3><h1 id="耗电优化"><a href="#耗电优化" class="headerlink" title="耗电优化"></a>耗电优化</h1><h1 id="启动优化"><a href="#启动优化" class="headerlink" title="启动优化"></a>启动优化</h1><h1 id="安装包瘦身"><a href="#安装包瘦身" class="headerlink" title="安装包瘦身"></a>安装包瘦身</h1>
+<h3 id="离屏渲染"><a href="#离屏渲染" class="headerlink" title="离屏渲染"></a>离屏渲染</h3><ul>
+<li><p>在OpenGL中GPU有2种渲染方式</p>
+<h6 id="On-Screen-Rendering-当前屏幕渲染，在当前用于显示屏幕缓冲区进行渲染操作"><a href="#On-Screen-Rendering-当前屏幕渲染，在当前用于显示屏幕缓冲区进行渲染操作" class="headerlink" title="On-Screen Rendering : 当前屏幕渲染，在当前用于显示屏幕缓冲区进行渲染操作"></a>On-Screen Rendering : 当前屏幕渲染，在当前用于显示屏幕缓冲区进行渲染操作</h6><h6 id="Off-Screen-Rendering-离屏渲染，在当前屏幕缓冲区以为新开辟一个缓冲区进行渲染操作"><a href="#Off-Screen-Rendering-离屏渲染，在当前屏幕缓冲区以为新开辟一个缓冲区进行渲染操作" class="headerlink" title="Off-Screen Rendering : 离屏渲染，在当前屏幕缓冲区以为新开辟一个缓冲区进行渲染操作"></a>Off-Screen Rendering : 离屏渲染，在当前屏幕缓冲区以为新开辟一个缓冲区进行渲染操作</h6></li>
+</ul>
+<h4 id="离屏渲染消耗性能的原因"><a href="#离屏渲染消耗性能的原因" class="headerlink" title="离屏渲染消耗性能的原因"></a>离屏渲染消耗性能的原因</h4><ul>
+<li>需要开辟新的缓冲区</li>
+<li>离屏渲染的整个过程，需要多次切换上下文环境，先是从当前屏幕(On-Screen)切换到离屏(Off-Screen)；等到离屏渲染结束后，将离屏缓冲区的渲染结果显示到屏幕上，又需要将上下文环境从离屏切换到当前屏幕</li>
+</ul>
+<h4 id="哪些操作会触发离屏渲染？"><a href="#哪些操作会触发离屏渲染？" class="headerlink" title="哪些操作会触发离屏渲染？"></a>哪些操作会触发离屏渲染？</h4><ul>
+<li>光栅化，layer.shouldRasterize = YES</li>
+<li>遮罩，layer.mask</li>
+<li>圆角，同时设置layer.maskToBounds = YES、layer.cornerRadius大于0；可以考虑通过CoreGraphics绘制裁剪圆角，或者叫美工提供圆角图片</li>
+<li>阴影，layer.shadowXXX；如果设置了layer.shaowPath就不会产生离屏渲染<h3 id="卡顿检测"><a href="#卡顿检测" class="headerlink" title="卡顿检测"></a>卡顿检测</h3></li>
+<li>平时所说的“卡顿”主要是因为在主线程执行了比较耗时的操作</li>
+<li>可以添加Observer到主线程RunLoop中，通过监听RunLoop状态切换的耗时，以达到监控卡顿的目的</li>
+</ul>
+<h1 id="耗电优化"><a href="#耗电优化" class="headerlink" title="耗电优化"></a>耗电优化</h1><h2 id="耗电的主要来源"><a href="#耗电的主要来源" class="headerlink" title="耗电的主要来源"></a>耗电的主要来源</h2><p><img src="https://i.loli.net/2021/08/25/Qkfe7bIxGRMZ4DK.png" alt="image-20210825150526234"></p>
+<ul>
+<li>CPU处理，Processing</li>
+<li>网络，Networking</li>
+<li>定位，Location</li>
+<li>图像，Graphics</li>
+</ul>
+<h2 id="如何降低设备耗电"><a href="#如何降低设备耗电" class="headerlink" title="如何降低设备耗电"></a>如何降低设备耗电</h2><ul>
+<li>尽可能降低CPU、GPU的功耗</li>
+<li>少用定时器</li>
+<li>优化I/O操作：<ol>
+<li>尽量不要频繁写入小数据，最好批量一次性写入</li>
+<li>读写大量数据时，考虑用dispatch_io,其提供了基于GCD的异步操作文件I/O的API。用dispatch_io系统会优化磁盘访问。</li>
+<li>数据量比较大的，建议使用数据库（SQLite、CoreData）</li>
+</ol>
+</li>
+<li>网络优化<ol>
+<li>减少、压缩网络数据</li>
+<li>如果多次请求的结果是相同的，尽量使用缓存</li>
+<li>使用断点续传，否则网络不稳定时可能多次传输相同的内容</li>
+<li>网络不可用时，不要尝试网络请求</li>
+<li>让用户可以取消长时间运行或者速度很慢的网络操作，设置合理的超时时间</li>
+<li>批量传输，比如，下载视频时，不要传输很小的数据包，直接下载整个文件或者一大块一大块的下载。如果下载广告一次性多下载些，然后再慢慢展示；比如下载电子邮件一次性下载多封，不要一封一封的下载；</li>
+</ol>
+</li>
+<li>定位优化<ol>
+<li>如果只是需要快速确定用户位置，最好用CLLocationManager的requestLocation方法。定位完成后，会自动让定位硬件断电</li>
+<li>如果不是导航应用，尽量不要实时更新位置，定位完毕就关掉定位服务</li>
+<li>尽量降低定位精度，比如尽量不要使用精度最高的kCLLocationAccuracyBest</li>
+<li>需要后台定位时，尽量设置pauseLocationUpdatesAutomatically为YES，如果用户不太可能移动的时候系统会自动暂停位置更新</li>
+<li>尽量不要使用startMonitoringSignificantLocationChanges,优先考虑startMonitoringForRegion：</li>
+</ol>
+</li>
+<li>硬件检测优化<ol>
+<li>用户移动、摇晃、倾斜设备时，会产生动作事件，这些事件由加速度计、陀螺仪、磁力计等硬件检测。在不需要检测的场合，应该及时关闭这些硬件。</li>
+</ol>
+</li>
+</ul>
+<h1 id="启动优化"><a href="#启动优化" class="headerlink" title="启动优化"></a>启动优化</h1><h1 id="安装包瘦身"><a href="#安装包瘦身" class="headerlink" title="安装包瘦身"></a>安装包瘦身</h1>
       
     </div>
     
@@ -725,7 +780,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CPU-amp-GPU"><span class="nav-number">1.</span> <span class="nav-text">CPU &amp; GPU</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#卡顿优化"><span class="nav-number">2.</span> <span class="nav-text">卡顿优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#卡顿产生的原因"><span class="nav-number">2.0.1.</span> <span class="nav-text">卡顿产生的原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卡顿问题如何解决"><span class="nav-number">2.0.2.</span> <span class="nav-text">卡顿问题如何解决</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CPU"><span class="nav-number">2.0.2.1.</span> <span class="nav-text">CPU</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GPU"><span class="nav-number">2.0.2.2.</span> <span class="nav-text">GPU</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#离屏渲染"><span class="nav-number">2.0.3.</span> <span class="nav-text">离屏渲染</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#耗电优化"><span class="nav-number">3.</span> <span class="nav-text">耗电优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#启动优化"><span class="nav-number">4.</span> <span class="nav-text">启动优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装包瘦身"><span class="nav-number">5.</span> <span class="nav-text">安装包瘦身</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CPU-amp-GPU"><span class="nav-number">1.</span> <span class="nav-text">CPU &amp; GPU</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#卡顿优化"><span class="nav-number">2.</span> <span class="nav-text">卡顿优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#卡顿产生的原因"><span class="nav-number">2.0.1.</span> <span class="nav-text">卡顿产生的原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卡顿问题如何解决"><span class="nav-number">2.0.2.</span> <span class="nav-text">卡顿问题如何解决</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CPU"><span class="nav-number">2.0.2.1.</span> <span class="nav-text">CPU</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GPU"><span class="nav-number">2.0.2.2.</span> <span class="nav-text">GPU</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#离屏渲染"><span class="nav-number">2.0.3.</span> <span class="nav-text">离屏渲染</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#On-Screen-Rendering-当前屏幕渲染，在当前用于显示屏幕缓冲区进行渲染操作"><span class="nav-number">2.0.3.0.0.1.</span> <span class="nav-text">On-Screen Rendering : 当前屏幕渲染，在当前用于显示屏幕缓冲区进行渲染操作</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Off-Screen-Rendering-离屏渲染，在当前屏幕缓冲区以为新开辟一个缓冲区进行渲染操作"><span class="nav-number">2.0.3.0.0.2.</span> <span class="nav-text">Off-Screen Rendering : 离屏渲染，在当前屏幕缓冲区以为新开辟一个缓冲区进行渲染操作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#离屏渲染消耗性能的原因"><span class="nav-number">2.0.3.1.</span> <span class="nav-text">离屏渲染消耗性能的原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#哪些操作会触发离屏渲染？"><span class="nav-number">2.0.3.2.</span> <span class="nav-text">哪些操作会触发离屏渲染？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卡顿检测"><span class="nav-number">2.0.4.</span> <span class="nav-text">卡顿检测</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#耗电优化"><span class="nav-number">3.</span> <span class="nav-text">耗电优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#耗电的主要来源"><span class="nav-number">3.1.</span> <span class="nav-text">耗电的主要来源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何降低设备耗电"><span class="nav-number">3.2.</span> <span class="nav-text">如何降低设备耗电</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#启动优化"><span class="nav-number">4.</span> <span class="nav-text">启动优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装包瘦身"><span class="nav-number">5.</span> <span class="nav-text">安装包瘦身</span></a></li></ol></div>
             
 
           </div>
@@ -759,7 +814,7 @@
 
 <div class="powered-by">
   <i class="fa fa-pencil-square"></i>
-  <span class="post-count">全站共35.2k字</span>
+  <span class="post-count">全站共36.1k字</span>
   <i class="fa fa-clock-o"></i>
 </div>
 
