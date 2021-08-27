@@ -112,7 +112,9 @@
 <meta property="og:image" content="https://i.loli.net/2021/08/24/gotUBLHfbPdWM9c.png">
 <meta property="og:image" content="https://i.loli.net/2021/08/24/K9JNzvfGd1aLoOw.png">
 <meta property="og:image" content="https://i.loli.net/2021/08/25/Qkfe7bIxGRMZ4DK.png">
-<meta property="og:updated_time" content="2021-08-25T09:21:07.860Z">
+<meta property="og:image" content="https://i.loli.net/2021/08/26/beJZv5z1r6P87j3.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/27/xyUQt1oN3eTDWid.png">
+<meta property="og:updated_time" content="2021-08-27T09:12:24.067Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS性能优化">
 <meta name="twitter:description" content="CPU &amp;amp; GPU在屏幕成像的过程中CPU（Central Processing Unit，中央处理器）和GPU(Graphics Processing Unit，图形处理器)起到了至关重要的作用,简言之,CPU负责计算包括:对象的创建和销毁、对象属性的调整、布局计算、文本的计算和排版、图片格式的转换和解码、图像的绘制（Core Graphics）。而GPU的话主要负责绘制：纹理的渲染。">
@@ -394,7 +396,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,671
+                  2,424
                 </span>
               
 
@@ -410,7 +412,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  6
+                  9
                 </span>
               
             </div>
@@ -523,7 +525,60 @@
 </ol>
 </li>
 </ul>
-<h1 id="启动优化"><a href="#启动优化" class="headerlink" title="启动优化"></a>启动优化</h1><h1 id="安装包瘦身"><a href="#安装包瘦身" class="headerlink" title="安装包瘦身"></a>安装包瘦身</h1>
+<h1 id="启动优化"><a href="#启动优化" class="headerlink" title="启动优化"></a>启动优化</h1><h2 id="App-的启动可以分为两种"><a href="#App-的启动可以分为两种" class="headerlink" title="App 的启动可以分为两种"></a>App 的启动可以分为两种</h2><ol>
+<li>冷启动(Cold Launch) ：从零开始启动App</li>
+<li>热启动(Warm Launch) ：App 已经在内存中，在后台存活着，再次点击图标启动App</li>
+</ol>
+<h2 id="App启动时间的优化，主要是针对冷启动来进行优化"><a href="#App启动时间的优化，主要是针对冷启动来进行优化" class="headerlink" title="App启动时间的优化，主要是针对冷启动来进行优化"></a>App启动时间的优化，主要是针对冷启动来进行优化</h2><h2 id="通过添加环境变量可以打印出App的启动时间分析（Edit-scheme-gt-Run-gt-Arguments）"><a href="#通过添加环境变量可以打印出App的启动时间分析（Edit-scheme-gt-Run-gt-Arguments）" class="headerlink" title="通过添加环境变量可以打印出App的启动时间分析（Edit scheme-&gt; Run -&gt; Arguments）"></a>通过添加环境变量可以打印出App的启动时间分析（Edit scheme-&gt; Run -&gt; Arguments）</h2><ol>
+<li>DYLY_PRINT_STATISTICS设置为1</li>
+<li>如果需要更详细的信息，可以将DYLD_PRINT_STATISTICS_DETAILS设置为1</li>
+</ol>
+<h2 id="App的冷启动可以概括为3大阶段"><a href="#App的冷启动可以概括为3大阶段" class="headerlink" title="App的冷启动可以概括为3大阶段"></a>App的冷启动可以概括为3大阶段</h2><ol>
+<li>dyld</li>
+<li>runtime</li>
+<li>main<br><img src="https://i.loli.net/2021/08/26/beJZv5z1r6P87j3.png" alt="image-20210826215811436" style="zoom: 50%;"><h2 id="dyld-dynamic-link-editor-，-Apple的动态链接器，可以用来装载Mach-O文件-可执行文件、动态库等"><a href="#dyld-dynamic-link-editor-，-Apple的动态链接器，可以用来装载Mach-O文件-可执行文件、动态库等" class="headerlink" title="dyld(dynamic link editor)， Apple的动态链接器，可以用来装载Mach-O文件(可执行文件、动态库等)"></a>dyld(dynamic link editor)， Apple的动态链接器，可以用来装载Mach-O文件(可执行文件、动态库等)</h2></li>
+</ol>
+<h2 id="启动App时，dyld所做的事情："><a href="#启动App时，dyld所做的事情：" class="headerlink" title="启动App时，dyld所做的事情："></a>启动App时，dyld所做的事情：</h2><ol>
+<li>装载App的可执行文件，同时会递归加载所有依赖的动态库</li>
+<li>当dyld把可执行文件、动态库都装载完毕后，会通知runtime进行下一步的处理</li>
+</ol>
+<h2 id="启动App时，runtime所做的事情："><a href="#启动App时，runtime所做的事情：" class="headerlink" title="启动App时，runtime所做的事情："></a>启动App时，runtime所做的事情：</h2><ol>
+<li>调用map_images进行可执行文内容的解析和处理</li>
+<li>在load_images中调用call_load_methods，调用所有Class和Category的+load方法</li>
+<li>进行各种objc结构的初始化(注册Objc类、初始化类对象等等)</li>
+<li>调用C++ 静态初始化器和<strong>attribute</strong>((constructor))修饰的函数</li>
+</ol>
+<p>到此为止，可执行文件和动态库中所有的符号（Class, Protocol, Selector,IMP,…）都已经按格式成功加载到内存中，被runtime所管理。</p>
+<h2 id="总结一把"><a href="#总结一把" class="headerlink" title="总结一把"></a>总结一把</h2><ol>
+<li>App启动由dyld主导，将可执行文件加载到内存，顺便加载所有依赖的动态库</li>
+<li>并由runtime负责加载成objc定义的结构</li>
+<li>所有初始化工作结束后，dyld就会调用main函数</li>
+<li>然后是UIApplicationMain函数，AppDelegate的application:didFinishLaunchingWithOptions:方法</li>
+</ol>
+<h2 id="App的启动优化"><a href="#App的启动优化" class="headerlink" title="App的启动优化"></a>App的启动优化</h2><h4 id="dyld"><a href="#dyld" class="headerlink" title="dyld"></a>dyld</h4><ol>
+<li>减少动态库、合并一些动态库(定期清理不必要的动态库)</li>
+<li>减少Objc类、分类的数量、减少Selector的数量（定期清理不必要的类、分类）</li>
+<li>减少C++虚函数数量</li>
+<li>Swift尽量使用struct</li>
+</ol>
+<h4 id="runtime"><a href="#runtime" class="headerlink" title="runtime"></a>runtime</h4><ol>
+<li>用+initialize方法和dispatch_once取代所有的<strong>attribute</strong>((constructor))、C++静态构造器、ObjC的+load</li>
+</ol>
+<h4 id="main"><a href="#main" class="headerlink" title="main"></a>main</h4><ol>
+<li>在不影响用户体验的前提下，尽可能将一些操作延迟，不要全部都放在finishLaunching方法中</li>
+<li>按需加载</li>
+</ol>
+<h1 id="安装包瘦身"><a href="#安装包瘦身" class="headerlink" title="安装包瘦身"></a>安装包瘦身</h1><h2 id="安装包-IPA-主要由可执行文件、资源文件构成"><a href="#安装包-IPA-主要由可执行文件、资源文件构成" class="headerlink" title="安装包(IPA)主要由可执行文件、资源文件构成"></a>安装包(IPA)主要由可执行文件、资源文件构成</h2><h2 id="资源（图片、音频、视频等）"><a href="#资源（图片、音频、视频等）" class="headerlink" title="资源（图片、音频、视频等）"></a>资源（图片、音频、视频等）</h2><ol>
+<li>采取无损压缩</li>
+<li>去除没有用的资源:<a href="https://github.com/tinymind/LSUnusedResources" target="_blank" rel="noopener">https://github.com/tinymind/LSUnusedResources</a></li>
+</ol>
+<h2 id="可执行文件瘦身"><a href="#可执行文件瘦身" class="headerlink" title="可执行文件瘦身"></a>可执行文件瘦身</h2><ol>
+<li>编译器优化：<br>Strip Linked Product、Make Strings Read-Only、Symbols Hidden by Default设置为YES<br>去掉异常支持，Enable C++ Exceptions、Enable Objective-C Exceptions设置为NO， Other C Flags添加-fno-exceptions</li>
+<li>利用AppCode(<a href="https://www.jetbrains.com/objc/)检测未使用的代码：菜单栏-&gt;Code-&gt;Inspect" target="_blank" rel="noopener">https://www.jetbrains.com/objc/)检测未使用的代码：菜单栏-&gt;Code-&gt;Inspect</a> Code</li>
+<li>编写LLVM插件检测出重复代码、未被调用的代码<h2 id="生成LinkMap文件，可以查看可执行文件的具体组成"><a href="#生成LinkMap文件，可以查看可执行文件的具体组成" class="headerlink" title="生成LinkMap文件，可以查看可执行文件的具体组成"></a>生成LinkMap文件，可以查看可执行文件的具体组成</h2></li>
+</ol>
+<p><img src="https://i.loli.net/2021/08/27/xyUQt1oN3eTDWid.png" alt="image-20210827171050254"></p>
+<h2 id="可借助第三方工具解析LinkMap文件-https-github-com-huanxsd-LinkMap"><a href="#可借助第三方工具解析LinkMap文件-https-github-com-huanxsd-LinkMap" class="headerlink" title="可借助第三方工具解析LinkMap文件:https://github.com/huanxsd/LinkMap"></a>可借助第三方工具解析LinkMap文件:<a href="https://github.com/huanxsd/LinkMap" target="_blank" rel="noopener">https://github.com/huanxsd/LinkMap</a></h2>
       
     </div>
     
@@ -780,7 +835,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CPU-amp-GPU"><span class="nav-number">1.</span> <span class="nav-text">CPU &amp; GPU</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#卡顿优化"><span class="nav-number">2.</span> <span class="nav-text">卡顿优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#卡顿产生的原因"><span class="nav-number">2.0.1.</span> <span class="nav-text">卡顿产生的原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卡顿问题如何解决"><span class="nav-number">2.0.2.</span> <span class="nav-text">卡顿问题如何解决</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CPU"><span class="nav-number">2.0.2.1.</span> <span class="nav-text">CPU</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GPU"><span class="nav-number">2.0.2.2.</span> <span class="nav-text">GPU</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#离屏渲染"><span class="nav-number">2.0.3.</span> <span class="nav-text">离屏渲染</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#On-Screen-Rendering-当前屏幕渲染，在当前用于显示屏幕缓冲区进行渲染操作"><span class="nav-number">2.0.3.0.0.1.</span> <span class="nav-text">On-Screen Rendering : 当前屏幕渲染，在当前用于显示屏幕缓冲区进行渲染操作</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Off-Screen-Rendering-离屏渲染，在当前屏幕缓冲区以为新开辟一个缓冲区进行渲染操作"><span class="nav-number">2.0.3.0.0.2.</span> <span class="nav-text">Off-Screen Rendering : 离屏渲染，在当前屏幕缓冲区以为新开辟一个缓冲区进行渲染操作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#离屏渲染消耗性能的原因"><span class="nav-number">2.0.3.1.</span> <span class="nav-text">离屏渲染消耗性能的原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#哪些操作会触发离屏渲染？"><span class="nav-number">2.0.3.2.</span> <span class="nav-text">哪些操作会触发离屏渲染？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卡顿检测"><span class="nav-number">2.0.4.</span> <span class="nav-text">卡顿检测</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#耗电优化"><span class="nav-number">3.</span> <span class="nav-text">耗电优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#耗电的主要来源"><span class="nav-number">3.1.</span> <span class="nav-text">耗电的主要来源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何降低设备耗电"><span class="nav-number">3.2.</span> <span class="nav-text">如何降低设备耗电</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#启动优化"><span class="nav-number">4.</span> <span class="nav-text">启动优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装包瘦身"><span class="nav-number">5.</span> <span class="nav-text">安装包瘦身</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CPU-amp-GPU"><span class="nav-number">1.</span> <span class="nav-text">CPU &amp; GPU</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#卡顿优化"><span class="nav-number">2.</span> <span class="nav-text">卡顿优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#卡顿产生的原因"><span class="nav-number">2.0.1.</span> <span class="nav-text">卡顿产生的原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卡顿问题如何解决"><span class="nav-number">2.0.2.</span> <span class="nav-text">卡顿问题如何解决</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CPU"><span class="nav-number">2.0.2.1.</span> <span class="nav-text">CPU</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GPU"><span class="nav-number">2.0.2.2.</span> <span class="nav-text">GPU</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#离屏渲染"><span class="nav-number">2.0.3.</span> <span class="nav-text">离屏渲染</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#On-Screen-Rendering-当前屏幕渲染，在当前用于显示屏幕缓冲区进行渲染操作"><span class="nav-number">2.0.3.0.0.1.</span> <span class="nav-text">On-Screen Rendering : 当前屏幕渲染，在当前用于显示屏幕缓冲区进行渲染操作</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Off-Screen-Rendering-离屏渲染，在当前屏幕缓冲区以为新开辟一个缓冲区进行渲染操作"><span class="nav-number">2.0.3.0.0.2.</span> <span class="nav-text">Off-Screen Rendering : 离屏渲染，在当前屏幕缓冲区以为新开辟一个缓冲区进行渲染操作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#离屏渲染消耗性能的原因"><span class="nav-number">2.0.3.1.</span> <span class="nav-text">离屏渲染消耗性能的原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#哪些操作会触发离屏渲染？"><span class="nav-number">2.0.3.2.</span> <span class="nav-text">哪些操作会触发离屏渲染？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卡顿检测"><span class="nav-number">2.0.4.</span> <span class="nav-text">卡顿检测</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#耗电优化"><span class="nav-number">3.</span> <span class="nav-text">耗电优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#耗电的主要来源"><span class="nav-number">3.1.</span> <span class="nav-text">耗电的主要来源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何降低设备耗电"><span class="nav-number">3.2.</span> <span class="nav-text">如何降低设备耗电</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#启动优化"><span class="nav-number">4.</span> <span class="nav-text">启动优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#App-的启动可以分为两种"><span class="nav-number">4.1.</span> <span class="nav-text">App 的启动可以分为两种</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#App启动时间的优化，主要是针对冷启动来进行优化"><span class="nav-number">4.2.</span> <span class="nav-text">App启动时间的优化，主要是针对冷启动来进行优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过添加环境变量可以打印出App的启动时间分析（Edit-scheme-gt-Run-gt-Arguments）"><span class="nav-number">4.3.</span> <span class="nav-text">通过添加环境变量可以打印出App的启动时间分析（Edit scheme-&gt; Run -&gt; Arguments）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#App的冷启动可以概括为3大阶段"><span class="nav-number">4.4.</span> <span class="nav-text">App的冷启动可以概括为3大阶段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dyld-dynamic-link-editor-，-Apple的动态链接器，可以用来装载Mach-O文件-可执行文件、动态库等"><span class="nav-number">4.5.</span> <span class="nav-text">dyld(dynamic link editor)， Apple的动态链接器，可以用来装载Mach-O文件(可执行文件、动态库等)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动App时，dyld所做的事情："><span class="nav-number">4.6.</span> <span class="nav-text">启动App时，dyld所做的事情：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动App时，runtime所做的事情："><span class="nav-number">4.7.</span> <span class="nav-text">启动App时，runtime所做的事情：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结一把"><span class="nav-number">4.8.</span> <span class="nav-text">总结一把</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#App的启动优化"><span class="nav-number">4.9.</span> <span class="nav-text">App的启动优化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#dyld"><span class="nav-number">4.9.0.1.</span> <span class="nav-text">dyld</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#runtime"><span class="nav-number">4.9.0.2.</span> <span class="nav-text">runtime</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#main"><span class="nav-number">4.9.0.3.</span> <span class="nav-text">main</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装包瘦身"><span class="nav-number">5.</span> <span class="nav-text">安装包瘦身</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装包-IPA-主要由可执行文件、资源文件构成"><span class="nav-number">5.1.</span> <span class="nav-text">安装包(IPA)主要由可执行文件、资源文件构成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#资源（图片、音频、视频等）"><span class="nav-number">5.2.</span> <span class="nav-text">资源（图片、音频、视频等）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可执行文件瘦身"><span class="nav-number">5.3.</span> <span class="nav-text">可执行文件瘦身</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成LinkMap文件，可以查看可执行文件的具体组成"><span class="nav-number">5.4.</span> <span class="nav-text">生成LinkMap文件，可以查看可执行文件的具体组成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可借助第三方工具解析LinkMap文件-https-github-com-huanxsd-LinkMap"><span class="nav-number">5.5.</span> <span class="nav-text">可借助第三方工具解析LinkMap文件:https://github.com/huanxsd/LinkMap</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -814,7 +869,7 @@
 
 <div class="powered-by">
   <i class="fa fa-pencil-square"></i>
-  <span class="post-count">全站共36.1k字</span>
+  <span class="post-count">全站共36.8k字</span>
   <i class="fa fa-clock-o"></i>
 </div>
 
