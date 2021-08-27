@@ -114,7 +114,7 @@
 <meta property="og:image" content="https://i.loli.net/2021/08/25/Qkfe7bIxGRMZ4DK.png">
 <meta property="og:image" content="https://i.loli.net/2021/08/26/beJZv5z1r6P87j3.png">
 <meta property="og:image" content="https://i.loli.net/2021/08/27/xyUQt1oN3eTDWid.png">
-<meta property="og:updated_time" content="2021-08-27T09:12:24.067Z">
+<meta property="og:updated_time" content="2021-08-27T09:39:39.387Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS性能优化">
 <meta name="twitter:description" content="CPU &amp;amp; GPU在屏幕成像的过程中CPU（Central Processing Unit，中央处理器）和GPU(Graphics Processing Unit，图形处理器)起到了至关重要的作用,简言之,CPU负责计算包括:对象的创建和销毁、对象属性的调整、布局计算、文本的计算和排版、图片格式的转换和解码、图像的绘制（Core Graphics）。而GPU的话主要负责绘制：纹理的渲染。">
@@ -536,9 +536,9 @@
 <h2 id="App的冷启动可以概括为3大阶段"><a href="#App的冷启动可以概括为3大阶段" class="headerlink" title="App的冷启动可以概括为3大阶段"></a>App的冷启动可以概括为3大阶段</h2><ol>
 <li>dyld</li>
 <li>runtime</li>
-<li>main<br><img src="https://i.loli.net/2021/08/26/beJZv5z1r6P87j3.png" alt="image-20210826215811436" style="zoom: 50%;"><h2 id="dyld-dynamic-link-editor-，-Apple的动态链接器，可以用来装载Mach-O文件-可执行文件、动态库等"><a href="#dyld-dynamic-link-editor-，-Apple的动态链接器，可以用来装载Mach-O文件-可执行文件、动态库等" class="headerlink" title="dyld(dynamic link editor)， Apple的动态链接器，可以用来装载Mach-O文件(可执行文件、动态库等)"></a>dyld(dynamic link editor)， Apple的动态链接器，可以用来装载Mach-O文件(可执行文件、动态库等)</h2></li>
+<li>main<br><img src="https://i.loli.net/2021/08/26/beJZv5z1r6P87j3.png" alt="image-20210826215811436" style="zoom: 50%;"></li>
 </ol>
-<h2 id="启动App时，dyld所做的事情："><a href="#启动App时，dyld所做的事情：" class="headerlink" title="启动App时，dyld所做的事情："></a>启动App时，dyld所做的事情：</h2><ol>
+<h2 id="dyld-dynamic-link-editor-，-Apple的动态链接器，可以用来装载Mach-O文件-可执行文件、动态库等"><a href="#dyld-dynamic-link-editor-，-Apple的动态链接器，可以用来装载Mach-O文件-可执行文件、动态库等" class="headerlink" title="dyld(dynamic link editor)， Apple的动态链接器，可以用来装载Mach-O文件(可执行文件、动态库等)"></a>dyld(dynamic link editor)， Apple的动态链接器，可以用来装载Mach-O文件(可执行文件、动态库等)</h2><h2 id="启动App时，dyld所做的事情："><a href="#启动App时，dyld所做的事情：" class="headerlink" title="启动App时，dyld所做的事情："></a>启动App时，dyld所做的事情：</h2><ol>
 <li>装载App的可执行文件，同时会递归加载所有依赖的动态库</li>
 <li>当dyld把可执行文件、动态库都装载完毕后，会通知runtime进行下一步的处理</li>
 </ol>
@@ -574,10 +574,10 @@
 </ol>
 <h2 id="可执行文件瘦身"><a href="#可执行文件瘦身" class="headerlink" title="可执行文件瘦身"></a>可执行文件瘦身</h2><ol>
 <li>编译器优化：<br>Strip Linked Product、Make Strings Read-Only、Symbols Hidden by Default设置为YES<br>去掉异常支持，Enable C++ Exceptions、Enable Objective-C Exceptions设置为NO， Other C Flags添加-fno-exceptions</li>
-<li>利用AppCode(<a href="https://www.jetbrains.com/objc/)检测未使用的代码：菜单栏-&gt;Code-&gt;Inspect" target="_blank" rel="noopener">https://www.jetbrains.com/objc/)检测未使用的代码：菜单栏-&gt;Code-&gt;Inspect</a> Code</li>
-<li>编写LLVM插件检测出重复代码、未被调用的代码<h2 id="生成LinkMap文件，可以查看可执行文件的具体组成"><a href="#生成LinkMap文件，可以查看可执行文件的具体组成" class="headerlink" title="生成LinkMap文件，可以查看可执行文件的具体组成"></a>生成LinkMap文件，可以查看可执行文件的具体组成</h2></li>
+<li>利用AppCode ( <a href="https://www.jetbrains.com/objc/" target="_blank" rel="noopener">https://www.jetbrains.com/objc/</a> )  检测未使用的代码：菜单栏-&gt;Code-&gt;Inspect Code</li>
+<li>编写LLVM插件检测出重复代码、未被调用的代码 </li>
 </ol>
-<p><img src="https://i.loli.net/2021/08/27/xyUQt1oN3eTDWid.png" alt="image-20210827171050254"></p>
+<h2 id="生成LinkMap文件，可以查看可执行文件的具体组成"><a href="#生成LinkMap文件，可以查看可执行文件的具体组成" class="headerlink" title="生成LinkMap文件，可以查看可执行文件的具体组成"></a>生成LinkMap文件，可以查看可执行文件的具体组成</h2><p><img src="https://i.loli.net/2021/08/27/xyUQt1oN3eTDWid.png" alt="image-20210827171050254"></p>
 <h2 id="可借助第三方工具解析LinkMap文件-https-github-com-huanxsd-LinkMap"><a href="#可借助第三方工具解析LinkMap文件-https-github-com-huanxsd-LinkMap" class="headerlink" title="可借助第三方工具解析LinkMap文件:https://github.com/huanxsd/LinkMap"></a>可借助第三方工具解析LinkMap文件:<a href="https://github.com/huanxsd/LinkMap" target="_blank" rel="noopener">https://github.com/huanxsd/LinkMap</a></h2>
       
     </div>
