@@ -103,7 +103,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Charles&#39; Blog">
-<meta property="og:url" content="http://yoursite.com/categories/flutter/index.html">
+<meta property="og:url" content="http://yoursite.com/categories/Flutter/index.html">
 <meta property="og:site_name" content="Charles&#39; Blog">
 <meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
@@ -137,13 +137,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/flutter/"/>
+  <link rel="canonical" href="http://yoursite.com/categories/Flutter/"/>
 
 
 
 
 
-  <title>分类: flutter | Charles' Blog</title>
+  <title>分类: Flutter | Charles' Blog</title>
   
 
 
@@ -317,7 +317,7 @@
 
     <div id="posts" class="posts-collapse">
       <div class="collection-title">
-        <h1>flutter<small>分类</small>
+        <h1>Flutter<small>分类</small>
         </h1>
       </div>
 
@@ -329,9 +329,9 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/2020/04/29/基于shared_preferences的本地存储/" itemprop="url">
+            <a class="post-title-link" href="/2020/02/17/Flutter开发包和插件/" itemprop="url">
               
-                <span itemprop="name">基于shared_preferences的本地存储</span>
+                <span itemprop="name">Flutter开发包和插件</span>
               
             </a>
         
@@ -339,9 +339,93 @@
 
       <div class="post-meta">
         <time class="post-time" itemprop="dateCreated"
-              datetime="2020-04-29T21:18:50+08:00"
-              content="2020-04-29" >
-          04-29
+              datetime="2020-02-17T18:00:13+08:00"
+              content="2020-02-17" >
+          02-17
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2020/02/16/Flutter使用Packages/" itemprop="url">
+              
+                <span itemprop="name">Flutter使用Packages</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2020-02-16T15:48:47+08:00"
+              content="2020-02-16" >
+          02-16
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2020/02/15/iOS和Flutter通信初探/" itemprop="url">
+              
+                <span itemprop="name">iOS和Flutter通信初探</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2020-02-15T13:10:31+08:00"
+              content="2020-02-15" >
+          02-15
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2020/02/13/iOS混合Flutter初探/" itemprop="url">
+              
+                <span itemprop="name">iOS混合Flutter初探</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2020-02-13T21:23:48+08:00"
+              content="2020-02-13" >
+          02-13
         </time>
       </div>
 
@@ -929,87 +1013,6 @@
             } else {
               resultItems.sort(function (resultLeft, resultRight) {
                 if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
-
-</body>
-</html>
-resultLeft.searchTextCount !== resultRight.searchTextCount) {
                   return resultRight.searchTextCount - resultLeft.searchTextCount;
                 } else if (resultLeft.hitCount !== resultRight.hitCount) {
                   return resultRight.hitCount - resultLeft.hitCount;

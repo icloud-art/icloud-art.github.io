@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[MacOS下安装Lua运行环境]]></title>
     <url>%2F2022%2F02%2F07%2FMacOS%E4%B8%8B%E5%AE%89%E8%A3%85Lua%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83%2F</url>
-    <content type="text"><![CDATA[最近工作需要使用Lua语言搞项目，这里记录一下怎么在Mac下安装Lua的运行环境。 首先打开终端，依次输入如下命令： 1curl -R -O http://www.lua.org/ftp/lua-5.3.5.tar.gz 1tar zxf lua-5.3.5.tar.gz 1cd lua-5.3.5 1make macosx 1sudo make install 到这里就安装完毕了，接下来我们测试一下安装是否成功以及版本号是否是我们安装的版本。 在终端里面输入： 1cd .. --返回上一级目录 然后输入： 1lua --查看当前lua运行环境 如果有如下打印，则是OK的： OK，到这里我们就可以编写一个.lua文件来编写lua代码了。 在终端中输入如下命令： 1touch helloworld.lua --创建helloworld.lua 文件 1vim helloworld.lua --打开lua文件 在vim模式下输入print(&quot;chalres: hello world lua!&quot;) 然后保存退出：Esc+Shift+: 运行lua文件： 1lua helloworld.lua 看下终端里面是否打印出： charles:hello world lua! 如果正常输入你的Lua环境已经OK了。]]></content>
+    <content type="text"><![CDATA[最近工作需要使用Lua语言搞项目，这里记录一下怎么在Mac下安装Lua的运行环境。 首先打开终端，cd 到/Users/用户名目录下，也就是你当前用户的目录下，然后依次输入如下命令： 1curl -R -O http://www.lua.org/ftp/lua-5.3.5.tar.gz 1tar zxf lua-5.3.5.tar.gz 1cd lua-5.3.5 1make macosx 1sudo make install 到这里就安装完毕了，接下来我们测试一下安装是否成功以及版本号是否是我们安装的版本。 在终端里面输入： 1cd .. --返回上一级目录 然后输入： 1lua --查看当前lua运行环境 如果有如下打印，则是OK的： OK，到这里我们就可以编写一个.lua文件来编写lua代码了。 在终端中输入如下命令： 1touch helloworld.lua --创建helloworld.lua 文件 1vim helloworld.lua --打开lua文件 在vim模式下输入print(&quot;chalres: hello world lua!&quot;) 然后保存退出：Esc+Shift+: 运行lua文件： 1lua helloworld.lua 看下终端里面是否打印出： charles:hello world lua! 如果正常输入你的Lua环境已经OK了。]]></content>
       <tags>
         <tag>Lua</tag>
       </tags>
